@@ -18,6 +18,8 @@ public class Test11_2 {
 		
 		System.out.println(-(pricePerMin*totalMin));
 		
+		//내 풀이에 강사님 풀이 적용
+		
 
 	
 		//입력
