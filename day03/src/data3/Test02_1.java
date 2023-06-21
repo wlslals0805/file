@@ -2,7 +2,7 @@ package data3;
 
 import java.util.Calendar;
 
-public class Test2_1 {
+public class Test02_1 {
 
 	public static void main(String[] args) {
 //		KH 편의점에서는 한국 나이로 20세 이상에게만 술, 담배를 팝니다  
