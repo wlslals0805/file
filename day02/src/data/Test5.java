@@ -13,7 +13,7 @@ public class Test5 {
 			 int champonTotal= champonPrice*champonCount;
 			 int allTotal= noodleTotal+champonTotal;
 			 
-			 //[3] 1,2번의 데이터로 문제에서 원하는 결과를 출력
+			
 			 
 			 System.out.println(noodleTotal);
 			 System.out.println(champonTotal);

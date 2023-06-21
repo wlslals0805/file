@@ -10,6 +10,7 @@ public class Test01 {
 			int korean=75;
 			int english=80;
 			
+			//int average =(korean+english)/2;
 			double average= (korean+english)/2.0;
 			
 			System.out.println(average);

@@ -16,13 +16,14 @@ public class Test15 {
 		int day=7;
 		int price=100000;
 		
-		int totalPrice=adult*day*price;
+		int totalPrice=day*price;
+		int threeTotalPrice=totalPrice*adult;
 		int rate=25;
 		
-		int discount=totalPrice*rate/100;
-		int pay=totalPrice-discount;
+		int discount=threeTotalPrice*rate/100;
+		int pay=threeTotalPrice-discount;
 		
-		System.out.println(totalPrice);
+		System.out.println(threeTotalPrice);
 		System.out.println(discount);
 		System.out.println(pay);
 	}

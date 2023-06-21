@@ -8,10 +8,13 @@ public class Test14 {
 			
 			//입력
 			int price = 3000000;
-			int rate=20;
+			int rate=25;
 			
 			//계산
+			//(주의) 나누기를 먼저하면 손실이 발생할 수 있다.
+			
 			int discount = price*rate/100;
+//			int discount = price/100*rate; //문제가 있음
 			System.out.println(discount);
 			
 			int pay=price-discount;

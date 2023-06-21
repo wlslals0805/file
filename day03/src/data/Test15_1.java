@@ -31,15 +31,7 @@ public class Test15_1 {
 		System.out.println(discount);
 		System.out.println(result);
 		
-//		int totalPrice=days*price;
-//		int threeTotalPrice=totalPrice*people;
-//		
-//		int discount=threeTotalPrice*rate/100;
-//		int pay=threeTotalPrice-discount;
-//		
-//		System.out.println(threeTotalPrice);
-//		System.out.println(discount);
-//		System.out.println(pay);
+
 	}
 
 }

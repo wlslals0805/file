@@ -10,6 +10,7 @@ public class Test03 {
 			System.out.println(a); //a에 저장된 데이터를 출력 
 			System.out.println(b);//b에 저장된 데이터를 출력
 			System.out.println(a+b);
+			//변수를 사용하면 유지보수가 용이하다.
  		
 		}
 		}
