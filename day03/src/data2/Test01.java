@@ -4,6 +4,8 @@ public class Test01 {
 	
 		public static void main(String[] args) {
 			
+			///실수 수업
+			
 			//실수가 필요한 상황
 			//(Q) 국어점수가 75점, 영어점수가 80점일 때 평균?
 			
@@ -11,7 +13,7 @@ public class Test01 {
 			int english=80;
 			
 			//int average =(korean+english)/2;
-			double average= (korean+english)/2.0;
+			double average= (korean+english)/2.0; ///정수/정수는 정수가 나오기 때문에 변수 타입을 실수 타입으로 변경해주고 피연산자 중 하나를 소수로 바꿔주기
 			
 			System.out.println(average);
 			

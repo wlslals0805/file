@@ -11,7 +11,7 @@ public class Test02 {
 //		               키²(m²)
 	
 		int cm=180;
-		double m=cm*0.01;
+		double m=cm*0.01; ///정확한 결과를 위해 소수 곱해주기
 		int kg=80;
 		
 		double bmi=kg/(m*m);

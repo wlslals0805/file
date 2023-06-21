@@ -20,9 +20,9 @@ public class Test03_1 {
 		int number=17;
 		
 		//계산
-		int mod=number%2;
+		int mod=number%2; ///2로 나누어 떨어지는 수
 //		boolean isZero=mod가 0과 같습니까?
-		boolean isZero = mod==0;
+		boolean isZero = mod==0; ///2로 나누어 떨어지는 수가 0==2의 배수==짝수
 		
 		//출력
 		System.out.println(isZero);

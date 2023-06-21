@@ -6,9 +6,9 @@ public class Test04 {
 		//=14~19사이
 		//=14세 이상 19세 이하
 		
-		int age=15;
+		int age=15; 
 		
-//		boolean teen= 14<=age<=19; //안됨
+//		boolean teen= 14<=age<=19; //안됨 ///14<=15==true<=19(x) 이상함. 따로 나눠서 비교연산자 계산하기
 		boolean teen=14<=age&&age<=19;
 		
 //		boolean free=8세 미만 또는 65세 이상;

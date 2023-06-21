@@ -13,7 +13,7 @@ public class Test3 {
 		int price=50000;
 		
 		
-		double oil=price/(double)L;
+		double oil=price/(double)L; ///십원단위로 계산했을 때 깔끔하게 나눠떨어지지 않기 때문에 소수 곱해주기
 		
 		
 		System.out.println(oil);

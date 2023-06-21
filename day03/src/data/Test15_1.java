@@ -31,7 +31,7 @@ public class Test15_1 {
 		System.out.println(discount);
 		System.out.println(result);
 		
-
+///할인 가격 계산 실습. 전체 가격 구해서 할인률 계산해주기
 	}
 
 }

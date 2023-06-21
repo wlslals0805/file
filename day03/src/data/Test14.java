@@ -13,7 +13,7 @@ public class Test14 {
 			//계산
 			//(주의) 나누기를 먼저하면 손실이 발생할 수 있다.
 			
-			int discount = price*rate/100;
+			int discount = price*rate/100; ///아직 정수 배우기 전이기 때문에 소수를 곱해주지 않고 100으로 나눠준다
 //			int discount = price/100*rate; //문제가 있음
 			System.out.println(discount);
 			
