@@ -36,7 +36,8 @@ public class Test7_1 {
 		//[3]400의 배수면 윤년이다
 		
 	    boolean is4 = year %4==0;
-	    boolean isNot100 = year %100!=0;
+//	    boolean isNot100 = year %100!=0;
+	    boolean isNot100 =!(year%100==0); //논리 부정
 	    boolean is400 = year %400==0; 
 		boolean leapYear = is400||is4&&isNot100;
 		
