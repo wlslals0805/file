@@ -23,13 +23,16 @@ public class Test03 {
 		
 		int age=sc.nextInt();
 		
+		
+		
 		sc.close();
 		
 		if(age>=65) {
 			System.out.println("어르신입니다.");
 			System.out.println("지하철 요금은 무료입니다.");
+			
 		}
-		else if(age<65&&age>=20) {
+		else if(age<65&&age>=20) { //age<65는 없어도 됨 위에서 거르고 왔기 때문에
 			System.out.println("성인입니다.");
 			System.out.println("지하철 요금은 1250원입니다.");
 		}
