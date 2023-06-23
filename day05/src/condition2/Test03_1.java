@@ -6,7 +6,7 @@ public class Test03_1 {
 
 	public static void main(String[] args) {
 		
-		//지하철 이용요금 카드 보증금 추가 버전
+		//지하철 이용요금 카드 보증금 추가 버전.
 		//입력
 				Scanner sc = new Scanner(System.in);
 				System.out.print("나이 입력 : ");
@@ -23,7 +23,7 @@ public class Test03_1 {
 				}
 				else if(age >= 20) {//성인
 					price = 1250;
-				}
+				} 
 				else if(age >= 14) {//청소년
 					price = 720;
 				}
