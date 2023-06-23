@@ -2,7 +2,7 @@ package condition2;
 
 import java.util.Scanner;
 
-public class Test6_1 {
+public class Test06_1 {
 
 	public static void main(String[] args) {
 //		BMI 계산기 개조
