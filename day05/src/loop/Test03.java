@@ -13,7 +13,7 @@ public class Test03 {
 			
 			boolean a = i%2==1;
 			
-			if(a) {System.out.println(i);}
+			if(a) {System.out.println(i);} 
 			
 		}
 		
