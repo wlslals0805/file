@@ -72,6 +72,9 @@ public class Test6_1 {
 			result="";
 		}
 		System.out.println(result);
+				
+				sc.close();
+				
 		
 		
 		
