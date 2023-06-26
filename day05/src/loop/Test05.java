@@ -9,8 +9,14 @@ public class Test05 {
 		{ boolean f= i/10==3||i/10==6||i/10==9;
 		 boolean s= i%10==3||i%10==6||i%10==9;
 		 
-		 if(f||s) {System.out.println(i);
+		 if(f&&s) {System.out.println("짝짝");
 	}
+		 else if(f||s) {System.out.println("짝");
+		 
+		 }
+		 else {System.out.println(i);
+		 
+		 }
 	}
 	}
 }
