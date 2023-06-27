@@ -35,7 +35,7 @@ public class Test10 {
 			minA=(float)totalMin/5;
 		}
 		System.out.println("총 공부한 시간은 "+totalHour+"시간 "+totalMin+"분");
-		System.out.println("일 평균 약 "+hourA+"시간 "+minA+"분");
+		System.out.println("일 평균 약 "+hourA+"시간 "+minA+"분"); //평균은 total로 구하는 게 좋다
 		sc.close();
 	}
 
