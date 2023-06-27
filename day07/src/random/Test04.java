@@ -28,8 +28,8 @@ public class Test04 {
 			}
 		}
 		System.out.println(count);
-		float a=(float)count/100*100; //확률 구하기
-		System.out.println(a);
+		float percent=(float)count/100*100; //확률 구하기
+		System.out.println(percent);
 		
 	}
 
