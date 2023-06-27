@@ -19,15 +19,12 @@ public class Test03 {
 		
 		int count=0;
 		while(true) {
-		
 			int number=sc.nextInt();
 			count++;
 			if(number==0) {
 				break;
-				
 			}
 			total+=number;
-			
 			
 		}
 		a=(double)total/(count-1);
