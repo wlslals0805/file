@@ -23,20 +23,20 @@ public class Test04 {
 		
 		Scanner sc=new Scanner(System.in);
 		Random r=new Random();
-		int number=r.nextInt(1001)+1;
+		int number=r.nextInt(1000)+1;
 		int count=0; 
 		
 		while(true) {
-			
+			System.out.print("입력:");
 			int number2=sc.nextInt();
-			
+			count++;
 			if(number==number2) {
-				System.out.println("게임 끝");
+				System.out.println("정답. 게임 끝");
 				break;
 				
 			}
 			else {
-				count++;
+				
 				if(number>number2) {
 					System.out.println("up");}
 					else {System.out.println("down");}
@@ -44,7 +44,7 @@ public class Test04 {
 				}
 			}
 		
-		System.out.println(count+"번만에 정답을 맞춤");
+		System.out.println("총 입력한 횟수는 "+count+"입니다" );
 
 		
 		}
