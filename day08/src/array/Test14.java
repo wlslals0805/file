@@ -14,14 +14,14 @@ public class Test14 {
 		
 		Random r=new Random();
 		int[] data=new int[] {30,50,20,10,40};
-		int backup=data[r.nextInt(5)];
+		int backup=0;
 		
 		for(int i=0;i<data.length;i++) {
-			
-			data[r.nextInt(data.length)]=backup;
-			backup=data[r.nextInt(5)];
-			
-			
+			int x=r.nextInt(5);
+			backup=data[i];
+			data[i]=data[x];
+			data[x]=backup;
+		
 		}
 		for(int i=0;i<data.length;i++) {
 			
