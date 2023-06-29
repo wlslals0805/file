@@ -22,6 +22,7 @@ public class Test14 {
 			data[i]=data[x];
 			data[x]=backup;
 		
+			
 		}
 		for(int i=0;i<data.length;i++) {
 			
