@@ -2,7 +2,7 @@ package condition3;
 
 import java.util.Scanner;
 
-public class Tesr04 {
+public class Test04 {
 
 	public static void main(String[] args) {
 //		1월부터 12월은 각각 정해진 날짜 수가 존재합니다.

@@ -18,9 +18,6 @@ public class Test07 {
 			total+=20;
 			System.out.println(i+"일차"+"20개");
 			
-		
-		
-		
 		}
 
 		System.out.println("1번 총 푸시업 개수 "+total+"개");

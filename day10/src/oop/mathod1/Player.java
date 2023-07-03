@@ -22,7 +22,7 @@ public class Player {
 			
 	}
 	
-	
+
 	
 	
 	//출력용

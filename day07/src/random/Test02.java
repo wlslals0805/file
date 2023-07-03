@@ -24,21 +24,24 @@ public class Test02 {
 		}
 		else {System.out.println("뒤");}
 		
-		//(약속) 가위=1, 바위=2, 보=2
-		//int a=1부터 3개 중 하나
+//		(약속) 가위=1, 바위=2, 보=2
+//		int a=1부터 3개 중 하나
 		int a=r.nextInt(3)+1;
 		if(a==1) {System.out.println("가위");}
 		else if(a==2) {System.out.println("바위");}
 		else {System.out.println("보");
-		}
 		
+		}
 		
 		
 		System.out.println("로또 번호:"+R);
 		System.out.println("무작위 두 자리 정수:"+i);
 		System.out.println("무작위 OTP 번호 1개:"+o);
-	
+	}
+}
+
+
 		
-	}
-	}
+	
+	
 

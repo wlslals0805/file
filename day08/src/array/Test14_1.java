@@ -1,5 +1,7 @@
 package array;
 
+import java.util.Random;
+
 public class Test14_1 {
 
 	public static void main(String[] args) {

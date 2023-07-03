@@ -2,7 +2,7 @@ package condition3;
 
 import java.util.Scanner;
 
-public class Tesr04_2 {
+public class Test04_2 {
 
 	public static void main(String[] args) {
 //		1월부터 12월은 각각 정해진 날짜 수가 존재합니다.
@@ -19,7 +19,37 @@ public class Tesr04_2 {
 //		```
 //		다 하신 분들은 연도를 추가하여 윤년까지 계산되도록 변경하세요
 		
-		
+		//switch로 풀이(Java 13↑)
+
+				//입력
+				int year = 2004;
+				int month = 2;
+
+				//계산
+				//int days = 31 or 30 or 28;
+				int days;
+				switch(month) {
+				case 1, 3, 5, 7, 8, 10, 12:
+					days = 31;
+					break;
+				case 4, 6, 9, 11:
+					days = 30;
+					break;
+				//case 2:
+				default:
+					boolean leapYear = year % 400 == 0 ||  year % 4 == 0 && year % 100 != 0;
+					if(leapYear) {
+						days = 29;
+					}
+					else {
+						days = 28;
+					}
+					break;
+				}
+
+				//출력
+				System.out.println(days+"일");
+
 				}
 		}
 		

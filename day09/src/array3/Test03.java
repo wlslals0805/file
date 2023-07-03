@@ -10,14 +10,14 @@ public class Test03 {
 //		- `10.2f`, `5.3f`, `6.5f`
 
 		
-		float [][] score=new float[2][3];
+		float [][] score=new float[][] {{1.5f,2.5f,3.6f},{10.2f,5.3f,6.5f}};
 		
-		score[0][0]=1.5f;
-		score[0][1]=2.5f;
-		score[0][2]=3.6f;
-		score[1][0]=10.2f;
-		score[1][1]=5.3f;
-		score[1][2]=6.5f;
+//		score[0][0]=1.5f;
+//		score[0][1]=2.5f;
+//		score[0][2]=3.6f;
+//		score[1][0]=10.2f;
+//		score[1][1]=5.3f;
+//		score[1][2]=6.5f;
 		
 		for(int a=0;a<score.length;a++) {
 		

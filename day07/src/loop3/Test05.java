@@ -16,6 +16,12 @@ public class Test05 {
 //		몇 번만에 게임오버가 되었는지 측정하여 출력
 //		원하는 상황일 때만 코드를 실행하도록 구현
 		
+//		방법 [2] 원치 않는 상황이면 SKIP하도록 처리
+//		 if(원치 않는 상황이라면){
+//						continue(처음으로 이동)}
+		
+		
+		
 		Scanner sc=new Scanner(System.in);
 		int a=100;
 		int count=0;
