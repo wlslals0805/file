@@ -71,26 +71,25 @@ public class Phone {
 			int discount=this.price*5/100;
 			int result = this.price - discount;
 		
-			System.out.println("판매가: "+result+"원");
+			System.out.print("판매가: "+result+"원");
+			
+			if(this.period==0) {
+				System.out.println("(약정 없음)");
+		
+			
+		}
 			System.out.println("(원가"+this.price+"원)");
 			
 		}
 		else {//약정이 있다면
 			int periodPrice = this.price/this.period;
-			System.out.println("판매가: "+this.price+"원");
+			System.out.print("판매가: "+this.price+"원");
 			System.out.println("(월"+periodPrice+"원)");
-			
+			System.out.println("약정개월 "+ this.period);
 		}
-		
-		if(this.period==0) {
-			
-			System.out.println("약정 없음");
-		}
-		
-		if(this.period==0)
-				{
-		System.out.println("가격 "+this.price);
-		System.out.println("약정개월 "+ this.period);
+	
+//		System.out.println("가격 "+this.price);
+//		System.out.println("약정개월 "+ this.period);
 		System.out.println();
 		
 	}
@@ -99,6 +98,7 @@ public class Phone {
 		
 		
 	}
-}
+	
+
 
 
