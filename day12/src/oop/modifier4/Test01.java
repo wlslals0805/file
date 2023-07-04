@@ -12,6 +12,8 @@ public class Test01 {
 		//-단, import는 public만 가능
 		Student a= new Student();
 	
+		a.setName("피카츄");
+		a.setScore(100);
 	}
 
 }
