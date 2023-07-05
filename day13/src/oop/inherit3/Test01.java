@@ -6,6 +6,7 @@ public class Test01 {
 		
 		Chrome a= new Chrome();
 		
+		a.url();
 		a.refresh();
 		a.move();
 		a.develop();

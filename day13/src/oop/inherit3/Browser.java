@@ -35,7 +35,11 @@ public class Browser {
 	private String refresh;
 	private String move;
 	
-	
+	public void url() {
+		System.out.println("주소를 입력하세요");
+		sc.next();
+		
+	}
 	public void refresh() {
 		System.out.println("새로고침 기능 실행");
 	}
