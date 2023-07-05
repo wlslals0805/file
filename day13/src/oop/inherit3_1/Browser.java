@@ -1,6 +1,6 @@
 package oop.inherit3_1;
 
-import java.util.Scanner;
+//import java.util.Scanner;
 
 public class Browser {
 	
