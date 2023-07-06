@@ -1,4 +1,4 @@
-package oop.poly1_1;
+package oop.poly1_01;
 
 public class MacBook extends NoteBook{
 	@Override

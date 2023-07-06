@@ -1,4 +1,4 @@
-package oop.poly1_1;
+package oop.poly1_01;
 
 public class Test01 {
 	public static void main(String[] args) {
