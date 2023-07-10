@@ -7,6 +7,7 @@ public class Test07_1 {
 		String memberId = "testuser1234";
 		String memberPw = "Testuser1234!";
 		String memberName = "테스트";
+	
 		
 		Member member = new Member(memberId, memberPw, memberName, memberName, 0);
 		member.show();
