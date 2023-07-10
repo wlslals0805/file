@@ -9,7 +9,7 @@ public class Member2 {
 		private int memberPoint;//회원포인트(기본값 100점)
 		
 		//생성자
-		public Member(String memberId, String memberPw, String memberName) {
+		public void Member(String memberId, String memberPw, String memberName) {
 			this.setMemberId(memberId);
 			this.setMemberPw(memberPw);
 			this.setMemberName(memberName);
