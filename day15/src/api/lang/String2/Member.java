@@ -28,7 +28,7 @@ public class Member {
 		if(memberId.matches("^[A-Za-z0-9]{8,20}$")){
 		this.memberId = "아이디:" + memberId;}
 		else {this.memberId="아이디: 승인불가";}
-		
+		 
 	}
 		
 	public String getMemberPw() {

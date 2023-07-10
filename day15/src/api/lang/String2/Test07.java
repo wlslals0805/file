@@ -12,7 +12,7 @@ public class Test07 {
 		String a = sc.next();
 		
 		System.out.println("비밀번호: ");
-		String b = sc.next();
+		String b = sc.next(); 
 		
 		System.out.println("이름: ");
 		String c = sc.next();
