@@ -2,7 +2,7 @@ package api.exception;
 
 import java.util.Scanner;
 
-public class Test08_1 {
+public class Test09 {
 
 	public static void main(String[] args) {
 		
