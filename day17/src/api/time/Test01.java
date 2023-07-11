@@ -12,7 +12,7 @@ public class Test01 {
 		//[3] Calendar 클래스		--->연도 기준 변경, 날짜 계산 기능 추가
 		//[4] java.time 패키지		--->기존의 시간 관리 문제점 대폭 개선(풀체인지)
 		
-		Date a = new Date();
+		Date a = new Date();	//현재 시간을 출력해주는 클래스
 		Date b= new Date(123,7,11);	//1900년 기준(비추천),월 0~11로 관리
 
 		
@@ -22,7 +22,11 @@ public class Test01 {
 		//시간을 원하는 형식으로 출력하려면...?
 		//[1] 내가 직접 형식을 만드는 방법
 		//[2] 형식을 만들어주는 도구를 사용하는 방법
-		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");	
+		//=Data클래스의 시간을 원하는 형식으로 출력해주는 클래스
+		
+		
+	
 		String time = fmt.format(a);
 		System.out.println("time="+time);
 		
