@@ -12,9 +12,11 @@ public class Test06_1 {
 		//도구 생성
 		Calendar c = Calendar.getInstance();
 		
+		
+		
 		//계산
-		//int day = c.get(Calendar.DATE);
-		//c.set(Calendar.DATE, day + d_day - 1);
+//		int day = c.get(Calendar.DATE);
+//		c.set(Calendar.DATE, day + d_day - 1);
 		c.add(Calendar.DATE, d_day-1);
 		
 		//출력
