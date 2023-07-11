@@ -16,20 +16,18 @@ public class Test02 {
 	public static void main(String[] args) {
 		
 		Date a=new Date();
-		Date a2=new Date();
-		Date b=new Date();
-		Date c=new Date();
+
 		
-		SimpleDateFormat fmt = new SimpleDateFormat("yyyy"+"년"+"MM"+"월"+"dd"+"일");
-		SimpleDateFormat fmt2 = new SimpleDateFormat("a "+"h"+"시"+"m"+"분");
-		SimpleDateFormat fmt3 = new SimpleDateFormat("k"+":"+"mm:"+"ss");
-		SimpleDateFormat fmt4 = new SimpleDateFormat("yyyy-MM-dd "+"E "+"k"+":"+"mm:"+"ss");
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy"+"년 "+"M"+"월 "+"dd"+"일");
+		SimpleDateFormat fmt2 = new SimpleDateFormat("a "+"h"+"시 "+"m"+"분");
+		SimpleDateFormat fmt3 = new SimpleDateFormat("H"+":"+"mm:"+"ss");
+		SimpleDateFormat fmt4 = new SimpleDateFormat("yyyy-MM-dd "+"E "+"H"+":"+"mm:"+"ss");
 		
 		
 		String time = fmt.format(a);
-		String time2 = fmt2.format(a2);
-		String time3 = fmt3.format(b);
-		String time4 = fmt4.format(c);
+		String time2 = fmt2.format(a);
+		String time3 = fmt3.format(a);
+		String time4 = fmt4.format(a);
 		System.out.println(time);
 		System.out.println(time2);
 		System.out.println(time3);
