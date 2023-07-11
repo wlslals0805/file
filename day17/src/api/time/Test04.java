@@ -9,11 +9,7 @@ public class Test04 {
 		//=1900년이 기준이 아니기 때문에 일반적인 연도 설정 가능
 		//=범위를 벗어나도 자동으로 가능한 값으로 변환된다(계산 특화)
 		
-		
-		
-		
-		
-		Calendar c =Calendar.getInstance();
+		Calendar c =Calendar.getInstance();	//생성하는 시점의 시간이 들어간다
 	
 		
 		//항목별로 설정
@@ -22,9 +18,12 @@ public class Test04 {
 //		c.set(Calendar.DATE, 1);
 //		c.set(2000, 0, 1);
 //		c.set(2000, 0, 0);
-//		c.set(2000, 30, 1);
+//		c.set(2000, 30, 1);	//Calendar의 좋은 점: 날짜가 범위를 넘어가도 자동으로 맞는 날짜로 변경해줌
+		
 		
 		//항목별로 추출하여 출력
+		//Date와 다르게 많은 정보를 담고있는 Calendar에서 
+		//원하는 정보만 뽑아서 출력하기 위해 객체의 참조변수.get을 사용
 		
 		int year = c.get(Calendar.YEAR);
 		System.out.println(year+"년");
