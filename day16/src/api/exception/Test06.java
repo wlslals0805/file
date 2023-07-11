@@ -56,9 +56,9 @@ public class Test06 {
 		String b= part1+part2+part3;	//생년월일
 		
 
-//	if(birth.length()<10) {
-//		throw new Exception("입력값이 부족합니다.");
-//	}
+	if(birth.length()<10) {
+		throw new Exception("입력값이 부족합니다.");
+	}
 	 if(Integer.parseInt(b)>Integer.parseInt(a)) {
 		throw new Exception("미래는 입력하실 수 없습니다.");
 	}
@@ -86,16 +86,24 @@ public class Test06 {
 		
 		System.out.println("만나이는: "+age2);
 	}
-	catch(Exception e){
-		
-			System.err.println("오류 발생");
-		}
-
-		
-	}
 	
+	catch(Exception e){
+//		catch( java.lang.StringIndexOutOfBoundsException e){
+		
+//			System.err.println("오류 발생");
+		
+	if(e.getMessage()==null) {
+		System.err.println("오류 발생");
+	}
+	else {
+		System.err.println(e.getMessage());
+	}
 
 		
+	
+	
+}
+	}
 	}
 
 
