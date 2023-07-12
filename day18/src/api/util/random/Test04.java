@@ -13,7 +13,7 @@ public class Test04 {
 				System.out.println(r.nextLong());
 				System.out.println(r.nextFloat());//0이상 1미만
 				System.out.println(r.nextDouble());//0이상 1미만
-				System.out.println(r.nextGaussian());//정규분포(-1부터 1사이가 66%로나옴)
+				System.out.println(r.nextGaussian());//정규분포(-1부터 1사이가 66%로나옴) 
 		
 		
 	}
