@@ -13,7 +13,7 @@ public class Test02 {
 		//자료형(Generic Type)을 지정하지 않으면 경고
 //		ArrayList list = new ArrayList();			
 		
-		//자료형을 지정하면서 생성
+		//자료형을 지정하면서 생성 
 //		ArrayList<String> list = new ArrayList<String>(); //String 전용 저장소
 		ArrayList<String>list = new ArrayList<>(); //약식 표현
 		
