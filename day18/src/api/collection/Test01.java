@@ -21,7 +21,7 @@ public class Test01 {
 		a.add("이효리");			b.add("이효리");				c.add("이효리");
 		a.add("김채원");			b.add("김채원");				c.add("김채원");
 		a.add("유태오");			b.add("유태오");				c.add("유태오");
-		a.add("지수");				b.add("지수");					c.add("지수");
+		a.add("지수");				b.add("지수");					c.add("지수"); 
 		
 		System.out.println("a="+a);
 		System.out.println("b="+b);
