@@ -14,7 +14,7 @@ public class Test03_1 {
 		Scanner sc = new Scanner(System.in);
 		
 		//사용자 입력
-		while(true) {
+		while(true) { 
 			System.out.print("나라 이름 : ");
 			String name = sc.next();
 			
