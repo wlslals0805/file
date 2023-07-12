@@ -13,7 +13,7 @@ public class Test01 {
 		Random r2 = new Random(1L);
 		
 		System.out.println(r1.nextInt());
-		System.out.println(r2.nextInt());
+		System.out.println(r2.nextInt()); 
 		
 	}
 

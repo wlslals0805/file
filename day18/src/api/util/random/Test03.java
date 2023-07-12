@@ -16,7 +16,7 @@ public class Test03 {
 				
 				long seed = System.currentTimeMillis() / 60000;
 				seed += serial.hashCode();
-				r.setSeed(seed);
+				r.setSeed(seed); 
 				
 				int otp = r.nextInt(1000000) + 0;
 				DecimalFormat fmt = new DecimalFormat("000000");
