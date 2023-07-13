@@ -51,7 +51,7 @@ public class Test04 {
 //		= 두 집합이 모두 가진 요소들만으로 이루어진 집합
 		Set<Integer> inter = new TreeSet<>();
 		inter.addAll(a);
-		inter.retainAll(b);
+		inter.retainAll(b);		//배열에 들어있는(현재:a) 요소들 중에 b가 가지는 요소들만 유지(retain)하고 나머지는 싹 다 제거
 		System.out.println("교집합 = " + inter);
 		
 //		차집합(minus/except)
