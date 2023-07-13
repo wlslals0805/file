@@ -34,8 +34,10 @@ public class Subject {
 		}
 	}
 	
+	//객체 생성 후 참조변수.setup 메소드를 불러내면 괄호 안에 들어간 매개변수 입력값이 나오고 그 안에 입력하면 아래 과정이 진행된다. (멤버필드의 값 하나가 입력되면 set멤버필드로 가서 입력된다. 결국 메소드 하나를 불러내면 그 메소드가 메소드 4개(멤버필드 수)의 활동으로 이어지는 것. 하나하나 불러올 때처럼. ex:p1(참조변수).name="홍길동" )
 	void setup(String title, int period, int price, String type) {
-		this.setTitle(title);
+		this.setTitle(title);		//매개변수 title을 입력받아서 this(이 클래스 안의).setTitle 메소드에 넣겠다. 
+										//setTitle 메소드에 들어간 입력값 title은 setTitle 메소드 안에서 검사를 받는다. 검사에 통과하면 this.title에 입력값 title이 들어간다. 결국 show()메소드 에서 출력되는 것은 title 값이 들어간 this.title이다.
 		this.setPeriod(period);
 		this.setPrice(price);
 		this.setType(type);
