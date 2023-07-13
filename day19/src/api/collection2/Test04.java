@@ -34,7 +34,7 @@ public class Test04 {
 		
 //		합집합(Union)
 //		- 중복을 제거할건지 제거하지 않을건지
-//		- 중복을 제거할것이면 Set, 중복을 제거하지 않을거라면 List를 쓴다
+//		- 중복을 제거할 것이면 Set, 중복을 제거하지 않을 거라면 List를 쓴다
 		Set<Integer> union1 = new TreeSet<>();
 		union1.addAll(a);
 		union1.addAll(b);
