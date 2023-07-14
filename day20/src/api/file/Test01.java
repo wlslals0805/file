@@ -17,8 +17,8 @@ public class Test01 {
 		//									java.nio 패키지 (논블로킹 방식)
 		
 		//File 클래스 객체 생성
-		File a = new File("D:/test.txt");
-		File b = new File("D:/", "test.txt");
+		File a = new File("D:/test1.txt");
+		File b = new File("D:/", "test1.txt");
 		
 		//파일 정보 분석
 		System.out.println(a.exists());//진짜 있냐?
@@ -34,6 +34,29 @@ public class Test01 {
 			System.out.println(a.length());//파일의 크기(=들어있는 글자의 개수)
 			System.out.println(a.lastModified());//최종 수정시각
 		}
+		
+		//디렉터리도 File 클래스로 제어한다
+		File c =new File("D:/");
+		File d =new File("D:\\");
+		
+		if(c.isDirectory()) {
+			System.out.println("디렉터리 이름: "+c.getName());
+			System.out.println(c.getPath());
+			System.out.println(c.length());	//(주의) 디렉터리의 크기는 의미가 없다.
+			
+			//디렉터리는 내부에 존재하는 요소들을 추출할 수 있다.
+			String[]names = c.list(); //이름만 추출
+			File[] files = c.listFiles(); //파일 객체를 추출(이름 + 나머지정보)
+			for(File file : files) {
+				System.out.println(file);
+			}
+			
+			
+			
+			
+			
+		}
+		
 	}
 
 }

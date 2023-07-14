@@ -26,10 +26,12 @@ public class Test04 {
 		
 		
 		//[2]
-		System.out.println(System.getProperty("user.home"));	//사용자 홈 폴더
-		System.out.println(System.getProperty("user.dir"));		//프로그램 실행위치
+		System.out.println(System.getProperty("user.home"));	//사용자 홈 폴더 읽어오기
+		System.out.println(System.getProperty("user.dir"));		//프로그램 실행위치	읽어오기
+		//System.getproperty=컴퓨터 정보 읽어오는 기능
 		
-		File c = new File(System.getProperty("user.home"), "dummy");
+		File c = new File(System.getProperty("user.home"), "dummy");	//홈폴더에다가 dummy 만들기
+															//특정 위치(이어지지 않고 끊어지는 통로)에다가 뭘 만들고 싶을 때에는 두 개로 입력하면 된다 (/ 안 쓰고)
 		c.mkdirs();
 		
 		

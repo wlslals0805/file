@@ -2,11 +2,11 @@ package api.file;
 
 import java.io.File;
 
-public class Teset02_1 {
+public class Test02_1 {
 
 	public static void main(String[] args) {
 		//경로 준비
-		String input = "D:/test.txt";	//파일
+		String input = "D:/";	//파일
 		//String input = "D:/study";		//디렉터리
 		//String input = "D:/study2";	//존재하지 않는 대상
 		

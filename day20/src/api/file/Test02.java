@@ -18,19 +18,16 @@ public class Test02 {
 //			(3)디렉터리는 옆에 [폴더] 표시를 추가
 		
 		
-		File a = new File("D:/test02/Test02");
+		File a = new File("D:/");
 		
 		if(a.isFile()) {
 			System.out.println("파일 이름: "+a.getName());
 			System.out.println("확장자: ");
 			System.out.println("파일 크기: "+a.length()+"byte");
-		}
-		
-		
+		}	
 		else if(a.isDirectory()) {
 			File[] files = a.listFiles(); //파일 객체를 추출(이름 + 나머지정보)
-			for(File file : files) {
-				
+			for(File file : files) {		
 				System.out.print(file.getName());
 				
 				if(file.isDirectory()) {
@@ -40,14 +37,10 @@ public class Test02 {
 					System.out.println("[파일]");
 				
 				}
-				
-				
 				else {
 					System.out.println("존재하지 않는 폴더");}
-				
-				
-				
 			}
+			
 			
 			
 		}
