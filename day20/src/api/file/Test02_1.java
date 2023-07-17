@@ -6,7 +6,7 @@ public class Test02_1 {
 
 	public static void main(String[] args) {
 		//경로 준비
-		String input = "C:\\\\study\\\\eclipse\\\\artifacts.xml";	//파일
+		String input = "C:\\";	//파일
 		//String input = "D:/study";		//디렉터리
 		//String input = "D:/study2";	//존재하지 않는 대상
 		

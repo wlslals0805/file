@@ -18,6 +18,7 @@ public class FileUtil {
 //	move	두 개의 파일 또는 디렉터리 정보를 전달받아 파일 이동을 진행합니다
 //	delete	한 개의 파일 또는 디렉터리 정보를 전달받아 삭제를 진행합니다
 //	info	한 개의 파일 또는 디렉터리 정보를 전달받아 정보를 출력합니다
+	
 //	제시된 기능은 파일일 경우와 디렉터리일 경우의 처리 내용이 달라야 합니다.
 //	예를 들어서 copy 기능인 경우 처리되는 방식은 다음과 같습니다.
 //
@@ -34,13 +35,33 @@ public class FileUtil {
 		 FileInputStream readStream = new FileInputStream(readFile);
 		 FileOutputStream copyStream= new FileOutputStream(copyFile); 
 		 
-		 byte[] buffer = new byte[100000];
+		 byte[] buffer = new byte[100];
+		 
 		 
 			while(true) {
+				if(readFile.isDirectory()&&copyFile.isDirectory()) {
+		
+				String[] listName = readFile.list();
+	
+				for(String copyList:listName){
+					File c = new File(copyFile,copyList);
+						c.mkdirs();
+						
+					}
+					
+					
+					
 				
-				int a= readStream.read(buffer); //만약 출력하면 배열 크기 한 줄씩 출력했을 때 몇 번(몇 글자)나 출력되었는지 나옴
-				if(a==-1)/*출력한 게 없다.*/ {break;} 
-				copyStream.write(buffer, 0, a/*네가 출력한 글자까지만 입력해*/);}
+				}
+					
+					
+				
+				else {
+				int a= readStream.read(buffer); 
+				if(a==-1) {break;} 
+				copyStream.write(buffer, 0, a);}
+	 }
+	
 				
 	 }
 	 
@@ -60,7 +81,7 @@ public class FileUtil {
 	 
 	 public static void move(File stopFile, File moveFile)  {
 		 
-		moveFile.renameTo(stopFile);
+		moveFile.renameTo(moveFile);
 		 
 	 }
 	 

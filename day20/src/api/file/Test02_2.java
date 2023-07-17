@@ -20,7 +20,7 @@ public class Test02_2 {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		String input = "C:\\study\\eclipse\\artifacts.xml";
+		String input = "C:\\";
 		
 		File file = new File(input);
 		

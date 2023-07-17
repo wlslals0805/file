@@ -18,7 +18,7 @@ public class Test03_3 {
 		FileOutputStream copyStream = new FileOutputStream(copyFile);
 		
 		
-		byte[] buffer = new byte[100000];
+		byte[] buffer = new byte[10000];
 		
 		int count = 0;
 		long total = readFile.length();
@@ -42,13 +42,12 @@ public class Test03_3 {
 			
 			}
 		
-		DecimalFormat fmt2 = new DecimalFormat("#,##0.00");
 		
 		long end = System.currentTimeMillis();
 		
-		double time = (end - strat)/1000d;
+		double time =(end - strat)/1000d;
 		
-		System.out.println(fmt2.format(time)+"초");
+		System.out.println(fmt.format(time)+"초");
 		
 	}
 
