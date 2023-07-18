@@ -4,48 +4,52 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
+import java.text.DecimalFormat;
 
 public class Test03 {
 
 	public static void main(String[] args) throws IOException {
-//		기존에 만든 파일 복사 프로그램을 byte[]을 이용하여 처리하도록 변경
-//
-//		최적의 버퍼 크기를 찾아서 설정
-//
-//		배열을 이용하여 복사를 하는 경우 처리가 잘못되면 복사된 파일의 크기가 커지는 현상이 생깁니다
-		
-		File readTarget = new File("D:/origin.txt");
-		FileInputStream readStream = new FileInputStream(readTarget);
-		
-		File writeTarget = new File("./sample/copy.txt");
-		FileOutputStream writeStream = new FileOutputStream(writeTarget);
-	
-		File readTarget2 = new File("./sample/copy.txt");
-		FileInputStream readStream2 = new FileInputStream(readTarget2);
 		
 		
 		
 		
-		byte[] count=new byte[5];
-		byte[]count2=new byte[5];
+		File readFile = new File("D:\\study\\eclipse/eclipse.exe");
+		File copyFile = new File("sample/test.txt");
 		
-		readStream.read(count);
-		writeStream.write(count);
-		writeStream.write(count2);
+		FileInputStream readStream = new FileInputStream(readFile);
+		FileOutputStream copyStream = new FileOutputStream(copyFile);
 		
-//		System.out.println(Arrays.toString(count));
-//		writeStream.write(Arrays.to);
+		byte[] buffer = new byte[100000]; //시간을 재 본 결과 가장 빨랐습니다. 0.00초
 		
+		int count = 0;
+		long total = readFile.length();
 		
-//		while(true) {
-//		readStream.read(count);
-//		writeStream.write(count);
-//		readStream2.read(count);
-//		if(readStream2.read(count))
+		DecimalFormat fmt = new DecimalFormat("#,##0.00");
 		
+		long strat = System.currentTimeMillis();
 		
+		while(true) {
+			
+			int a= readStream.read(buffer); 
+			if(a==-1){break;} 
+			copyStream.write(buffer, 0, a);
+			
+			count+=a;
+			
+			double percent = count*100d/total;
+			
+			System.out.print(count+"/"+total);
+			System.out.println("("+fmt.format(percent)+")%진행중");
+			
+			}
 		
+		DecimalFormat fmt2 = new DecimalFormat("#,##0.00");
+		
+		long end = System.currentTimeMillis();
+		
+		double time = (end - strat)/1000d;
+		
+		System.out.println(fmt2.format(time)+"초");
 		
 	}
 

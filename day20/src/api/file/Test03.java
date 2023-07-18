@@ -9,7 +9,7 @@ public class Test03 {
 		//파일 또는 디렉터리 생성/삭제
 		//(주의) 디렉터리는 비어있는 것만 삭제가 가능
 		
-		File target = new File("D:/dummy");
+		File target = new File("sample");
 //		File target = new File("D:/dummy/a/b/c");
 		
 		//파일로 만들고 싶다면 createNewFile()
@@ -24,7 +24,7 @@ public class Test03 {
 		//파일이나 디렉터리나 모두 삭제는 동일
 		//(주의) 디렉터리는 비어있는 것만 삭제가 가능
 
-		target.delete();
+//		target.delete();
 		
 		
 		
