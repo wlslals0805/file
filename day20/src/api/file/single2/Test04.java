@@ -7,7 +7,7 @@ public class Test04 {
 
 	public static void main(String[] args) throws IOException {
 		
-<<<<<<< HEAD
+
 		File a =new File("d:/study");
 		File b =new File("sample");
 		
@@ -19,14 +19,14 @@ public class Test04 {
 //		a.mkdirs();
 		
 		
-	}
+	
 
-}
-=======
-		File a =new File("C:\\study");
-		File b =new File("c://study/sample");
+
+//
+//		File a =new File("C:\\study");
+//		File b =new File("c://study/sample");
 		
-		FileUtil.copy(a, b);
+		FileUtil.copy(a, b);}}
 //		FileUtil.info(a);
 //		FileUtil.list(a);
 //		FileUtil.delete(a);
@@ -34,7 +34,6 @@ public class Test04 {
 //		a.mkdirs();
 		
 		
-	}
+	
 
-}
->>>>>>> branch 'main' of https://github.com/wlslals0805/file.git
+

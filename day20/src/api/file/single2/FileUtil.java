@@ -102,9 +102,8 @@ public class FileUtil {
 	 
 		 
 } 
-<<<<<<< HEAD
-	 
-=======
+
 	 
 
->>>>>>> branch 'main' of https://github.com/wlslals0805/file.git
+	 
+
