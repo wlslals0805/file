@@ -36,7 +36,7 @@ public class Test01 {
 		}
 		
 		//디렉터리도 File 클래스로 제어한다
-		File c =new File("D:/");
+		File c =new File("c:/");
 		File d =new File("D:\\");
 		
 		if(c.isDirectory()) {
