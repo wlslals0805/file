@@ -17,40 +17,52 @@ public class Test36 {
 //		출력은 2줄이다. 1번째 줄엔 제출하지 않은 학생의 출석번호 중 가장 작은 것을 출력하고, 2번째 줄에선 그 다음 출석번호를 출력한다.
 		
 		
-//		Scanner sc = new Scanner(System.in);
-//		
-//		int[] b = new int[2];
-//		int[] a = new int[29];
-//		
-//		for(int i = 1;i<=28;i++) {
-//			a[i] = sc.nextInt();
-//			}
-//		
-//		for(int i =1;i<a.length;i++) {
-
-//		}
+		Scanner sc= new Scanner(System.in);
 		
-
-		int[] a = new int[] {4,6,5,8,9,3,1,2,7};
+		int[] a= new int[28];
 		
+		for(int i = 0; i<a.length;i++) {
+			
+			a[i]=sc.nextInt();
+			
+		}
 		
 		for(int i = 0;i<a.length;i++) {
 			
-		for(int b = i; b <a.length; b++) {
-			
-			int minIndex = i;
-			
-			if(a[minIndex]>a[b]) {
+			for(int b = i; b <a.length; b++) {
 				
-				minIndex=b;
+				int minIndex = i;
 				
+				if(a[minIndex]>a[b]) {
+					
+					minIndex=b;
+					
+				}
+				int s = a[i];
+				a[i]= a[minIndex];
+				a[minIndex]=s;
 			}
-			int s = a[i];
-			a[i]= a[minIndex];
-			a[minIndex]=s;
+			
+			}
+		int a1=0;
+		int a2=0;
+		
+		for(int i=0;i<a.length-1;i++) {
+			
+			if(a[i]+1!=a[i+1]) {
+			System.out.println(a[i]+1);
+			
 		}
 		
-		}
+		
+
+		
+
+		
+		
+		
+
+
 		
 		
 		
@@ -60,4 +72,4 @@ public class Test36 {
 		
 	}
 
-}
+}}
