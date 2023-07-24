@@ -19,6 +19,7 @@ public class Test02 {
 		String bookTitle = sc.next();		//띄어쓰기 불가
 		float bookPrice= sc.nextFloat();
 		
+		//DB처리 - 자바는 자동 commit 모드를 사용한다
 		String sql = "update Book set book_title = ?, book_price = ? where book_id = ?";
 		Object[] data = {bookTitle, bookPrice,bookId};
 		
