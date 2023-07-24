@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="baekjoon/src"/>
+	<classpathentry kind="src" path="day02/src"/>
+	<classpathentry kind="src" path="day03/src"/>
+	<classpathentry kind="src" path="day05/src"/>
+	<classpathentry kind="src" path="day06/src"/>
+	<classpathentry kind="src" path="day07/src"/>
+	<classpathentry kind="src" path="day08/src"/>
+	<classpathentry kind="src" path="day09/src"/>
+	<classpathentry kind="src" path="day10/src"/>
+	<classpathentry kind="src" path="day11/src"/>
+	<classpathentry kind="src" path="day12/src"/>
+	<classpathentry kind="src" path="day13/src"/>
+	<classpathentry kind="src" path="day14/src"/>
+	<classpathentry kind="src" path="day15/src"/>
+	<classpathentry kind="src" path="day16/src"/>
+	<classpathentry kind="src" path="day17/src"/>
+	<classpathentry kind="src" path="day18/src"/>
+	<classpathentry kind="src" path="day19/src"/>
+	<classpathentry kind="src" path="day20/src"/>
+	<classpathentry kind="src" path="day21/src"/>
+	<classpathentry kind="src" path="day22/src"/>
+	<classpathentry kind="src" path="day4/src"/>
+	<classpathentry kind="src" path="jdbc01/src"/>
+	<classpathentry kind="lib" path="jdbc01/lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="jdbc01/lib/ojdbc8-23.2.0.0.jar"/>
+	<classpathentry kind="lib" path="jdbc01/lib/spring-beans-5.3.29.jar"/>
+	<classpathentry kind="lib" path="jdbc01/lib/spring-core-5.3.29.jar"/>
+	<classpathentry kind="lib" path="jdbc01/lib/spring-dao-2.0.8.jar"/>
+	<classpathentry kind="lib" path="jdbc01/lib/spring-jdbc-5.3.29.jar"/>
+	<classpathentry kind="lib" path="jdbc01/lib/spring-tx-5.3.29.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

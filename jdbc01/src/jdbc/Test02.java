@@ -17,7 +17,7 @@ public class Test02 {
 		
 		//[2] 연결 도구 생성 및 연결에 필요한 정보를 설정
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setUsername("c##dummy");
+		dataSource.setUsername("C##KH");
 		dataSource.setPassword("kh");
 		dataSource.setDriverClassName("oracle.jdbc.OracleDriver");
 		dataSource.setUrl("jdbc:oracle:thin:@localhost:1521:xe");

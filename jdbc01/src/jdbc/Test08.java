@@ -46,7 +46,7 @@ String sql = "insert into Member"
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("oracle.jdbc.OracleDriver");//DB종류
 		dataSource.setUrl("jdbc:oracle:thin:@localhost:1521:xe");//DB위치+연결방식
-		dataSource.setUsername("C##dummy");
+		dataSource.setUsername("C##KH");
 		dataSource.setPassword("kh");
 		
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
