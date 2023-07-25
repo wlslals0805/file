@@ -1,5 +1,8 @@
 package day01;
 
+
+import java.util.ArrayList;
+
 import java.util.Scanner;
 
 public class Test51 {
@@ -22,24 +25,103 @@ public class Test51 {
 		
 		
 		Scanner sc = new Scanner(System.in);
-		StringBuffer s= new StringBuffer();
+		ArrayList<String> list = new ArrayList<>();
 		
-		int king = sc.nextInt(), Qune= sc.nextInt(), rook = sc.nextInt(), bishop = sc.nextInt(), kNight = sc.nextInt(), pawn = sc.nextInt();
+		int king = sc.nextInt(), qune= sc.nextInt(), rook = sc.nextInt(), bishop = sc.nextInt(), kNight = sc.nextInt(), pawn = sc.nextInt();
 		
-		for(int i = 0;i<6;i++) {
 			
 			if(king>1) {
-				king = king-(king-1);
 				
-				s.append(king);
+				list.add(String.valueOf(-(king-1)));
+			}
+			if(king<1) {
+				list.add(String.valueOf((1-king)));
+			}
+			if(king==1) {
+				list.add(String.valueOf(0));
+				
+			}
+			
+			if(qune>1) {
+				
+				list.add(String.valueOf(-(qune-1)));
 	
 			}
-			 
+			if(qune<1) {
+				list.add(String.valueOf((1-qune)));
+				
+			}	
+			if(qune==1) {
+				list.add(String.valueOf(0));
+				
+				
+			}
+			if(rook>2) {
+				
+				list.add(String.valueOf(-(rook-2)));
+	
+			}
+			if(rook<2) {
+				list.add(String.valueOf((2-rook)));
+				
+			}	
+			if(rook==2) {
+				
+				list.add(String.valueOf(0));
+				
+			}
+			if(bishop>2) {
+				
+				list.add(String.valueOf(-(bishop-2)));
+	
+			}
+			 if(bishop<2) {
+				list.add(String.valueOf((2-bishop)));
+				
+			}	
+			 if(bishop==2) {
+				 list.add(String.valueOf(0));
+				 
+			 }
+			if(kNight>2) {
+				
+				list.add(String.valueOf(-(kNight-2)));
+	
+			}
+			if(kNight<2) {
+				list.add(String.valueOf((2-kNight)));
+				
+			}	
+			
+			 if(kNight==2) {
+				 list.add(String.valueOf(0));
+				 
+			 }
+			
+			if(pawn>8) {
+				
+				list.add(String.valueOf(-(pawn-8)));
+	
+			}
+			if(pawn<8) {
+				list.add(String.valueOf((8-pawn)));
+				
+			}	
+			 if(pawn==8) {
+				 list.add(String.valueOf(0));
+				 
+			 }
+			
+		
+			
+		
+		for(int i=0;i<list.size();i++) {
+			
+			System.out.println(list.get(i));
 			
 			
 			
 		}
-		
 		
 		
 		
