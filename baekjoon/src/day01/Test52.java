@@ -1,5 +1,8 @@
 package day01;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Test52 {
 
 	public static void main(String[] args) {
@@ -14,6 +17,42 @@ public class Test52 {
 //
 //		출력
 //		첫째 줄에 팰린드롬이면 1, 아니면 0을 출력한다.
+		
+		Scanner sc = new Scanner(System.in);
+		
+//		ArrayList<String> a =new ArrayList<>();
+//		ArrayList<String> c =new ArrayList<>();
+		
+		String b = sc.next();
+		
+//		for(int i = 0;i<b.length();i++) {
+//			
+//			a.add(String.valueOf(b.charAt(i)));
+//			
+//			
+//			
+//		}
+		
+		StringBuffer d = new StringBuffer();
+		StringBuffer x = new StringBuffer();
+		
+		d.append(b);
+		
+		x.append(d.reverse());
+		
+		d.reverse();
+		
+		
+		
+		String result1 = d.toString();
+		String result2 = x.toString();
+		
+		
+		if(result1.equals(result2)) {
+			System.out.println("1");
+			
+		}
+		else {System.out.println("0");}
 		
 		
 		
