@@ -1,8 +1,11 @@
 package com.kh.spring06;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
 
 
 
@@ -18,6 +21,9 @@ import org.springframework.stereotype.Repository;
 		
 		@Autowired 	//(주의) 등록을 하지 않으면 절대로 주지 않음
 		private JdbcTemplate jdbcTemplate;
+		
+		@Autowired
+		private BoardMapper mapper;
 		
 		public void insert(BoardDto dto) {
 			String sql = "insert into board(board_no,board_title,board_content,board_writer) "
@@ -50,6 +56,12 @@ import org.springframework.stereotype.Repository;
 			Object[] data = {boardNo};
 			return jdbcTemplate.update(sql, data) > 0;
 
+		}
+		
+		public List<BoardDto> selectList(){
+			String sql = "select * from board order by board_no asc";
+			return jdbcTemplate.query(sql, mapper);
+			
 		}
 		
 		
