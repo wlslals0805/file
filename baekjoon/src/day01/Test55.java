@@ -22,20 +22,42 @@ public class Test55 {
 		
 		Scanner sc  = new Scanner(System.in);
 		
-		StringBuilder sb= new StringBuilder();
+		
+		
 		int num = sc.nextInt();
 		
 		ArrayList<String> a = new ArrayList<>();
 		
+		int count=0;
+		for(int q = 0;q<num;q++) {
+		String input = sc.next();
+		a.add(input);
 		
-		for(int i = 0;i<num;i++) {
-			String input = sc.next();
-			sb.append(input);
-			a.add(input);
-			
-//			if(!input.equals(String.valueOf(a.charAt(i))&&!a.contains(String.valueOf(input)) {
-				
+		
+		ArrayList<String> b = new ArrayList<>();
+		boolean c = true;
+		for(int i = 0;i<input.length();i++) {
+
+
+			if(b.contains(String.valueOf(a.get(q).charAt(i)))&&i>0) { //contains은 자기자신도 포함
+
+				if(!b.get(i-1).equals(String.valueOf(a.get(q).charAt(i)))){
+					
+					c=false;
+				}
 			}
+			
+			b.add(String.valueOf(a.get(q).charAt(i)));	//contains.에 자기자신을 포함시키면 안돼서 내려보냈음
+			
+			}
+		
+		if(c) {	
+			count++;	
+		}
+//		System.out.println(c);
+//		System.out.println(count);
+		}
+		System.out.println(count);
 			
 			
 		}
