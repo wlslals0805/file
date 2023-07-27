@@ -1,5 +1,7 @@
 package com.kh.spring05.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,8 +43,48 @@ public class PocketmonController {
 		if(result) return "포켓몬스터 삭제 완료";
 		
 		else return "존재하지 않는 몬스터 번호";
+
+	}
+	
+	
+	@RequestMapping("/list")
+	public String list(){
+		
+		List<PocketmonDto> list = dao.list();
+		
+		StringBuffer buffer = new StringBuffer();
+		
+		for(PocketmonDto dto:list) {
+			
+			buffer.append(dto);
+			buffer.append("<br>");
+
+		}
+	return buffer.toString();
 		
 		
+		
+		
+	}
+	
+
+	
+	@RequestMapping("/detailList")
+	public String list(@RequestParam int no){
+		
+		PocketmonDto dto = dao.detailList(no);
+
+		StringBuffer buffer = new StringBuffer();
+		
+	
+		
+		//출력
+				if(dto ==null) {
+					return "찾으시는 번호의 포켓몬이 없습니다.";
+				}
+				else {
+					return dto.toString();
+				}
 		
 		
 	}

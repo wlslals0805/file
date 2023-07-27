@@ -1,10 +1,13 @@
 package com.kh.spring05.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spring05.dto.PocketmonDto;
+import com.kh.spring05.mapper.PocketmonMapper;
 
 //DAO 클래스
 //= Spring에 등록해야됨
@@ -16,6 +19,10 @@ public class PocketmonDao {
 	@Autowired//(주의) 등록을 하지 않으면 절대로 주지 않음
 	private JdbcTemplate jdbcTemplate;
 	
+	@Autowired
+	private PocketmonMapper mapper;
+	
+	
 	public void insert(PocketmonDto dto) {
 		String sql = "insert into pocketmon(no, name, type) "
 							+ "values(?, ?, ?)";
@@ -24,6 +31,7 @@ public class PocketmonDao {
 		};
 		jdbcTemplate.update(sql, data);
 	}
+	
 	
 	
 	public boolean update(PocketmonDto dto) {
@@ -38,7 +46,6 @@ public class PocketmonDao {
 		
 	}
 
-
 	public boolean delete(int no) {
 		
 		String sql ="delete pocketmon where no= ?";
@@ -47,6 +54,33 @@ public class PocketmonDao {
 
 	}
 	
+	public List<PocketmonDto> list(){
+		
+		String sql = "select * from pocketmon order by no asc";
+	
+		
+		return jdbcTemplate.query(sql, mapper);
+		
+	
+	}
+
+	
+	public PocketmonDto detailList(int no){
+		String sql = "select * from pocketmon where no=? order by no asc";
+		
+		Object[]data= {no};
+				
+		List<PocketmonDto> list = jdbcTemplate.query(sql, mapper ,data);
+//		return jdbcTemplate.query(sql, mapper, data);
+		
+			if(list.isEmpty()) {
+			return null;
+		}
+	
+		else {
+			return list.get(0);		//상세조회 (번호 하나 선택 = 리스트에 들어온 목록이 하나 = get(0)만 존재)
+		}
+	}
 	
 }
 
