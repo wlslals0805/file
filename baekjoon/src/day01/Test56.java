@@ -1,5 +1,6 @@
 package day01;
 
+
 import java.util.Scanner;
 
 public class Test56 {
@@ -101,3 +102,7 @@ public class Test56 {
 		
 
 }}
+
+
+
+
