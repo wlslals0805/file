@@ -66,19 +66,19 @@ public class PocketmonDao {
 
 	
 	public PocketmonDto detailList(int no){
-		String sql = "select * from pocketmon where no=? order by no asc";
+		String sql = "select * from pocketmon where no=?";
 		
 		Object[]data= {no};
 				
 		List<PocketmonDto> list = jdbcTemplate.query(sql, mapper ,data);
-//		return jdbcTemplate.query(sql, mapper, data);
 		
 			if(list.isEmpty()) {
 			return null;
 		}
 	
 		else {
-			return list.get(0);		//상세조회 (번호 하나 선택 = 리스트에 들어온 목록이 하나 = get(0)만 존재)
+			return list.get(0);		
+			//상세조회 (번호 하나 선택 = 리스트에 들어온 목록이 하나 = get(0)만 존재)
 		}
 	}
 	

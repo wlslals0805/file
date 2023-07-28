@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 
+
 @RestController
 public class BoardController {
 
@@ -48,9 +49,31 @@ public class BoardController {
 	
 		}
 		
+		//내용 빼고
+		@RequestMapping("/detailList")
+		public String detailList() {
+			List<BoardDto> list = dao.selectList();
+			StringBuffer buffer = new StringBuffer();//safe
+			for(BoardDto dto : list) {
+				buffer.append("[");
+				buffer.append(dto.getBoardNo());
+				buffer.append("]");
+				buffer.append(" ");
+				buffer.append(dto.getBoardTitle());
+				buffer.append(" - ");
+				buffer.append(dto.getBoardWriter());
+				buffer.append(" (조회수 : ");
+				buffer.append(dto.getBoardReadcount());
+				buffer.append(")");
+				buffer.append("<br>");
+			}
+			return buffer.toString();
+		}
+		
+		//전체출력
 		@RequestMapping("/list")
 		public String list(){
-			List<BoardDto> list = dao.selectList();
+			List<BoardDto> list = dao.list();
 			StringBuffer buffer = new StringBuffer();
 			
 			for(BoardDto dto:list) {
@@ -60,8 +83,33 @@ public class BoardController {
 
 			}
 		return buffer.toString();	
-	
-	
-	
 		}
+		
+		
+		
+		
+		
+		
+		//전체 중 번호 하나만 골라서
+		@RequestMapping("/detail")
+		public String detail(@RequestParam int boardNo) {
+			BoardDto dto = dao.selectOne(boardNo);
+			if(dto == null) {
+				return "게시글이 존재하지 않습니다";
+			}
+			else {
+				//return dto.toString();
+				StringBuffer buffer = new StringBuffer();
+				buffer.append("[제목]" + dto.getBoardTitle());
+				buffer.append("("+dto.getBoardWriter()+")");
+				buffer.append("<br>");
+				buffer.append("---------------------------");
+				buffer.append("<br>");
+				buffer.append(dto.getBoardContent());
+				buffer.append("<br>");
+				return buffer.toString();
+			}
+		}
+		
 }
+

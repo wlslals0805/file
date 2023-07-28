@@ -69,15 +69,11 @@ public class PocketmonController {
 	
 
 	
-	@RequestMapping("/detailList")
+	@RequestMapping("/detail")
 	public String list(@RequestParam int no){
 		
 		PocketmonDto dto = dao.detailList(no);
 
-		StringBuffer buffer = new StringBuffer();
-		
-	
-		
 		//출력
 				if(dto ==null) {
 					return "찾으시는 번호의 포켓몬이 없습니다.";
