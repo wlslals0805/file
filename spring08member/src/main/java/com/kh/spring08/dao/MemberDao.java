@@ -93,7 +93,7 @@ public class MemberDao {
 		String sql = "delete member where member_id = ?";
 		Object[] data = {memberId};
 		return jdbcTemplate.update(sql, data) > 0;
-	}
+	 }
 }
 
 
