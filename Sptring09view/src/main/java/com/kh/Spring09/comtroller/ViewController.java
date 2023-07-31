@@ -43,6 +43,12 @@ public class ViewController {
 		return "/WEB-INF/views/dummy.jsp";
 	}
 	
+	@RequestMapping("/alt")
+	public String alt() {
+		return "/WEB-INF/views/alt.jsp";
+		
+	}
+	
 	
 	
 
