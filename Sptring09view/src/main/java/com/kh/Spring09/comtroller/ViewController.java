@@ -23,6 +23,10 @@ public class ViewController {
 	return "/WEB-INF/views/heading.jsp";
 			
 		}
+	@RequestMapping("/link")
+	public String link() {
+		return "/WEB-INF/views/link.jsp";
+	}
 	
 	
 
