@@ -28,6 +28,22 @@ public class ViewController {
 		return "/WEB-INF/views/link.jsp";
 	}
 	
+	@RequestMapping("/image")
+	public String image() {
+		return "/WEB-INF/views/image.jsp";
+	}
+	
+	@RequestMapping("/sns")
+	public String sns() {
+		return "/WEB-INF/views/sns.jsp";
+	}
+	
+	@RequestMapping("/dummy")
+	public String dummy() {
+		return "/WEB-INF/views/dummy.jsp";
+	}
+	
+	
 	
 
 }
