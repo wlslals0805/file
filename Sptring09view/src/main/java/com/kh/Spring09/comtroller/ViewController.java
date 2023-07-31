@@ -46,7 +46,6 @@ public class ViewController {
 	@RequestMapping("/alt")
 	public String alt() {
 		return "/WEB-INF/views/alt.jsp";
-		
 	}
 	
 	
