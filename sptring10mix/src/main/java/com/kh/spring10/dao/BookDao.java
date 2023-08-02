@@ -1,4 +1,4 @@
-package com.kh.spring07.dao;
+package com.kh.spring10.dao;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.spring07.dto.BookDto;
-import com.kh.spring07.mapper.BookMapper;
+import com.kh.spring10.dto.BookDto;
+import com.kh.spring10.mapper.BookMapper;
 
 
 
@@ -65,16 +65,11 @@ import com.kh.spring07.mapper.BookMapper;
 		
 		
 		//전체출력 되는 메소드
-		
-		public List<BookDto> listAll(){	
+		public List<BookDto> listAll(){
 			String sql = "select * from book order by book_id asc";
-			return jdbcTemplate.query(sql, mapper); //객체의 모든 정보를 list에 담아서 반환.
+			return jdbcTemplate.query(sql, mapper);
+			
 		}
-		
-		
-		
-		
-		
 		
 		//이름,제목,내용,글쓴이 중에 내용 빼고 출력되는 메소드
 //		public List<BookDto> selectList() {
@@ -86,16 +81,20 @@ import com.kh.spring07.mapper.BookMapper;
 //							+ "board order by board_no desc";
 //			return jdbcTemplate.query(sql, mapper);
 //		}
-
-		/*객체 한 개를 반환*/
+		
+		
+		
+		
+		
+		
+		
+		
 		public BookDto selectOne(int bookId){
 			String sql = "select * from book where book_id=?";
 			
 			Object[]data= {bookId};
 					
 			List<BookDto> list = jdbcTemplate.query(sql, mapper ,data);
-			
-			//jdbcTemplate이 DB로부터 가져온 모든 객체의 정보를 list에 담는다
 			
 				if(list.isEmpty()) {
 				return null;
@@ -104,7 +103,6 @@ import com.kh.spring07.mapper.BookMapper;
 			else {
 				return list.get(0);		
 				//상세조회 (번호 하나 선택 = 리스트에 들어온 목록이 하나 = get(0)만 존재)
-				//list.get(0)== 객체 한 개를 반환한다. (입력받은 bookId에 해당하는 객체)
 			}
 		}
 		

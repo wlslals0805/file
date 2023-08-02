@@ -73,6 +73,7 @@ public class PocketmonController {
 	public String list(@RequestParam int no){
 		
 		PocketmonDto dto = dao.detailList(no);
+		
 
 		//출력
 				if(dto ==null) {
