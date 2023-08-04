@@ -29,7 +29,11 @@
 					<th>내용</th>
 					<td>${dto.boardContent}</td>
 				</tr>
+				
 			</table>
+				<a href="edit?boardNo=${dto.boardNo}">정보수정</a>
+				<a href="delete?boardNo=${dto.boardNo}">삭제하기</a>
+				<a href="delete/${dto.boardNo}">삭제하기2</a>
 		</c:when>
 		<c:otherwise>
 			<h1>존재하지 않는 게시글입니다</h1>

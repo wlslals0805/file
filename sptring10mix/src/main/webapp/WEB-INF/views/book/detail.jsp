@@ -6,13 +6,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>도서 상세 보기</title>
+<title>${dto.bookId}번 도서 상세 보기</title>
 </head>
 <body>
 
-	<h1>도서 상세 정보</h1>
+	<h1>${dto.bookId}번 도서 상세 정보</h1>
 	
 	<c:choose>
+	
 		<c:when test="${dto != null}">
 			<!-- 
 				리스트 태그
@@ -31,6 +32,8 @@
 				<li>${dto.bookPageCount}</li>
 				<li>${dto.bookGenre}</li>
 			</ul>
+			<a href="edit?bookId=${dto.bookId}">정보수정</a>
+			<a href="delete?bookId=${dto.bookId}">삭제하기</a>
 		</c:when>
 		<c:otherwise>
 			<h2>해당 도서는 존재하지 않습니다</h2>

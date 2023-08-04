@@ -33,16 +33,31 @@ import com.kh.spring10.mapper.BoardListMapper;
 		@Autowired
 		private BoardListMapper listMapper;
 		
-		public void insert(BoardDto dto) {
-			String sql = "insert into board(board_no,board_title,board_content,board_writer) "
-					+ "values(board_seq.nextval,?,?,?)";
-			
-			Object[] data = {
-					dto.getBoardTitle(),dto.getBoardContent(),dto.getBoardWriter()
-			};
-				jdbcTemplate.update(sql, data);	
+		//등록과 번호생성 기능
+		//select board_seq.nextval from dual
+		//insert into boarad(...) values(?,?,?,?,0)
+		public int sequence() {
+			String sql = "select board_seq.nextval from dual";
+			return jdbcTemplate.queryForObject(sql, int.class);
+//			return jdbcTemplate.queryForObject(sql, Integer.class);
 			
 		}
+		
+		public void insert(BoardDto dto) {
+			String sql="insert into board"
+					+ "(board_no,board_title,board_content,"
+					+ "board_writer,board_readcount)values(?,?,?,?,0)";
+			Object[] data = {
+					
+					dto.getBoardNo(),dto.getBoardTitle()
+					,dto.getBoardContent(),dto.getBoardWriter()
+					
+			};
+			
+			jdbcTemplate.update(sql, data);
+			
+		}
+		
 		
 		public boolean update(BoardDto dto) {
 			String sql = "update Board set board_title=?,"
@@ -93,9 +108,10 @@ import com.kh.spring10.mapper.BoardListMapper;
 		
 		
 		public BoardDto selectOne(int boardNo){
+			
 			String sql = "select * from board where board_no=?";
 			
-			Object[]data= {boardNo};
+			Object[] data= {boardNo};
 					
 			List<BoardDto> list = jdbcTemplate.query(sql, detailMapper ,data);
 			
@@ -108,6 +124,9 @@ import com.kh.spring10.mapper.BoardListMapper;
 				//상세조회 (번호 하나 선택 = 리스트에 들어온 목록이 하나 = get(0)만 존재)
 			}
 		}
+		
+		
+		
 		
 		
 		
