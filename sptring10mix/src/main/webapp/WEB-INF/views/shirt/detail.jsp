@@ -27,13 +27,14 @@
 			
 			<a href="edit?shirtNo=${dto.shirtNo}">정보수정</a>
 			<a href="delete?shirtNo=${dto.shirtNo}">삭제하기</a>
+			<a href="list">목록으로</a>
+			<a href="add">상품등록</a>
 		</c:when>
 		<c:otherwise>
 			<h1>존재하지 않는 번호입니다.</h1>
 		</c:otherwise>
 	</c:choose>
 
-  <a href="list">목록보기</a>
 
 	
 </body>

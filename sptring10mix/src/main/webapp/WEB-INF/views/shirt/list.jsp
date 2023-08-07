@@ -34,7 +34,7 @@
 	<c:forEach var="dto" items="${list}">
 	<tr>
 	<td>${dto.shirtNo}</td>
-	<td><a href="detail?shirtNo=${dto.shirtNo}">${dto.shirtName}</a></td>
+	<td><a href="detail2?shirtNo=${dto.shirtNo}">${dto.shirtName}</a></td>
 	<td>${dto.shirtColor}</td>
 	<td>${dto.shirtPrice}</td>
 	<td>${dto.shirtKind}</td>

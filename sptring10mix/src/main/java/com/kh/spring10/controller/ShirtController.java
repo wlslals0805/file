@@ -13,17 +13,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.spring10.dao.ShirtDao;
-import com.kh.spring10.dto.PocketmonDto;
+import com.kh.spring10.dao.ShirtSizeDao;
 import com.kh.spring10.dto.ShirtDto;
+import com.kh.spring10.dto.ShirtSizeDto;
 
 
 
 @Controller
-@RequestMapping("/shirt")
+@RequestMapping("/shirt")//공용주소는 GET/POST 지정 불가
 public class ShirtController {
 
 	@Autowired
 	private ShirtDao dao; 
+	
+	@Autowired
+	private ShirtSizeDao sizeDao;
 
 
 	@RequestMapping("/detail")
@@ -74,7 +78,7 @@ public class ShirtController {
 			//더이상 할 일이 없으므로 다른 페이지로 강제 이동(리다이렉트, redirect)
 			//반환하는 문자열이 redirect: 로 시작하면 스프링이 리다이렉트 처리한다
 			return "redirect:detail?shirtNo="+shirtNo;//상대경로
-			//return "redirect:list";//상대경로
+//			return "redirect:list";//상대경로
 //			return "redirect:/shirt/list";//절대경로
 	}
 		
@@ -128,7 +132,90 @@ public class ShirtController {
 			
 		}
 		
+		//(추가) 만약 사이즈까지 같이 등록하는 경우라면...
+			
+		@GetMapping("/add2")
+		public String add2() {
+			return "/WEB-INF/views/shirt/add2.jsp";
+			
+		}
 		
+		
+		
+		
+		@PostMapping("add2")
+		public String add2(
+				@ModelAttribute ShirtDto shirtDto,
+				@RequestParam List<String> size){
+			
+			int shirtNo = dao.sequence();
+			shirtDto.setShirtNo(shirtNo);
+			dao.insert(shirtDto);
+			
+			
+			
+			for(String s : size) {
+				ShirtSizeDto sizeDto = new ShirtSizeDto();
+				sizeDto.setShirtNo(shirtNo);
+				sizeDto.setShirtSizeName(s);
+				sizeDao.insert(sizeDto);
+				
+				
+				
+			}
+			
+			
+			return "redirect:detail2?shirtNo="+shirtNo;
+			
+		}
+		
+		@RequestMapping("/detail2")
+		public String detail2(@RequestParam int shirtNo,Model model) {
+			ShirtDto shirtDto = dao.detailList(shirtNo);
+			model.addAttribute("shirtDto", shirtDto);
+			
+			List<ShirtSizeDto> sizeList = sizeDao.selectOne(shirtNo);
+			model.addAttribute("sizeList", sizeList);
+			
+			return "/WEB-INF/views/shirt/detail2.jsp";
+	
+		}
+		
+		@GetMapping("/edit2")
+		public String edit2(@RequestParam int shirtNo,Model model) {
+			
+			ShirtDto shirtDto = dao.detailList(shirtNo);
+			model.addAttribute("shirtDto", shirtDto);	//셔츠 정보
+			
+			
+			List<ShirtSizeDto> sizeList = sizeDao.selectOne(shirtNo);
+			model.addAttribute("sizeList", sizeList);//사이즈 목록 정보
+			
+			return "/WEB-INF/views/shirt/edit2.jsp";
+		}
+		
+		@PostMapping("/edit2")
+		public String edit2(@ModelAttribute ShirtDto shirtDto,
+				@RequestParam List<String> size) {
+			
+			boolean result = dao.update(shirtDto);
+			if(result) {
+				//사이즈 삭제 후 추가
+				sizeDao.delete(shirtDto.getShirtNo());
+				for(String s:size) {
+					ShirtSizeDto sizeDto = new ShirtSizeDto();
+					sizeDto.setShirtNo(shirtDto.getShirtNo());
+					sizeDto.setShirtSizeName(s);
+					sizeDao.insert(sizeDto);
+					
+				}
+				return "redirect:detail2?shirtNo="+shirtDto.getShirtNo();
+				
+			}
+			else {
+				return "redirect:에러페이지";
+			}
+		}
 		
 		
 		
