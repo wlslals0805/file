@@ -11,7 +11,6 @@ import com.kh.spring10.mapper.ShirtSizeMapper;
 
 @Repository
 public class ShirtSizeDao {
-
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -20,31 +19,26 @@ public class ShirtSizeDao {
 	private ShirtSizeMapper mapper;
 	
 	public void insert(ShirtSizeDto dto) {
-		String sql="insert into shirt_size"
-				+ "(shirt_no,shirt_size_name)values(?,?)";
-		
-		Object[]data = {dto.getShirtNo(),dto.getShirtSizeName()};
-		
+		String sql = "insert into shirt_size(shirt_no, shirt_size_name) "
+																			+ "values(?, ?)";
+		Object[] data = {dto.getShirtNo(), dto.getShirtSizeName()};
 		jdbcTemplate.update(sql, data);
 	}
 	
-	
-	public List<ShirtSizeDto> selectOne(int shirtNo){
-		
+	public List<ShirtSizeDto> selectList(int shirtNo) {
 		String sql = "select * from shirt_size where shirt_no = ?";
-		
-		Object[] data= {shirtNo};
-		return jdbcTemplate.query(sql, mapper,data);
-		
-		
+		Object[] data = {shirtNo};
+		return jdbcTemplate.query(sql, mapper, data);
 	}
 	
 	public boolean delete(int shirtNo) {
-		
 		String sql = "delete shirt_size where shirt_no = ?";
-		Object[]data = {shirtNo};
-		return jdbcTemplate.update(sql, data)>0;
-		
+		Object[] data = {shirtNo};
+		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
 }
+
+
+
+

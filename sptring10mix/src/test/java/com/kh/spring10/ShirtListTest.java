@@ -19,7 +19,7 @@ public class ShirtListTest {
 
 	@Test
 	public void test() {
-		List<ShirtDto> list = dao.list();
+		List<ShirtDto> list = dao.selectList();
 		
 		for(ShirtDto dto : list) {
 			

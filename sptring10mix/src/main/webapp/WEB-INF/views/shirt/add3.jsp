@@ -9,8 +9,8 @@
 <body>
 	<h1>의상 등록</h1>
 	
-	<form action="add2" method="post">
-	의상 이름: <input name="ShirtName"> <br><br>
+	<form action="add3" method="post">
+	의상 이름: <input name="shirtName"> <br><br>
 	의상 컬러: <select name="shirtColor" required>
 	<!-- 
 	option에 value를 주면 표시되는 값과 다르게 전송을 한다
@@ -37,19 +37,16 @@
 </select> <br><br>
 	의상 재질: <input name="shirtMaterial"> <br><br>
 	의상 재고: <input name="shirtStock" required> <br><br>
-	<hr>
-	
-	<input type = "checkbox" name = "size" value="S">S
-	<input type = "checkbox" name = "size" value="M">M
-	<input type = "checkbox" name = "size" value="L">L
-	<input type = "checkbox" name = "size" value="XL">XL
-	<input type = "checkbox" name = "size" value="2XL">2XL
-	<input type = "checkbox" name = "size" value="3XL">3XL
-	
-	<hr>
+	의상 사이즈: <select name="shirtSizeName" required>
+	<option value="">선택하세요</option>
+	<option>S</option>
+	<option>M</option>
+	<option>X</option>
+	<option>XL</option>
+	<option>XXL</option>
+</select> <br><br>
 	
 	<button>등록</button>	
-	
 	</form>
 	
 	<h2><a href="list"> 목록으로 </a></h2>
