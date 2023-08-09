@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.springhome.dao.MemberDao;
 import com.kh.springhome.dto.MemberDto;
@@ -89,10 +90,14 @@ public class MemberController {
 		
 		//[3] 비밀번호가 일치하면 메인페이지로 이동
 		if(isCorrectPw) {
-				session.setAttribute("name",inputDto.getMemberId());
-				//아이디와 비밀번호가 모두 일치했을 때야 비로소 session에 데이터 저장. 이 저장이 remove(로그아웃)되기 전까지 회원용 header가 뜬다
-			
-			return "redirect:/";
+		session.setAttribute("name",inputDto.getMemberId());
+		//아이디와 비밀번호가 모두 일치했을 때야 비로소 session에 데이터 저장. 이 저장이 remove(로그아웃)되기 전까지 회원용 header가 뜬다
+		
+		//로그인 시간 갱신
+		memberDao.updateMemberLogin(inputDto.getMemberId());
+		
+		//메인페이지로 이동
+		return "redirect:/";
 			
 		}
 		
@@ -148,6 +153,218 @@ public class MemberController {
 		return "/WEB-INF/views/member/after.jsp";
 		
 	}
+	
+	
+	//비밀번호 변경
+	@GetMapping("/password")
+	public String password() {
+		
+		return "/WEB-INF/views/member/password.jsp";
+		
+	}
+
+	@PostMapping("/password")
+	public String password(HttpSession session,@RequestParam String originPw,
+			@RequestParam String changePw) {
+		
+		String memberId = (String) session.getAttribute("name");
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		
+		//[1] 기존 비밀번호가 일치하는지 판정
+		if(memberDto.getMemberPw().equals(originPw)) {//비밀번호가 일치한다면
+		//[2] 1번이 성공일 때만 비밀번호를 변경하도록 처리(+개인정보 변경시각 수정)
+			
+		memberDao.updateMemberPw(memberId,changePw);
+			
+		return "redirect:passwordFinish";
+			
+			
+		}
+		else {
+			
+			return "redirect:password?error";
+			
+			
+		}
+	
+	}
+
+	@RequestMapping("/passwordFinish")
+	public String passwordFinish() {
+		
+		return "/WEB-INF/views/member/passwordFinish.jsp";
+	}
+	
+	@GetMapping("/change")
+	public String change(HttpSession session, Model model) {
+		
+		String memberId = (String) session.getAttribute("name");
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		
+		model.addAttribute("memberDto", memberDto);
+		
+		return "/WEB-INF/views/member/change.jsp";
+		
+	}
+	
+	@PostMapping("/change")
+	public String change(HttpSession session, @ModelAttribute MemberDto inputDto) 
+	{
+		
+		String memberId = (String) session.getAttribute("name");
+		
+		//비밀번호 검사 후 변경 처리 요청
+		MemberDto findDto = memberDao.selectOne(memberId);
+		
+		if(inputDto.getMemberPw().equals(findDto.getMemberPw())) {
+			//비밀번호가 일치한다면
+			
+			inputDto.setMemberId(memberId); //아이디를 설정하고
+			memberDao.updateMemberInfo(inputDto); //정보 변경 처리
+			return "redirect:mypage";
+			
+		}
+		else {
+			//비밀번호가 일치하지 않는다면 -> 다시 입력하도록 되돌려보냄
+			return "redirect:change?error";
+			
+			
+		}	
+	}
+	
+	
+	
+	
+	@GetMapping("/change2")
+	public String change2(HttpSession session, Model model) {
+		
+		
+		String memberId= (String) session.getAttribute("name");
+		
+		MemberDto dto=memberDao.selectOne(memberId);
+		
+		model.addAttribute("dto", dto);
+		
+		return "/WEB-INF/views/member/change2.jsp";
+		
+		
+		
+	}
+	
+	@PostMapping("/change2")
+	public String change2(HttpSession session, @ModelAttribute MemberDto input) {
+		
+		String memberId= (String) session.getAttribute("name");
+		
+		MemberDto origin = memberDao.selectOne(memberId);
+		
+		
+		
+		if(input.getMemberPw().equals(origin.getMemberPw())) {
+			
+			input.setMemberId(memberId);
+			memberDao.info(input);
+		
+		return "redirect:mypage";
+		
+		}
+		
+		else {
+			
+			return "redirect:change2?error";
+		}	
+		
+	}
+	@GetMapping("/exit")
+	public String exit() {
+		return "/WEB-INF/views/member/exit.jsp";
+	}
+	
+	@PostMapping("/exit")
+	public String exit(HttpSession session, @RequestParam String memberPw) {
+		String memberId = (String)session.getAttribute("name");
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		if(memberDto.getMemberPw().equals(memberPw)) {//비밀번호 일치
+			//삭제
+			memberDao.delete(memberId);
+			//로그아웃
+			session.removeAttribute("name");//세션에서 name의 값을 삭제
+			//session.invalidate();//세션 소멸(비추천)
+			return "redirect:exitFinish";
+		}
+		else {//비밀번호 불일치
+			return "redirect:exit?error";
+		}
+	}
+	
+	@RequestMapping("/exitFinish")
+	public String exitFinish() {
+		return "/WEB-INF/views/member/exitFinish.jsp";
+	}
+	
+	
+	
+	@GetMapping("/exit2")
+	public String delete2() {
+		
+		return "/WEB-INF/views/member/exit2.jsp";
+		
+	}
+	
+	@PostMapping("/exit2")
+	public String delete2(String memberPw, HttpSession session) {
+		
+	String memberId=(String) session.getAttribute("name");
+	
+	MemberDto dto = memberDao.selectOne(memberId);
+	
+	if(memberPw.equals(dto.getMemberPw())) {
+		
+		memberDao.delete2(memberPw);
+		session.removeAttribute("name");
+		
+		return "/WEB-INF/views/member/exitFinish2.jsp";
+		
+		
+	}
+	
+	else {
+		
+		return "redirect:exit2?error";
+		
+	}
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
