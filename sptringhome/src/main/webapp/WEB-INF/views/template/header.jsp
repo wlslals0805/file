@@ -38,7 +38,7 @@
 	<a href="/">홈</a>
 	<a href="/member/join">회원가입</a>
 	<a href="/member/login">로그인</a>
-	<a href="/board/write">게시판</a>
+	<a href="/board/list">게시판</a>
 		
 		</c:otherwise>
 		

@@ -15,4 +15,5 @@ public interface MemberDao {
 	boolean delete2(String memberId);
 	
 	
+	
 }

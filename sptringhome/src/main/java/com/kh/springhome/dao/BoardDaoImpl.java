@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.springhome.dto.BoardDto;
+import com.kh.springhome.dto.MemberDto;
 import com.kh.springhome.mapper.BoardDetailMapper;
 import com.kh.springhome.mapper.BoardListMapper;
 
@@ -62,12 +63,67 @@ public class BoardDaoImpl implements BoardDao{
 		String sql = "select board_no,board_writer,"
 				+ "board_title,board_readcount,"
 				+ "board_likecount,board_replycount,board_ctime,"
-				+ "board_utime from board order by board_no asc";
+				+ "board_utime from board order by board_no desc";
 	
 		return jdbcTemplate.query(sql, detailMapper);
 	}
 
+
+	@Override
+	public BoardDto seletOne(int boardNo) {
+		
+		String sql = "select * from board where board_no=?";
+		
+		Object[] data =  {boardNo};
+		
+		List<BoardDto> list = jdbcTemplate.query(sql, listMapper, data);
+		
+		
+		return list.get(0);
+	}
+
+
+	@Override
+	public void update(BoardDto boardDto) {
+		
+		String sql = "update board set board_title=?,board_content=?,board_utime=sysdate "
+				+ "where board_no=?";
+		
+		Object[] data= {boardDto.getBoardTitle(),boardDto.getBoardContent(),boardDto.getBoardNo()};
+		
+		
+		jdbcTemplate.update(sql, data);
+	}
 	
+	@Override
+	public void updateView(BoardDto boardDto) {
+		
+		String sql = "update board set board_readcount=?"
+				+ "where board_no=?";
+		
+		Object[] data= {boardDto.getBoardReadcount(),boardDto.getBoardNo()};
+		
+		
+		jdbcTemplate.update(sql, data);
+	}
+
+
+	@Override
+	public boolean delete(int boardNo) {
+		
+		String sql = "delete board where board_no=?";
+		
+		Object[]data= {boardNo};
+		
+		
+		jdbcTemplate.update(sql, data);
+		
+		return jdbcTemplate.update(sql, data)>0;
+
+	}
+
+
+
 	
 	
 	
