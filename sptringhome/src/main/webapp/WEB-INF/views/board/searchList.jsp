@@ -5,20 +5,10 @@
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-
-<form action="list" method="post">
-
-<select name="type">
-<option>제목</option>
-<option>작성자</option>
-</select>
-
-<input type=text name="search" required>
-<button>검색</button><br><br>
-
-</form>
+<h1>검색결과</h1>
 
 <table border="1">
+
 <tr>
 <th>번호</th>
 <th>글쓴이</th>
@@ -33,12 +23,7 @@
 
 
 
-
-<c:if test="${param.error!=null}"><h2 style=color:red>찾으시는 제목의 게시글이 존재하지 않습니다.</h2></c:if>
-<c:if test="${param.error2!=null}"><h2 style=color:red>찾으시는 작성자의 게시글이 존재하지 않습니다.</h2></c:if>
-
-<c:forEach var="boardDto" items="${list}">
-
+<c:forEach var="boardDto" items="${tList}">
 
 <tr>
 <th>${boardDto.boardNo}</th>
@@ -56,8 +41,9 @@ pattern="y년 M월 d일 E a h시 m분 s초"/></th>
 
 </c:forEach>
 
+
 </table>
 
-<br><br><a href="write">게시글 등록</a>
+<a href="write">게시글 등록</a>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

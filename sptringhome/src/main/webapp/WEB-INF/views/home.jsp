@@ -15,7 +15,7 @@
 	
 	<c:when test="${sessionScope.name!=null}">
 		<h2>${sessionScope.name}님 환영합니다!</h2>
-		<img src="https://picsum.photos/id/237/200/300">
+		<img src="/puppy.jpg">
 	</c:when>
 	
 	<c:otherwise>

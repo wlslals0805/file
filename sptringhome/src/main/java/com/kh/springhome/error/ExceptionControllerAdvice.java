@@ -57,7 +57,7 @@ public class ExceptionControllerAdvice {
 	
 	@ExceptionHandler(AuthorityException.class)
 	public String authority(AuthorityException e) {
-		
+	
 		return "/WEB-INF/views/error/authority.jsp";
 		
 	}

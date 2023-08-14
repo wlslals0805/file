@@ -131,6 +131,18 @@ public class MemberDaoImpl implements MemberDao{
 		
 		
 	}
+
+	@Override
+	public boolean updatePoint(String memberId) {
+		
+		
+		String sql = "update member set member_point=member_point+10 where member_id=?";
+		
+		Object[] data = {memberId};
+		
+		
+		return jdbcTemplate.update(sql,data)>0;
+	}
 	
 	
 	

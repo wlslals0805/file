@@ -1,10 +1,7 @@
 package com.kh.springhome.controller;
 
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,7 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.springhome.dao.BoardDao;
+import com.kh.springhome.dao.MemberDao;
+import com.kh.springhome.dao.SaveDao;
 import com.kh.springhome.dto.BoardDto;
+import com.kh.springhome.dto.MemberDto;
+import com.kh.springhome.dto.SaveDto;
 
 //게시판 관련 기능을 처리하는 컨트롤러 
 @Component
@@ -28,6 +29,12 @@ public class BoardController {
 	@Autowired
 	private BoardDao boardDao;
 	
+	@Autowired 
+	private MemberDao memberDao;
+	
+	@Autowired
+	private SaveDao dao;
+	
 	@GetMapping("/write")
 	public String write() {
 		
@@ -36,7 +43,7 @@ public class BoardController {
 	}
 	
 	@PostMapping("/write")
-	public String write(BoardDto boardDto,HttpSession session) {
+	public String write(BoardDto boardDto,HttpSession session) throws InterruptedException {
 		
 		String memberId=(String) session.getAttribute("name");
 		
@@ -44,14 +51,14 @@ public class BoardController {
 		
 		boardDto.setBoardWriter(memberId);
 		boardDto.setBoardNo(boardNo);
-		
 		boardDao.insert(boardDto);
+		memberDao.updatePoint(memberId);
 		
 		return "redirect:/board/detail?boardNo="+boardNo;
 		
 	}
-	
-	@RequestMapping("/list")
+
+	@GetMapping("/list")
 	public String list(Model model,HttpSession session) {
 		
 		List<BoardDto> list = boardDao.detailList();
@@ -63,102 +70,206 @@ public class BoardController {
 		
 	}
 	
+	@PostMapping("/list")
+	public String list(Model model,HttpSession session,String search,String type) {
+		
+		List<BoardDto> list = boardDao.detailList();
+		int result=0;
+	
+		if(type.equals("제목")) {
+		
+		for(BoardDto a:list) {
+			
+			if(a.getBoardTitle().startsWith(search)) {
+				result++;	
+			}	
+		}
+
+		if(result>=1) {
+			
+			List<BoardDto> tList = boardDao.seletTitle(search+"%");
+			
+			model.addAttribute("tList", tList);
+			
+			
+			return "/WEB-INF/views/board/searchList.jsp";
+		}
+		
+		else {
+			return "redirect:/board/list?error";
+			
+		}
+		
+		}
+		
+		else if(type.equals("작성자")) {
+			
+			for(BoardDto a:list) {
+				
+				if(a.getBoardWriter().startsWith(search)) {
+					
+					result++;
+					
+				}	
+			}
+			if(result>=1) {
+				
+				List<BoardDto> tList = boardDao.seletWriter(search+"%");
+				
+				model.addAttribute("tList", tList);
+				
+				
+				return "/WEB-INF/views/board/searchList.jsp";
+			}
+			
+			else {
+				return "redirect:/board/list?error2";
+				
+			}	
+		}
+		else {
+			
+			return "redirect:/board/list";
+		}
+		
+		}
+
 //	@RequestMapping("/detail")
-//	public String detail(@RequestParam int boardNo,Model model,HttpSession session) {
-//		
-//		
+//	public String detail(@RequestParam int boardNo,Model model,HttpSession session,HttpSession session2) {
 //		String memberId=(String) session.getAttribute("name");
 //		BoardDto boardDto = boardDao.seletOne(boardNo);
 //		
 //		
 //		
-//		model.addAttribute("boardDto",boardDto);
-//		
-//		if(!memberId.equals(boardDto.getBoardWriter())) {
-//		
-//		boardDto.setBoardReadcount(boardDto.getBoardReadcount()+1);}
-//		
+//		if(memberId!=null&&memberId.equals(boardDto.getBoardWriter())) {
+//			
+//			boardDto.setBoardReadcount(boardDto.getBoardReadcount());}
 //	
+//		else {
+//			
+//			boardDto.setBoardReadcount(boardDto.getBoardReadcount()+1);
+//		}
+//
+//		model.addAttribute("boardDto",boardDto);
 //
 //		boardDao.updateView(boardDto);
-//		
-//		
-//		
+//
 //		return "/WEB-INF/views/board/detail.jsp";
+//		
+//	}
 	
 	@RequestMapping("/detail")
-	public String detail(@RequestParam int boardNo, Model model, HttpSession session) {
-	    String memberId = (String) session.getAttribute("name");
-	    BoardDto boardDto = boardDao.seletOne(boardNo);
-	    
-	    // 사용자별로 읽은 글 번호를 저장하는 Map을 세션에서 가져옵니다.
-	    Map<String, Set<Integer>> userReadArticles = (Map<String, Set<Integer>>) session.getAttribute("userReadArticles");
-	    if (userReadArticles == null) {
-	        userReadArticles = new HashMap<>();
-	        session.setAttribute("userReadArticles", userReadArticles);
-	    }
-	    
-	    // 현재 로그인한 사용자의 읽은 글 번호 목록을 가져옵니다.
-	    Set<Integer> readArticleNumbers = userReadArticles.get(memberId);
-	    if (readArticleNumbers == null) {
-	        readArticleNumbers = new HashSet<>();
-	        userReadArticles.put(memberId, readArticleNumbers);
-	    }
-	    
-	    if (!readArticleNumbers.contains(boardNo)) {
-	        readArticleNumbers.add(boardNo);
-	        
-	        // 조회수 증가 처리
-	        if (!memberId.equals(boardDto.getBoardWriter())) {
-	            boardDto.setBoardReadcount(boardDto.getBoardReadcount() + 1);
-	            boardDao.updateView(boardDto);
-	        }
-	    }
-	    
-	    model.addAttribute("boardDto", boardDto);
-	    
-	    return "/WEB-INF/views/board/detail.jsp";
-	}
+	public String detail(@RequestParam int boardNo,Model model,HttpSession session,HttpSession session2,SaveDto dto) {
+		String memberId=(String) session.getAttribute("name");
+		BoardDto boardDto = boardDao.seletOne(boardNo);
+		MemberDto memberDto = memberDao.selectOne(boardDto.getBoardWriter());
+		
+		
+		List<SaveDto> list = dao.selectList(memberId);
+		
+		List<Integer> l = new ArrayList<>();
+		
+		for(SaveDto numList:list) {
+			
+			l.add(numList.getSaveNo());
+			
+			
+		}
+		
+		if(memberId!=null&&memberId.equals(boardDto.getBoardWriter())) {
+		
+		boardDto.setBoardReadcount(boardDto.getBoardReadcount());}
+		
+		else if(l.contains(boardNo)) {
+			
+		boardDto.setBoardReadcount(boardDto.getBoardReadcount());
+			
+		}
+		
+		else {
+			dto.setSaveId(memberId);
+			dto.setSaveNo(boardNo);
+
+			dao.listInsert(dto);
+			boardDto.setBoardReadcount(boardDto.getBoardReadcount()+1);
+		}
+		
+		
+		
+//		if(memberId!=null&&memberId.equals(boardDto.getBoardWriter())) {
+//			
+//			boardDto.setBoardReadcount(boardDto.getBoardReadcount());}
+//	
+//		else {
+//			
+//			boardDto.setBoardReadcount(boardDto.getBoardReadcount()+1);
+//		}
 
 		
+		model.addAttribute("boardDto",boardDto);
+		model.addAttribute("memberDto",memberDto);
+
+		boardDao.updateView(boardDto);
+
+		return "/WEB-INF/views/board/detail.jsp";
 		
-		
-		
+	}
 	
 	
+
 	@GetMapping("/edit")
-	public String edit(@RequestParam int boardNo,Model model) {
+	public String edit(@RequestParam int boardNo,Model model,HttpSession session) {
 	
 		BoardDto boardDto = boardDao.seletOne(boardNo);
 		
 		model.addAttribute("boardDto", boardDto);
+		
+	String memberId = (String) session.getAttribute("name");
+		
+		
+		if(memberId.equals(boardDto.getBoardWriter())) {
+			
+			
+			return "/WEB-INF/views/board/edit.jsp";
+		}
+		else {
+			return "redirect:detail?boardNo="+(boardNo)+"&error2";
+		}
+		
 
-		return "/WEB-INF/views/board/edit.jsp";
+		
 	
 	}
 
 	@PostMapping("/edit")
-	public String edit(BoardDto boardDto) {
-		
-		boardDao.update(boardDto);
-		
-		
-		
-		
-		return "redirect:/board/detail?boardNo="+boardDto.getBoardNo();
-		
-		
+	public String edit(BoardDto boardDto,HttpSession session) {
+
+			boardDao.update(boardDto);
+			
+			return "redirect:/board/detail?boardNo="+boardDto.getBoardNo();
+	
 	}
 	
 	
 	@RequestMapping("/delete")
-	public String delete(int boardNo) {
+	public String delete(int boardNo,HttpSession session) {
 		
-		boardDao.delete(boardNo);
+		BoardDto boardDto = boardDao.seletOne(boardNo);
 		
 		
 		
-		return "redirect:/board/list";
+		String memberId= (String) session.getAttribute("name");
+
+		if(memberId.equals(boardDto.getBoardWriter())) {
+		
+			boardDao.delete(boardNo);
+			
+			return "redirect:/board/list";
+		}
+		else {
+			return "redirect:detail?boardNo="+(boardNo)+"&error";
+		}
+		
 		
 		
 	}

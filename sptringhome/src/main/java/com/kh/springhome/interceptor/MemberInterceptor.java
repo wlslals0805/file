@@ -19,7 +19,7 @@ public class MemberInterceptor implements HandlerInterceptor{
 							HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		//세션이 주어지지 않으므로, 요청정보에서 세션 객체를 추출하여 사용
+		//컨트롤러와 다르게 세션이 주어지지 않으므로, 요청정보에 들어있던 세션 객체를 추출하여 사용
 		HttpSession session = request.getSession();
 		
 		String memberId = (String) session.getAttribute("name");
@@ -29,15 +29,16 @@ public class MemberInterceptor implements HandlerInterceptor{
 			return true;
 		}
 		else {//비회원이면 
-			//[1] 차단 + 로그인페이지로 리다이렉트
-			//response.sendRedirect("/member/login");
+//			[1] 차단 + 로그인페이지로 리다이렉트
+			response.sendRedirect("/member/login?error3");
+			return false;
 			
 			//[2] 권한 없음 오류 발생
-			//response.sendError(401);
+//			response.sendError(401);
 			//return false;
 			
 			//[3] 내가 만든 예외로 처리
-			throw new AuthorityException("로그인 후 이용 가능");
+//			throw new AuthorityException("로그인 후 이용 가능");
 		}
 	}
 }

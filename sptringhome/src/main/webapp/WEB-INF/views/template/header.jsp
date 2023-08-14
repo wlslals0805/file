@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div align="center">
-	<h1>내가 만든 홈페이지</h1>
+	<h1>Home</h1>
 	<hr>
 	<%--
 	JSP에서 세션에 저장된 값을 확인하려면 EL의 내장객체를 사용

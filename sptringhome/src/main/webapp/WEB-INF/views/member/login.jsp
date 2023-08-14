@@ -3,6 +3,10 @@
 <jsp:include page = "/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  
+ 
+ <c:if test="${param.error3!=null}">
+<h2 style=color:red>로그인이 필요한 기능입니다.</h2>
+</c:if>
 
 
 <h2>로그인</h2>
@@ -26,6 +30,7 @@ param을 이용하여 파라미터를 비교할 수 있다.
 <c:if test ="${param.error != null}">
 	<h3 style="color:red">존재하지 않는 회원입니다.</h3>
 </c:if> 
+
 
 <c:if test ="${param.error2 != null}">
 	<h3 style="color:red">비밀번호가 일치하지 않습니다.</h3>

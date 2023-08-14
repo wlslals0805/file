@@ -14,5 +14,6 @@ public interface BoardDao {
 	void update(BoardDto boardDto);
 	boolean delete(int boardNo);
 	void updateView(BoardDto boardDto);
-
+	List<BoardDto> seletTitle(String boardTitle);
+	List<BoardDto> seletWriter(String search);
 }

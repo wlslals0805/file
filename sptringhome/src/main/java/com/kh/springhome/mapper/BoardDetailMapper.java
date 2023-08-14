@@ -20,7 +20,7 @@ public class BoardDetailMapper implements RowMapper<BoardDto>{
 		
 		boardDto.setBoardNo(rs.getInt("board_no"));
 		boardDto.setBoardTitle(rs.getString("board_title"));
-		boardDto.setBoardWriter(rs.getString("board_writer"));
+		boardDto.setBoardWriter(rs.getString("member_nickname"));
 		boardDto.setBoardReadcount(rs.getInt("board_readcount"));
 		boardDto.setBoardReplycount(rs.getInt("board_replycount"));
 		boardDto.setBoardCtime(rs.getDate("board_ctime"));

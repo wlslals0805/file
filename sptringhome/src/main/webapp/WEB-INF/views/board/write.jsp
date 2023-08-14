@@ -5,8 +5,8 @@
 <form action="write" method="post">
 
 
-게시글 제목<input type="text" name="boardTitle">
-게시글 내용<input type="text" name="boardContent">
+제목 <textarea name="boardTitle" rows="1" cols="25"></textarea><br><br>
+내용<textarea name="boardContent" rows="6" cols="25"></textarea><br><br>
 
 <button>게시글 등록</button>
 </form>

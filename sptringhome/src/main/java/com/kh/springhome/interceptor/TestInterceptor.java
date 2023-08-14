@@ -11,12 +11,13 @@ import org.springframework.web.servlet.ModelAndView;
 /**
 	인터셉터(Interceptor)
 	- 완성된 스프링 프로젝트의 구석구석을 간섭할 수 있도록 만들어진 도구
+	(스프링이 진행되는 중간중간에 끼어들어서 흐름을 끊고 사용자를 데려간다)
 	
 	만드는 법
-	1. 상속을 받아서 자격을 획득 (HandlerInterceptor)
+	1. 상속을 받아서 자격을 획득 (HandlerInterceptor)//우리가 만든 게 아니라 원래 있던 것.
 	2. 등록
-	3. 메소드 재정의
-	4. 설정파일을 만들어서 어느 주소를 간섭할 것인지 설정
+	3. 메소드 재정의 (HandlerInterceptor 안에 있는 메소드들을 이곳에서 재정의)
+	4. 설정파일을 만들어서 어느 주소를 간섭할 것인지 설정(Configuration(설정))
  */
 @Component
 public class TestInterceptor implements HandlerInterceptor{
@@ -34,7 +35,9 @@ public class TestInterceptor implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		System.out.println("preHandle 실행");
-		return true;
+		return false;	//true, false에 따라 홈페이지에 들어갈 수 있는지 없는지가 결정된다
+		//true면 preHandle이 실행돼도 홈페이지에 들어갈 수 있음. 
+		//홈페이지에 들어가기 전에 자격이 있냐 없냐를 따져서 허용과 차단을 결정.
 	}
 	/**
 	 * postHandle은 컨트롤러 처리 후 화면 생성 전 시점을 간섭하는 메소드

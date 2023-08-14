@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.springhome.dto.BoardDto;
-import com.kh.springhome.dto.MemberDto;
 import com.kh.springhome.mapper.BoardDetailMapper;
 import com.kh.springhome.mapper.BoardListMapper;
 
@@ -20,6 +19,7 @@ public class BoardDaoImpl implements BoardDao{
 	
 	@Autowired 
 	private BoardDetailMapper detailMapper;
+	
 	
 	@Autowired 
 	private BoardListMapper listMapper;
@@ -60,10 +60,9 @@ public class BoardDaoImpl implements BoardDao{
 	@Override
 	public List<BoardDto> detailList() {
 		
-		String sql = "select board_no,board_writer,"
-				+ "board_title,board_readcount,"
-				+ "board_likecount,board_replycount,board_ctime,"
-				+ "board_utime from board order by board_no desc";
+		String sql = "SELECT board.BOARD_NO,member.MEMBER_NICKNAME,board.BOARD_TITLE,board.BOARD_READCOUNT,board.BOARD_LIKECOUNT,"
+				+ "board.BOARD_REPLYCOUNT,board.BOARD_CTIME,board.BOARD_UTIME  FROM board INNER JOIN MEMBER ON"
+				+ " MEMBER.member_id=board.board_writer ORDER BY board_no desc";
 	
 		return jdbcTemplate.query(sql, detailMapper);
 	}
@@ -80,6 +79,29 @@ public class BoardDaoImpl implements BoardDao{
 		
 		
 		return list.get(0);
+	}
+	
+	@Override
+	public List<BoardDto> seletTitle(String boardTitle) {
+		
+		String sql = "select * from board where board_title like ? order by board_no desc";
+		
+		Object[] data =  {boardTitle};
+		
+		
+		
+		return jdbcTemplate.query(sql, listMapper, data);
+	}
+	
+	public List<BoardDto> seletWriter(String boardWriter) {
+		
+		String sql = "select * from board where board_writer like ? order by board_no desc";
+		
+		Object[] data =  {boardWriter};
+		
+		
+		
+		return jdbcTemplate.query(sql, listMapper, data);
 	}
 
 
@@ -121,6 +143,8 @@ public class BoardDaoImpl implements BoardDao{
 		return jdbcTemplate.update(sql, data)>0;
 
 	}
+
+
 
 
 
