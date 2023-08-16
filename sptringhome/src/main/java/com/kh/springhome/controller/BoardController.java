@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,6 +30,7 @@ import com.kh.springhome.error.NoTargetException;
 
 //게시판 관련 기능을 처리하는 컨트롤러 
 @Component
+@Controller
 @RequestMapping("/board")
 public class BoardController {
 	
@@ -291,9 +293,10 @@ public class BoardController {
 			}
 			else {
 				
-				throw new NoTargetException("존재하지 않는 글번호");
-				//아직 이해 못함. 사용자와 글번호가 맞지 않으면 차단하는 걸 만들어서 
-				//이게 필요 없다고 말씀하셨는데 이해 못했으니 영상 다시보기
+				throw new NoTargetException("존재하지 않는 글번호"); 
+				//실행은 됐지만 결과가 없는(바뀐 게 없는) 예외. (따로 설정해주어야 하는 예외이다.)
+				
+
 				
 			}
 			

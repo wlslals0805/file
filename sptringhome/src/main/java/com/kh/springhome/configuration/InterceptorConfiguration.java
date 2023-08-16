@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.kh.springhome.interceptor.BoardInterceptor;
 import com.kh.springhome.interceptor.BoardOwnerInterceptor;
 import com.kh.springhome.interceptor.MemberInterceptor;
 import com.kh.springhome.interceptor.TestInterceptor;
@@ -26,6 +27,9 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 	
 	@Autowired
 	private MemberInterceptor memberInterceptor;
+	
+	@Autowired
+	private BoardInterceptor boardInterceptor;
 	
 	@Autowired
 	private BoardOwnerInterceptor boardOwnerInterceptor;
@@ -71,7 +75,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 								
 								);
 		
-		registry.addInterceptor(boardOwnerInterceptor).addPathPatterns("/board/edit","/board/delete");
+//		registry.addInterceptor(boardOwnerInterceptor).addPathPatterns("/board/edit","/board/delete");
+		registry.addInterceptor(boardInterceptor).addPathPatterns("/board/edit");
 	}
 }
 

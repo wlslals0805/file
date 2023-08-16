@@ -30,15 +30,15 @@ public class MemberInterceptor implements HandlerInterceptor{
 		}
 		else {//비회원이면 
 //			[1] 차단 + 로그인페이지로 리다이렉트
-			response.sendRedirect("/member/login?error3");
-			return false;
+//			response.sendRedirect("/member/login?error3");
+//			return false;
 			
 			//[2] 권한 없음 오류 발생
 //			response.sendError(401);
 			//return false;
 			
 			//[3] 내가 만든 예외로 처리
-//			throw new AuthorityException("로그인 후 이용 가능");
+			throw new AuthorityException("로그인 후 이용가능");
 		}
 	}
 }
