@@ -18,7 +18,7 @@
 <th>${boardDto.boardNo}</th>
 </tr>
 <tr>
-<th>작성자	</th><th>${memberDto.memberNickname}</th>
+<th>작성자	</th><th>${boardDto.getBoardWriterString()}</th>
 </tr>
 <tr>
 <th>제목</th><th>${boardDto.boardTitle}</th>
@@ -45,9 +45,10 @@ pattern="y년 M월 d일 E a h시 m분 s초"/></th>
 
 
 </table>
+<c:if test="${sessionScope.name != null}"><br><br><a href="write">게시글 등록</a></c:if>
+<c:if test="${boardDto.boardWriter==sessionScope.name}"><a href="edit?boardNo=${boardDto.boardNo}">수정하기</a>
+<a href="delete?boardNo=${boardDto.boardNo}">삭제하기</a></c:if>
 
-<a href="edit?boardNo=${boardDto.boardNo}">수정하기</a>
-<a href="delete?boardNo=${boardDto.boardNo}">삭제하기</a>
 <a href="list">목록으로</a>
 
 <c:if test="${param.error != null}"><h2 style=color:red>다른 사람의 글은 삭제할 수 없습니다.</h2></c:if>

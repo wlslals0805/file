@@ -61,7 +61,7 @@ public class BoardDaoImpl implements BoardDao{
 	public List<BoardDto> detailList() {
 		
 		String sql = "SELECT board.BOARD_NO,member.MEMBER_NICKNAME,board.BOARD_TITLE,board.BOARD_READCOUNT,board.BOARD_LIKECOUNT,"
-				+ "board.BOARD_REPLYCOUNT,board.BOARD_CTIME,board.BOARD_UTIME  FROM board INNER JOIN MEMBER ON"
+				+ "board.BOARD_REPLYCOUNT,board.BOARD_CTIME,board.BOARD_UTIME  FROM board left outer JOIN MEMBER ON"
 				+ " MEMBER.member_id=board.board_writer ORDER BY board_no desc";
 	
 		return jdbcTemplate.query(sql, detailMapper);
@@ -69,7 +69,7 @@ public class BoardDaoImpl implements BoardDao{
 
 
 	@Override
-	public BoardDto seletOne(int boardNo) {
+	public BoardDto selectOne(int boardNo) {
 		
 		String sql = "select * from board where board_no=?";
 		
@@ -78,35 +78,48 @@ public class BoardDaoImpl implements BoardDao{
 		List<BoardDto> list = jdbcTemplate.query(sql, listMapper, data);
 		
 		
-		return list.get(0);
+		return list.isEmpty() ? null : list.get(0);
 	}
 	
+	
 	@Override
-	public List<BoardDto> seletTitle(String boardTitle) {
+	public List<BoardDto> selectTitle(String boardTitle) {
 		
-		String sql = "select * from board where board_title like ? order by board_no desc";
+		String sql =  "SELECT board.BOARD_NO,member.MEMBER_NICKNAME,"
+				+ "board.BOARD_TITLE,board.BOARD_READCOUNT,"
+				+ "board.BOARD_LIKECOUNT,board.BOARD_REPLYCOUNT,"
+				+ "board.BOARD_CTIME,board.BOARD_UTIME FROM board "
+				+ "left outer JOIN MEMBER on MEMBER.member_id="
+				+ "board.board_writer where board.board_title "
+				+ "like ? order by board_no desc";;
 		
 		Object[] data =  {boardTitle};
 		
 		
 		
-		return jdbcTemplate.query(sql, listMapper, data);
+		return jdbcTemplate.query(sql, detailMapper, data);
 	}
 	
-	public List<BoardDto> seletWriter(String boardWriter) {
+	public List<BoardDto> selectWriter(String boardWriter) {
 		
-		String sql = "select * from board where board_writer like ? order by board_no desc";
+		String sql = "SELECT board.BOARD_NO,member.MEMBER_NICKNAME,"
+				+ "board.BOARD_TITLE,board.BOARD_READCOUNT,"
+				+ "board.BOARD_LIKECOUNT,board.BOARD_REPLYCOUNT,"
+				+ "board.BOARD_CTIME,board.BOARD_UTIME FROM board "
+				+ "left outer JOIN MEMBER on MEMBER.member_id="
+				+ "board.board_writer where member.member_nickname "
+				+ "like ? order by board_no desc";
 		
 		Object[] data =  {boardWriter};
 		
 		
 		
-		return jdbcTemplate.query(sql, listMapper, data);
+		return jdbcTemplate.query(sql, detailMapper, data);
 	}
 
 
 	@Override
-	public void update(BoardDto boardDto) {
+	public boolean update(BoardDto boardDto) {
 		
 		String sql = "update board set board_title=?,board_content=?,board_utime=sysdate "
 				+ "where board_no=?";
@@ -114,7 +127,7 @@ public class BoardDaoImpl implements BoardDao{
 		Object[] data= {boardDto.getBoardTitle(),boardDto.getBoardContent(),boardDto.getBoardNo()};
 		
 		
-		jdbcTemplate.update(sql, data);
+		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
 	@Override
@@ -143,6 +156,26 @@ public class BoardDaoImpl implements BoardDao{
 		return jdbcTemplate.update(sql, data)>0;
 
 	}
+
+
+	@Override
+	public Integer selectMax(String boardWriter) {
+		
+		String sql = "select max(board_no) from board where board_writer = ?";
+		Object[] data = {boardWriter};
+		
+		return jdbcTemplate.queryForObject(sql, Integer.class,data);
+	}
+	
+	
+
+
+	
+
+	
+	
+	
+	
 
 
 

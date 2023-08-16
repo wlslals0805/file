@@ -42,13 +42,25 @@
 
 <tr>
 <th>${boardDto.boardNo}</th>
+
+<c:choose>
+<c:when test="${boardDto.boardWriter!=null}">
 <th>${boardDto.boardWriter}</th>
+</c:when>
+<c:otherwise>
+<th>탈퇴한 사용자</th>
+</c:otherwise>
+</c:choose>
+
+<%-- <td>${boardDto.getBoardWriterString()}</td>  --%>
+
+
 <th><a href="detail?boardNo=${boardDto.boardNo}">${boardDto.boardTitle}</a></th>
 <th>${boardDto.boardReadcount}</th>
 <th>${boardDto.boardLikecount}</th>
+<c:if test="${boardDto.boardReplycount>0}">${boardDto.boardReplycount}</c:if>
 <th>${boardDto.boardReplycount}</th>
-<th><fmt:formatDate value= "${boardDto.boardCtime}" 
-pattern="y년 M월 d일 E a h시 m분 s초"/></th>
+<th>${boardDto.getBoardCtimeString()}</th>
 <th><fmt:formatDate value= "${boardDto.boardUtime}" 
 pattern="y년 M월 d일 E a h시 m분 s초"/></th>
 
@@ -58,6 +70,7 @@ pattern="y년 M월 d일 E a h시 m분 s초"/></th>
 
 </table>
 
-<br><br><a href="write">게시글 등록</a>
+<c:if test="${sessionScope.name != null}"><br><br><a href="write">게시글 등록</a></c:if>
+
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

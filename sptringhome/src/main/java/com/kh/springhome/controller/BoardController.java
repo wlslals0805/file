@@ -1,5 +1,8 @@
 package com.kh.springhome.controller;
 
+import java.sql.Timestamp;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +23,9 @@ import com.kh.springhome.dao.SaveDao;
 import com.kh.springhome.dto.BoardDto;
 import com.kh.springhome.dto.MemberDto;
 import com.kh.springhome.dto.SaveDto;
+import com.kh.springhome.error.NoTargetException;
+
+
 
 //게시판 관련 기능을 처리하는 컨트롤러 
 @Component
@@ -51,8 +58,39 @@ public class BoardController {
 		
 		boardDto.setBoardWriter(memberId);
 		boardDto.setBoardNo(boardNo);
+		
+		//이 사용자의 마지막 글번호를 조회
+		Integer lastNo = boardDao.selectMax(memberId);
+		
+		//글을 등록하고
 		boardDao.insert(boardDto);
-		memberDao.updatePoint(memberId);
+		
+		//포인트 계산 작업
+		//-lastNo가 null이라는 것은 처음 글을 작성했다는 의미
+		//-lastNo가 null이 아니면 조회한 다음 시간차를 비교
+		
+		if(lastNo == null) {//처음이라면
+			
+			memberDao.increaseMemberPoint(memberId, 10);
+			
+		}
+		else {//처음이 아니라면 시간 차이를 계산
+			BoardDto lastDto = boardDao.selectOne(lastNo);
+			Timestamp stamp = new Timestamp(lastDto.getBoardCtime().getTime());
+			LocalDateTime lastTime = stamp.toLocalDateTime();
+			LocalDateTime currentTime = LocalDateTime.now();
+			
+			Duration duration = Duration.between(lastTime,currentTime);
+			long seconds = duration.getSeconds();
+			if(seconds>300) {//시간차가 300초보다 크다면(5분 초과)
+				
+				memberDao.increaseMemberPoint(memberId, 10); //10점 부여
+				
+			}
+			
+		}
+		
+		
 		
 		return "redirect:/board/detail?boardNo="+boardNo;
 		
@@ -87,7 +125,7 @@ public class BoardController {
 
 		if(result>=1) {
 			
-			List<BoardDto> tList = boardDao.seletTitle(search+"%");
+			List<BoardDto> tList = boardDao.selectTitle(search+"%");
 			
 			model.addAttribute("tList", tList);
 			
@@ -114,7 +152,7 @@ public class BoardController {
 			}
 			if(result>=1) {
 				
-				List<BoardDto> tList = boardDao.seletWriter(search+"%");
+				List<BoardDto> tList = boardDao.selectWriter(search+"%");
 				
 				model.addAttribute("tList", tList);
 				
@@ -161,7 +199,7 @@ public class BoardController {
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int boardNo,Model model,HttpSession session,HttpSession session2,SaveDto dto) {
 		String memberId=(String) session.getAttribute("name");
-		BoardDto boardDto = boardDao.seletOne(boardNo);
+		BoardDto boardDto = boardDao.selectOne(boardNo);
 		MemberDto memberDto = memberDao.selectOne(boardDto.getBoardWriter());
 		
 		
@@ -220,7 +258,7 @@ public class BoardController {
 	@GetMapping("/edit")
 	public String edit(@RequestParam int boardNo,Model model,HttpSession session) {
 	
-		BoardDto boardDto = boardDao.seletOne(boardNo);
+		BoardDto boardDto = boardDao.selectOne(boardNo);
 		
 		model.addAttribute("boardDto", boardDto);
 		
@@ -242,19 +280,31 @@ public class BoardController {
 	}
 
 	@PostMapping("/edit")
-	public String edit(BoardDto boardDto,HttpSession session) {
+	public String edit(@ModelAttribute BoardDto boardDto,HttpSession session) {
 
-			boardDao.update(boardDto);
+			boolean result = boardDao.update(boardDto);
 			
-			return "redirect:/board/detail?boardNo="+boardDto.getBoardNo();
+			if(result) {
+				
+				return "redirect:/board/detail?boardNo="+boardDto.getBoardNo();
+				
+			}
+			else {
+				
+				throw new NoTargetException("존재하지 않는 글번호");
+				//아직 이해 못함. 사용자와 글번호가 맞지 않으면 차단하는 걸 만들어서 
+				//이게 필요 없다고 말씀하셨는데 이해 못했으니 영상 다시보기
+				
+			}
+			
 	
 	}
 	
 	
 	@RequestMapping("/delete")
-	public String delete(int boardNo,HttpSession session) {
+	public String delete(@RequestParam int boardNo,HttpSession session) {
 		
-		BoardDto boardDto = boardDao.seletOne(boardNo);
+		BoardDto boardDto = boardDao.selectOne(boardNo);
 		
 		
 		
@@ -268,6 +318,7 @@ public class BoardController {
 		}
 		else {
 			return "redirect:detail?boardNo="+(boardNo)+"&error";
+//			throw new AuthorityException("글 작성자가 아닙니다");
 		}
 		
 		

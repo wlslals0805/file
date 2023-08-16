@@ -132,17 +132,25 @@ public class MemberDaoImpl implements MemberDao{
 		
 	}
 
+	
+
 	@Override
-	public boolean updatePoint(String memberId) {
-		
-		
-		String sql = "update member set member_point=member_point+10 where member_id=?";
-		
-		Object[] data = {memberId};
+	public boolean increaseMemberPoint(String memberId, int point) {
+		String sql = "update member set member_point=member_point + ? where member_id=?";
+		Object[] data = {point,memberId};
 		
 		
 		return jdbcTemplate.update(sql,data)>0;
 	}
+
+	@Override
+	public boolean decreaseMemberPoint(String memberId, int point) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	
+	
 	
 	
 	

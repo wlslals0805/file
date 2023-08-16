@@ -10,10 +10,12 @@ public interface BoardDao {
 	void insert(BoardDto boardDto); 
 	int sequence();
 	List<BoardDto> detailList();
-	BoardDto seletOne(int boardNo);
-	void update(BoardDto boardDto);
+	boolean update(BoardDto boardDto);
 	boolean delete(int boardNo);
 	void updateView(BoardDto boardDto);
-	List<BoardDto> seletTitle(String boardTitle);
-	List<BoardDto> seletWriter(String search);
+	BoardDto selectOne(int boardNo);
+	List<BoardDto> selectTitle(String boardTitle);
+	List<BoardDto> selectWriter(String boardWriter);
+	Integer selectMax(String boardWriter);
+	
 }
