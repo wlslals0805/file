@@ -29,22 +29,22 @@ import com.kh.springhome.error.NoTargetException;
 								HttpServletResponse response, Object handler)
 				throws Exception {
 			
-			BoardDto boardDto = new BoardDto();
-			
-			 boardDto.setBoardTitle(request.getParameter("boardTitle"));
-	            boardDto.setBoardContent(request.getParameter("boardContent"));
-	            boardDto.setBoardNo(Integer.parseInt(request.getParameter("boardNo")));
-
-	            boolean updateResult = boardDao.update(boardDto); 
-	            
-	            if(updateResult) {
-	            	
-	            	return true;
-	            }
-	            
-	         else {
-	            throw new NoTargetException("대상이 없습니다.");
-	         }
+			try { 
+				int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+				BoardDto boardDto = boardDao.selectOne(boardNo);
+		            
+		            if(boardDto != null) {
+		            	
+		            	return true;
+		            }
+		            
+		         else {
+		            throw new NoTargetException("대상이 없습니다.");
+		         }
+			}
+			catch(Exception e) {
+				throw new NoTargetException("대상이 없습니다.");
+			}
 		}
 	}
 	

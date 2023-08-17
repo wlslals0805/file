@@ -5,7 +5,7 @@
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<h1>검색결과</h1>
+<h1>${param.search} 검색결과</h1>
 
 <table border="1">
 

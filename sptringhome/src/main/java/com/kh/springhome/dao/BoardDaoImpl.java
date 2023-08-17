@@ -7,8 +7,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.springhome.dto.BoardDto;
+import com.kh.springhome.dto.BoardListDto;
 import com.kh.springhome.mapper.BoardDetailMapper;
 import com.kh.springhome.mapper.BoardListMapper;
+import com.kh.springhome.mapper.BoardListMapper2;
 
 
 @Repository
@@ -19,6 +21,9 @@ public class BoardDaoImpl implements BoardDao{
 	
 	@Autowired 
 	private BoardDetailMapper detailMapper;
+	
+	@Autowired
+	private BoardListMapper2 boardListMapper2;
 	
 	
 	@Autowired 
@@ -58,15 +63,18 @@ public class BoardDaoImpl implements BoardDao{
 
 
 	@Override
-	public List<BoardDto> detailList() {
+	public List<BoardListDto> detailList() {
 		
-		String sql = "SELECT board.BOARD_NO,member.MEMBER_NICKNAME,board.BOARD_TITLE,board.BOARD_READCOUNT,board.BOARD_LIKECOUNT,"
-				+ "board.BOARD_REPLYCOUNT,board.BOARD_CTIME,board.BOARD_UTIME  FROM board left outer JOIN MEMBER ON"
-				+ " MEMBER.member_id=board.board_writer ORDER BY board_no desc";
+		
+		String sql = "select * from board_list connect by "
+				+ "prior board_no = board_parent start with "
+				+ "board_parent is null order siblings by "
+				+ "board_group desc, board_no asc";
 	
-		return jdbcTemplate.query(sql, detailMapper);
+		return jdbcTemplate.query(sql, boardListMapper2);
 	}
-
+	
+	
 
 	@Override
 	public BoardDto selectOne(int boardNo) {
@@ -166,8 +174,10 @@ public class BoardDaoImpl implements BoardDao{
 		
 		return jdbcTemplate.queryForObject(sql, Integer.class,data);
 	}
-	
-	
+
+
+
+
 
 
 	

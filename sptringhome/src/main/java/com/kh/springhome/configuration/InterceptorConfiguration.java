@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.kh.springhome.interceptor.BoardDefenderInterceptor;
 import com.kh.springhome.interceptor.BoardInterceptor;
 import com.kh.springhome.interceptor.BoardOwnerInterceptor;
 import com.kh.springhome.interceptor.MemberInterceptor;
@@ -33,6 +34,9 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 	
 	@Autowired
 	private BoardOwnerInterceptor boardOwnerInterceptor;
+	
+	@Autowired
+	private BoardDefenderInterceptor boardDefenderInterceptor;
 	
 	//addInterceptors=인터셉터를 추가할 수 있는 설정 메소드(registry 저장소에다가 설정)
 	//등록 시 주소의 패턴 설정 방법
@@ -75,8 +79,11 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 								
 								);
 		
-//		registry.addInterceptor(boardOwnerInterceptor).addPathPatterns("/board/edit","/board/delete");
+		registry.addInterceptor(boardOwnerInterceptor).addPathPatterns("/board/edit","/board/delete");
 		registry.addInterceptor(boardInterceptor).addPathPatterns("/board/edit");
+	//[4] 게시글 조회수 중복방지 인터셉터 등록
+	registry.addInterceptor(boardDefenderInterceptor)
+	.addPathPatterns("/board/detail");
 	}
 }
 

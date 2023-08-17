@@ -8,9 +8,12 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import lombok.Data;
+
+//오로지 게시판 목록을 위한 Dto
 @Data
-public class BoardDto {
+public class BoardListDto {
 	
+	private String memberNickname;
 	private int boardNo;
 	private String boardWriter;
 	private String boardTitle;
@@ -49,6 +52,8 @@ public class BoardDto {
 			return ctime.toString();
 		}
 		
-		
-	}
-}
+	
+	
+	
+	}}
+

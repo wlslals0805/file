@@ -4,7 +4,9 @@ import java.sql.Timestamp;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -22,6 +24,7 @@ import com.kh.springhome.dao.BoardDao;
 import com.kh.springhome.dao.MemberDao;
 import com.kh.springhome.dao.SaveDao;
 import com.kh.springhome.dto.BoardDto;
+import com.kh.springhome.dto.BoardListDto;
 import com.kh.springhome.dto.MemberDto;
 import com.kh.springhome.dto.SaveDto;
 import com.kh.springhome.error.NoTargetException;
@@ -101,7 +104,7 @@ public class BoardController {
 	@GetMapping("/list")
 	public String list(Model model,HttpSession session) {
 		
-		List<BoardDto> list = boardDao.detailList();
+		List<BoardListDto> list = boardDao.detailList();
 
 		model.addAttribute("list", list);
 		
@@ -110,15 +113,31 @@ public class BoardController {
 		
 	}
 	
+	//조회수 중복 방지를 위한 마스터플랜
+//	1.세션에 history라는 이름의 저장소가 있는지 확인
+//	2.없으면 생성, 있으면 추출
+//	3.지금 읽는 글 번호가 history에 존재하는지 확인
+//	4.없으면 추가하고 다시 세션에 저장
+	
+//	1.
+
+	
+	
+	
+	
+	//목록 + 검색
+	//-검색일 경우에는 type과 keyword라는 파라미터가 존재
+	//-목록일 경우에는 type과 keyword라는 파라미터가 없음
+	//-만약 불완전한 상태(type이나 keyword만 있는 경우)라면 목록으로 처리
 	@PostMapping("/list")
 	public String list(Model model,HttpSession session,String search,String type) {
 		
-		List<BoardDto> list = boardDao.detailList();
+		List<BoardListDto> list = boardDao.detailList();
 		int result=0;
 	
 		if(type.equals("제목")) {
 		
-		for(BoardDto a:list) {
+		for(BoardListDto a:list) {
 			
 			if(a.getBoardTitle().startsWith(search)) {
 				result++;	
@@ -144,14 +163,19 @@ public class BoardController {
 		
 		else if(type.equals("작성자")) {
 			
-			for(BoardDto a:list) {
+			for(BoardListDto a:list) {
 				
+				if(a.getBoardWriter()==null) {
+					
+					continue;
+					
+				}
 				if(a.getBoardWriter().startsWith(search)) {
 					
 					result++;
 					
-				}	
-			}
+				}	}
+			
 			if(result>=1) {
 				
 				List<BoardDto> tList = boardDao.selectWriter(search+"%");
@@ -165,8 +189,8 @@ public class BoardController {
 			else {
 				return "redirect:/board/list?error2";
 				
-			}	
-		}
+			}
+			}
 		else {
 			
 			return "redirect:/board/list";
