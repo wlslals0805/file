@@ -246,7 +246,7 @@ public class BoardDaoImpl implements BoardDao{
 		else {
 			sql = "select * from board_list where instr(board_writer,?)>0 order by board_no desc";
 			
-			
+			 
 		}
 		
 		Object[] data = {keyword};
