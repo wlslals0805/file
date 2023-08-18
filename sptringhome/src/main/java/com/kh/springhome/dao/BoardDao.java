@@ -18,6 +18,11 @@ public interface BoardDao {
 	List<BoardDto> selectTitle(String boardTitle);
 	List<BoardDto> selectWriter(String boardWriter);
 	Integer selectMax(String boardWriter);
+	List<BoardListDto> selectListByPage(int page);
+	List<BoardListDto> selectListByPage(String boardTitle, int page);
+	List<BoardListDto> searchList(String type, String keyword);
+	
+	
 	
 	
 }

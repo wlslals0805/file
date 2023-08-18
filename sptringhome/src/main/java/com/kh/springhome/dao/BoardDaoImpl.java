@@ -47,15 +47,19 @@ public class BoardDaoImpl implements BoardDao{
 //				+ "boardCtime,boardUtime) "
 //				+ "values(?,?,?,?,?,?,?,?)";
 		
-		String sql = "insert into board(board_no,board_writer,board_title,board_content)"
-				+ "values(?,?,?,?)";
+		String sql = "insert into board(board_no,board_writer,"
+				+ "board_title,board_content,board_group,board_parent,"
+				+ "board_depth)"
+				+ "values(?,?,?,?,?,?,?)";
 		
 //		Object[]data = {boardDto.getBoardNo(),boardDto.getBoardWriter(),
 //				boardDto.getBoardTitle(),boardDto.getBoardContent(),boardDto.getBoardReadcount(),boardDto.getBoardLikecount()
 //				,boardDto.getBoardReplycount(),boardDto.getBoardCtime(),boardDto.getBoardUtime()};
 		
 		Object[]data = {boardDto.getBoardNo(),boardDto.getBoardWriter(),
-				boardDto.getBoardTitle(),boardDto.getBoardContent()};
+				boardDto.getBoardTitle(),boardDto.getBoardContent(),
+				boardDto.getBoardGroup(),boardDto.getBoardParent(),
+				boardDto.getBoardDepth()};
 		
 		
 		jdbcTemplate.update(sql, data);
@@ -99,7 +103,7 @@ public class BoardDaoImpl implements BoardDao{
 				+ "board.BOARD_CTIME,board.BOARD_UTIME FROM board "
 				+ "left outer JOIN MEMBER on MEMBER.member_id="
 				+ "board.board_writer where board.board_title "
-				+ "like ? order by board_no desc";;
+				+ "like ? order by board_no desc";
 		
 		Object[] data =  {boardTitle};
 		
@@ -176,7 +180,83 @@ public class BoardDaoImpl implements BoardDao{
 	}
 
 
+	@Override
+	public List<BoardListDto> selectListByPage(int page) {
+		String sql = "SELECT * FROM ("
+			    + "    SELECT"
+			    + "        FLOOR((ROWNUM - 1) / 10) + 1 AS group_number,"
+			    + "        TMP.*"
+			    + "    FROM ("
+			    + "        SELECT * FROM board ORDER BY board_no DESC"
+			    + "    ) TMP"
+			    + ")"
+			    + "WHERE group_number = ?";
+		
+		Object[] data = {page};
+		
+		return jdbcTemplate.query(sql, boardListMapper2, data);
+	}
 
+
+
+	@Override
+	public List<BoardListDto> selectListByPage(String boardTitle, int page) {
+		String sql ="SELECT * FROM ("
+	            + "    SELECT"
+	            + "        FLOOR((ROWNUM - 1) / 10) + 1 AS group_number,"
+	            + "        TMP.*"
+	            + "    FROM ("
+	            + "        SELECT"
+	            + "            board.BOARD_NO,"
+	            + "            member.MEMBER_NICKNAME,"
+	            + "            board.BOARD_TITLE,"
+	            + "board.board_writer,"
+	            + "            board.BOARD_READCOUNT,"
+	            + "            board.BOARD_LIKECOUNT,"
+	            + "            board.BOARD_REPLYCOUNT,"
+	            + "            board.BOARD_CTIME,"
+	            + "            board.BOARD_UTIME,"
+	            + "            board.board_group,"
+	            + "            board.board_parent,"
+	            + "            board.board_depth"
+	            + "        FROM board"
+	            + "        LEFT OUTER JOIN MEMBER ON MEMBER.member_id = board.board_writer"
+	            + "        WHERE board.board_title LIKE ?"
+	            + "        ORDER BY board_no DESC"
+	            + "    ) TMP"
+	            + ")"
+	            + "WHERE group_number = ?";
+		
+		Object[] data = {boardTitle,page};
+		
+		return jdbcTemplate.query(sql, boardListMapper2,data);
+	}
+
+
+	@Override
+	public List<BoardListDto> searchList(String type, String keyword) {
+		
+		String sql;
+		if(type.equals("제목")) {
+		sql = "select * from board_list where instr(board_title,?)>0 order by board_no desc";
+
+		
+		}
+		
+		else {
+			sql = "select * from board_list where instr(board_writer,?)>0 order by board_no desc";
+			
+			
+		}
+		
+		Object[] data = {keyword};
+		
+		
+		return jdbcTemplate.query(sql, boardListMapper2,data);
+	}
+
+
+	
 
 
 

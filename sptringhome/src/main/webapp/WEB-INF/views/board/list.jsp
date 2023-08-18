@@ -5,16 +5,28 @@
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<h1><c:if test="${param.keyword!=null}">${param.keyword} 검색 결과  </c:if></h1>
 
-<form action="list" method="post">
-
-<select name="type">
-<option>제목</option>
-<option>작성자</option>
-</select>
+<form action="list" method="get">
 
 
-<input type=search name="search" placeholder="검색어 입력" required>
+
+<c:choose>
+		<c:when test="${param.type == '작성자'}">
+			<select name="type" required>
+				<option>제목</option>
+				<option selected>작성자</option>
+			</select>
+		</c:when>
+		<c:otherwise>
+			<select name="type" required>
+				<option>제목</option>
+				<option>작성자</option>
+			</select>
+		</c:otherwise>
+	</c:choose>
+
+<input type=search name="keyword" placeholder="검색어 입력" required>
 <button>검색</button><br><br>
 
 </form>
@@ -59,11 +71,22 @@
 
 <%-- <td>${boardListDto.getBoardWriterString()}</td>  --%>
 
-<c:forEach var="i" begin="1" end="${boardListDto.boardDepth}" step="1">
-&nbsp;&nbsp;
-</c:forEach>
 
-<th><a href="detail?boardNo=${boardListDto.boardNo}">${boardListDto.boardTitle}</a></th>
+				
+<th>
+<%-- 차수만큼 띄어쓰기 출력 --%>
+				<%-- for(int i=1; i <= 차수; i++) { --%>
+				<c:forEach var="i" begin="1" end="${boardListDto.boardDepth}" step="1">
+				&nbsp;&nbsp;
+				</c:forEach>
+				
+				<%-- 띄어쓰기 뒤에 화살표 표시 --%>
+				<c:if test="${boardListDto.boardDepth > 0}">
+<!-- 					<img src="https://dummyimage.com/15x15/000/fff"> -->
+					<img src="/reply.jpg" width="15" height="15">
+				</c:if>
+
+<a href="detail?boardNo=${boardListDto.boardNo}">${boardListDto.boardTitle}</a></th>
 
 <th>${boardListDto.boardReadcount}</th>
 <th>${boardListDto.boardLikecount}</th>

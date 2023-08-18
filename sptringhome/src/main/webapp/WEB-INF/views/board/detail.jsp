@@ -45,9 +45,11 @@ pattern="y년 M월 d일 E a h시 m분 s초"/></th>
 
 
 </table>
-<c:if test="${sessionScope.name != null}"><br><br><a href="write">게시글 등록</a></c:if>
+<c:if test="${sessionScope.name != null}">
+			<a href="write">글쓰기</a>
+			<a href="write?boardParent=${boardDto.boardNo}">답글쓰기</a>
 <c:if test="${boardDto.boardWriter==sessionScope.name}"><a href="edit?boardNo=${boardDto.boardNo}">수정하기</a>
-<a href="delete?boardNo=${boardDto.boardNo}">삭제하기</a></c:if>
+<a href="delete?boardNo=${boardDto.boardNo}">삭제하기</a></c:if></c:if>
 
 <a href="list">목록으로</a>
 

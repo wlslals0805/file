@@ -4,9 +4,7 @@ import java.sql.Timestamp;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -29,9 +27,12 @@ import com.kh.springhome.dto.MemberDto;
 import com.kh.springhome.dto.SaveDto;
 import com.kh.springhome.error.NoTargetException;
 
+import lombok.extern.slf4j.Slf4j;
+
 
 
 //게시판 관련 기능을 처리하는 컨트롤러 
+@Slf4j
 @Component
 @Controller
 @RequestMapping("/board")
@@ -47,22 +48,58 @@ public class BoardController {
 	@Autowired
 	private SaveDao dao;
 	
+	
+	
+	//등록(새글 or 답글)
+	//- boardParent라는 항목의 유무에 따라 새글과 답글을 구분하여 처리
+	
 	@GetMapping("/write")
-	public String write() {
+	public String write(Model model, @RequestParam(required = false) Integer boardParent) {
 		
+		if(/*답글이라면*/boardParent!=null) {
+			//답글이라면 원본글 정보를 화면에 전달
+			
+			BoardDto originDto = boardDao.selectOne(boardParent);
+			model.addAttribute("originDto",originDto);
+			model.addAttribute("isReply",true);
+			
+		}
+		
+		else {//새글=boardParent가 없으면
+			
+			model.addAttribute("isReply", false);
+			
+		}
 		return "/WEB-INF/views/board/write.jsp";
-		
 	}
 	
 	@PostMapping("/write")
-	public String write(BoardDto boardDto,HttpSession session) throws InterruptedException {
+	public String write(@ModelAttribute BoardDto boardDto,HttpSession session) throws InterruptedException {
 		
 		String memberId=(String) session.getAttribute("name");
 		
 		int boardNo=boardDao.sequence();
 		
-		boardDto.setBoardWriter(memberId);
 		boardDto.setBoardNo(boardNo);
+		boardDto.setBoardWriter(memberId);
+		
+		//글 등록 전에 새글/답글에 따른 그룹, 상위글, 차수를 계산
+		if(boardDto.getBoardParent()==null) {//새글일 경우
+			boardDto.setBoardGroup(boardNo);
+//			boardDto.setBoardParent(null);
+//			boardDto.setBoardDepth(0);
+		}
+		
+		else { //답글일 경우
+			BoardDto originDto = boardDao.selectOne(boardDto.getBoardParent());
+			log.debug("originDto = {}", originDto);
+			boardDto.setBoardGroup(originDto.getBoardGroup());	//그룹번호는 원본글 번호와 같다
+			boardDto.setBoardParent(originDto.getBoardNo());//상위글 번호는 원본글 번호
+			boardDto.setBoardDepth(originDto.getBoardDepth()+1);//차수는 원본글 차수 +1 
+		}
+		
+		log.debug("boardDto = {}", boardDto);
+		
 		
 		//이 사용자의 마지막 글번호를 조회
 		Integer lastNo = boardDao.selectMax(memberId);
@@ -102,9 +139,23 @@ public class BoardController {
 	}
 
 	@GetMapping("/list")
-	public String list(Model model,HttpSession session) {
+	public String list(Model model,HttpSession session, @RequestParam(required = false) String type, @RequestParam(required = false) String keyword) {
 		
-		List<BoardListDto> list = boardDao.detailList();
+		List<BoardListDto> list;
+		
+		if(type==null&&keyword==null) {
+		
+		list = boardDao.detailList();
+		
+		}
+		
+//		List<BoardListDto> list = boardDao.selectListByPage(page);
+		
+		else {
+			
+			list = boardDao.searchList(type, keyword);
+			
+		}
 
 		model.addAttribute("list", list);
 		
@@ -130,7 +181,7 @@ public class BoardController {
 	//-목록일 경우에는 type과 keyword라는 파라미터가 없음
 	//-만약 불완전한 상태(type이나 keyword만 있는 경우)라면 목록으로 처리
 	@PostMapping("/list")
-	public String list(Model model,HttpSession session,String search,String type) {
+	public String list(Model model,HttpSession session,String search,String type,int page) {
 		
 		List<BoardListDto> list = boardDao.detailList();
 		int result=0;
@@ -146,7 +197,8 @@ public class BoardController {
 
 		if(result>=1) {
 			
-			List<BoardDto> tList = boardDao.selectTitle(search+"%");
+//			List<BoardDto> tList = boardDao.selectTitle(search+"%");
+			List<BoardListDto> tList = boardDao.selectListByPage((search+"%"),page);
 			
 			model.addAttribute("tList", tList);
 			

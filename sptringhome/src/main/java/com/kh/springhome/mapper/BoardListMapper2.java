@@ -1,12 +1,17 @@
 package com.kh.springhome.mapper;
 
 import java.sql.ResultSet;
+
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import com.kh.springhome.dto.BoardListDto;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Component
 public class BoardListMapper2 implements RowMapper<BoardListDto>{
 	
@@ -26,8 +31,6 @@ public class BoardListMapper2 implements RowMapper<BoardListDto>{
 		boardListDto.setBoardGroup(rs.getInt("board_group"));
 		boardListDto.setBoardParent(rs.getObject("board_parent",Integer.class));
 		
-		
-
 		return boardListDto;
 	}
 	
