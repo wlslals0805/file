@@ -12,16 +12,16 @@
 
 
 <c:choose>
-		<c:when test="${param.type == '작성자'}">
+		<c:when test="${param.type == 'member_nickname'}">
 			<select name="type" required>
-				<option>제목</option>
-				<option selected>작성자</option>
+				<option value="board_title">제목</option>
+				<option value="member_nickname" selected>작성자</option>
 			</select>
 		</c:when>
 		<c:otherwise>
 			<select name="type" required>
-				<option>제목</option>
-				<option>작성자</option>
+				<option value="board_title">제목</option>
+				<option value="member_nickname">작성자</option>
 			</select>
 		</c:otherwise>
 	</c:choose>
@@ -62,7 +62,7 @@
 
 <c:choose>
 <c:when test="${boardListDto.boardWriter!=null}">
-<th>${boardListDto.boardWriter}</th>
+<th>${boardListDto.boardWriter}(${boardListDto.memberNickname})</th>
 </c:when>
 <c:otherwise>
 <th>탈퇴한 사용자</th>
@@ -70,23 +70,21 @@
 </c:choose>
 
 <%-- <td>${boardListDto.getBoardWriterString()}</td>  --%>
-
-
-				
-<th>
+		
+<td align="left">
 <%-- 차수만큼 띄어쓰기 출력 --%>
-				<%-- for(int i=1; i <= 차수; i++) { --%>
-				<c:forEach var="i" begin="1" end="${boardListDto.boardDepth}" step="1">
+<%-- for(int i=1; i <= 차수; i++) { --%>
+			
+	<c:forEach var="i" begin="1" end="${boardListDto.boardDepth}" step="1">
 				&nbsp;&nbsp;
 				</c:forEach>
-				
-				<%-- 띄어쓰기 뒤에 화살표 표시 --%>
-				<c:if test="${boardListDto.boardDepth > 0}">
-<!-- 					<img src="https://dummyimage.com/15x15/000/fff"> -->
-					<img src="/reply.jpg" width="15" height="15">
-				</c:if>
+<c:if test = "${boardListDto.boardDepth>0}">
 
-<a href="detail?boardNo=${boardListDto.boardNo}">${boardListDto.boardTitle}</a></th>
+<img src="/reply.jpg" width="30" height="15">
+
+</c:if>			
+
+<a href="detail?boardNo=${boardListDto.boardNo}">${boardListDto.boardTitle}</a></td>
 
 <th>${boardListDto.boardReadcount}</th>
 <th>${boardListDto.boardLikecount}</th>

@@ -15,11 +15,12 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class BoardListMapper2 implements RowMapper<BoardListDto>{
 	
+	//Content 없음. 사실상 DetailMapper2
 	@Override
 	public BoardListDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		BoardListDto boardListDto = new BoardListDto(); 	//객체 생성 및 초기화
 		
-		boardListDto.setMemberNickname("member_nickname");
+		boardListDto.setMemberNickname(rs.getString("member_nickname"));
 		boardListDto.setBoardNo(rs.getInt("board_no"));
 		boardListDto.setBoardTitle(rs.getString("board_title"));
 		boardListDto.setBoardWriter(rs.getString("board_writer"));

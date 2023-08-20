@@ -10,6 +10,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.kh.springhome.dao.BoardDao;
 import com.kh.springhome.dto.BoardDto;
+import com.kh.springhome.dto.BoardListDto;
 import com.kh.springhome.error.AuthorityException;
 
 //게시글 소유자인 경우만 통과시키는 인터셉터
@@ -35,7 +36,7 @@ public class BoardOwnerInterceptor implements HandlerInterceptor{
 		//-통신이기 때문에 반환형이 String이다
 		//-변환 명령을 이용하여 원하는 형태로 바꿔 사용할 수 있다
 		int boardNo =Integer.parseInt(request.getParameter("boardNo"));
-		BoardDto boardDto = boardDao.selectOne(boardNo);
+		BoardListDto boardDto = boardDao.selectOne(boardNo);
 		
 		if(/*소유자면 통과*/boardDto.getBoardWriter().equals(memberId)) {
 

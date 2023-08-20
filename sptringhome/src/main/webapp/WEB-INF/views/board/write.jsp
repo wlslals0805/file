@@ -23,12 +23,12 @@
 <%-- 답글일 때만 추가 정보를 전송--%>
 
 
-<c:if test="${isReply}">
 
-<input type="hidden" name="boardParent" value="${originDto.boardNo}"></c:if>
+
 
 <c:choose>
 <c:when test="${isReply}">
+<input type="hidden" name="boardParent" value="${originDto.boardNo}">
 	제목<input type="text" name="boardTitle"
 			value="RE:${originDto.boardTitle}" required><br><br>
 			</c:when>

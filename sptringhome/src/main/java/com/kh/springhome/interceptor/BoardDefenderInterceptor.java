@@ -13,6 +13,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.kh.springhome.dao.BoardDao;
 import com.kh.springhome.dto.BoardDto;
+import com.kh.springhome.dto.BoardListDto;
 import com.kh.springhome.error.NoTargetException;
 
 @Component
@@ -28,7 +29,7 @@ public class BoardDefenderInterceptor implements HandlerInterceptor{
 
 		//글 정보 불러오기
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-		BoardDto boardDto = boardDao.selectOne(boardNo);
+		BoardListDto boardDto = boardDao.selectOne(boardNo);
 		if(boardDto == null) {
 			throw new NoTargetException("존재하지 않는 게시글");
 		}

@@ -10,6 +10,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.kh.springhome.dao.BoardDao;
 import com.kh.springhome.dto.BoardDto;
+import com.kh.springhome.dto.BoardListDto;
 import com.kh.springhome.error.NoTargetException;
 
 	//회원인지 아닌지 검사하여 비회원을 차단하는 인터셉터 구현
@@ -31,7 +32,7 @@ import com.kh.springhome.error.NoTargetException;
 			
 			try { 
 				int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-				BoardDto boardDto = boardDao.selectOne(boardNo);
+				BoardListDto boardDto = boardDao.selectOne(boardNo);
 		            
 		            if(boardDto != null) {
 		            	

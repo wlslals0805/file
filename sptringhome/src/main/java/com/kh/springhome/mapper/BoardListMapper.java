@@ -6,33 +6,34 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import com.kh.springhome.dto.BoardDto;
+import com.kh.springhome.dto.BoardListDto;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
-public class BoardListMapper implements RowMapper<BoardDto>{
+public class BoardListMapper implements RowMapper<BoardListDto>{
 
 	@Override
-	public BoardDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+	public BoardListDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		
-		BoardDto boardDto = new BoardDto();
+		com.kh.springhome.dto.BoardListDto boardListDto = new BoardListDto();
 		
-		boardDto.setBoardNo(rs.getInt("board_no"));
-		boardDto.setBoardContent(rs.getString("board_content"));
-		boardDto.setBoardTitle(rs.getString("board_title"));
-		boardDto.setBoardWriter(rs.getString("board_writer"));
-		boardDto.setBoardReadcount(rs.getInt("board_readcount"));
-		boardDto.setBoardReplycount(rs.getInt("board_replycount"));
-		boardDto.setBoardCtime(rs.getDate("board_ctime"));
-		boardDto.setBoardUtime(rs.getDate("board_utime"));
+		boardListDto.setMemberNickname(rs.getString("member_nickname"));
+		boardListDto.setBoardNo(rs.getInt("board_no"));
+		boardListDto.setBoardContent(rs.getString("board_content"));
+		boardListDto.setBoardTitle(rs.getString("board_title"));
+		boardListDto.setBoardWriter(rs.getString("board_writer"));
+		boardListDto.setBoardReadcount(rs.getInt("board_readcount"));
+		boardListDto.setBoardReplycount(rs.getInt("board_replycount"));
+		boardListDto.setBoardCtime(rs.getDate("board_ctime"));
+		boardListDto.setBoardUtime(rs.getDate("board_utime"));
 		
-		boardDto.setBoardDepth(rs.getInt("board_depth"));
-		boardDto.setBoardGroup(rs.getInt("board_group"));
-		boardDto.setBoardParent(rs.getObject("board_parent",Integer.class));
+		boardListDto.setBoardDepth(rs.getInt("board_depth"));
+		boardListDto.setBoardGroup(rs.getInt("board_group"));
+		boardListDto.setBoardParent(rs.getObject("board_parent",Integer.class));
 		
-		return boardDto;
+		return boardListDto;
 	}
 	
 	

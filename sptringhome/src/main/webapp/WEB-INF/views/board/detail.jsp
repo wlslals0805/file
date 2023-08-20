@@ -18,7 +18,7 @@
 <th>${boardDto.boardNo}</th>
 </tr>
 <tr>
-<th>작성자	</th><th>${boardDto.getBoardWriterString()}</th>
+<th>작성자	</th><th>${boardDto.boardWriter}(${boardDto.memberNickname})</th>
 </tr>
 <tr>
 <th>제목</th><th>${boardDto.boardTitle}</th>

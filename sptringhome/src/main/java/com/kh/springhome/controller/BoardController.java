@@ -54,22 +54,21 @@ public class BoardController {
 	//- boardParent라는 항목의 유무에 따라 새글과 답글을 구분하여 처리
 	
 	@GetMapping("/write")
-	public String write(Model model, @RequestParam(required = false) Integer boardParent) {
-		
-		if(/*답글이라면*/boardParent!=null) {
-			//답글이라면 원본글 정보를 화면에 전달
-			
-			BoardDto originDto = boardDao.selectOne(boardParent);
-			model.addAttribute("originDto",originDto);
-			model.addAttribute("isReply",true);
-			
+	public String write(Model model, 
+		@RequestParam(required = false) Integer boardParent) {
+
+		//답글이라면 원본글 정보를 화면에 전달
+		if(boardParent != null) {//답글 = boardParent가 있으면
+			BoardListDto originDto = boardDao.selectOne(boardParent);
+			model.addAttribute("originDto", originDto);
+			model.addAttribute("isReply", true);
 		}
-		
-		else {//새글=boardParent가 없으면
-			
+		else {//새글 = boardParent가 없으면
 			model.addAttribute("isReply", false);
-			
 		}
+		
+		
+		
 		return "/WEB-INF/views/board/write.jsp";
 	}
 	
@@ -83,20 +82,22 @@ public class BoardController {
 		boardDto.setBoardNo(boardNo);
 		boardDto.setBoardWriter(memberId);
 		
-		//글 등록 전에 새글/답글에 따른 그룹, 상위글, 차수를 계산
-		if(boardDto.getBoardParent()==null) {//새글일 경우
-			boardDto.setBoardGroup(boardNo);
-//			boardDto.setBoardParent(null);
-//			boardDto.setBoardDepth(0);
-		}
+	
 		
-		else { //답글일 경우
-			BoardDto originDto = boardDao.selectOne(boardDto.getBoardParent());
-			log.debug("originDto = {}", originDto);
-			boardDto.setBoardGroup(originDto.getBoardGroup());	//그룹번호는 원본글 번호와 같다
-			boardDto.setBoardParent(originDto.getBoardNo());//상위글 번호는 원본글 번호
-			boardDto.setBoardDepth(originDto.getBoardDepth()+1);//차수는 원본글 차수 +1 
+		
+		//글 등록 전에 새글/답글에 따른 그룹,상위글,차수를 계산
+			if(boardDto.getBoardParent() == null) {//새글일 경우
+			boardDto.setBoardGroup(boardNo);//그룹번호는 글번호로 설정
+			//boardDto.setBoardParent(null);//상위글번호는 null로 설정
+			//boardDto.setBoardDepth(0);//차수 0으로 설정
 		}
+		else {//답글일 경우
+			BoardListDto originDto = boardDao.selectOne(boardDto.getBoardParent());
+			boardDto.setBoardGroup(originDto.getBoardGroup());//그룹번호는 원본글 그룹번호와 동일
+			//boardDto.setBoardParent(originDto.getBoardNo());//상위글번호는 원본글 번호
+			boardDto.setBoardDepth(originDto.getBoardDepth()+1);//차수는 원본글 차수 + 1
+				}
+		
 		
 		log.debug("boardDto = {}", boardDto);
 		
@@ -117,7 +118,7 @@ public class BoardController {
 			
 		}
 		else {//처음이 아니라면 시간 차이를 계산
-			BoardDto lastDto = boardDao.selectOne(lastNo);
+			BoardListDto lastDto = boardDao.selectOne(lastNo);
 			Timestamp stamp = new Timestamp(lastDto.getBoardCtime().getTime());
 			LocalDateTime lastTime = stamp.toLocalDateTime();
 			LocalDateTime currentTime = LocalDateTime.now();
@@ -139,25 +140,27 @@ public class BoardController {
 	}
 
 	@GetMapping("/list")
-	public String list(Model model,HttpSession session, @RequestParam(required = false) String type, @RequestParam(required = false) String keyword) {
+	public String list(Model model,HttpSession session, 
+			@RequestParam(required = false) String type, 
+			@RequestParam(required = false) String keyword,
+			@RequestParam(required=false, defaultValue="1") int page) {
 		
 		List<BoardListDto> list;
 		
 		if(type==null&&keyword==null) {
 		
-		list = boardDao.detailList();
-		
+//		list = boardDao.detailList();
+			list = boardDao.selectListByPage(page);
 		}
 		
-//		List<BoardListDto> list = boardDao.selectListByPage(page);
 		
 		else {
 			
-			list = boardDao.searchList(type, keyword);
+		list = boardDao.selectListByPage(type, keyword,page);
 			
 		}
-
 		model.addAttribute("list", list);
+
 		
 		
 		return "/WEB-INF/views/board/list.jsp";
@@ -180,75 +183,75 @@ public class BoardController {
 	//-검색일 경우에는 type과 keyword라는 파라미터가 존재
 	//-목록일 경우에는 type과 keyword라는 파라미터가 없음
 	//-만약 불완전한 상태(type이나 keyword만 있는 경우)라면 목록으로 처리
-	@PostMapping("/list")
-	public String list(Model model,HttpSession session,String search,String type,int page) {
-		
-		List<BoardListDto> list = boardDao.detailList();
-		int result=0;
-	
-		if(type.equals("제목")) {
-		
-		for(BoardListDto a:list) {
-			
-			if(a.getBoardTitle().startsWith(search)) {
-				result++;	
-			}	
-		}
-
-		if(result>=1) {
-			
-//			List<BoardDto> tList = boardDao.selectTitle(search+"%");
-			List<BoardListDto> tList = boardDao.selectListByPage((search+"%"),page);
-			
-			model.addAttribute("tList", tList);
-			
-			
-			return "/WEB-INF/views/board/searchList.jsp";
-		}
-		
-		else {
-			return "redirect:/board/list?error";
-			
-		}
-		
-		}
-		
-		else if(type.equals("작성자")) {
-			
-			for(BoardListDto a:list) {
-				
-				if(a.getBoardWriter()==null) {
-					
-					continue;
-					
-				}
-				if(a.getBoardWriter().startsWith(search)) {
-					
-					result++;
-					
-				}	}
-			
-			if(result>=1) {
-				
-				List<BoardDto> tList = boardDao.selectWriter(search+"%");
-				
-				model.addAttribute("tList", tList);
-				
-				
-				return "/WEB-INF/views/board/searchList.jsp";
-			}
-			
-			else {
-				return "redirect:/board/list?error2";
-				
-			}
-			}
-		else {
-			
-			return "redirect:/board/list";
-		}
-		
-		}
+//	@PostMapping("/list")
+//	public String list(Model model,HttpSession session,String search,String type,int page) {
+//		
+//		List<BoardListDto> list = boardDao.detailList();
+//		int result=0;
+//	
+//		if(type.equals("제목")) {
+//		
+//		for(BoardListDto a:list) {
+//			
+//			if(a.getBoardTitle().startsWith(search)) {
+//				result++;	
+//			}	
+//		}
+//
+//		if(result>=1) {
+//			
+////			List<BoardDto> tList = boardDao.selectTitle(search+"%");
+//			List<BoardListDto> tList = boardDao.selectListByPage((search+"%"),page);
+//			
+//			model.addAttribute("tList", tList);
+//			
+//			
+//			return "/WEB-INF/views/board/searchList.jsp";
+//		}
+//		
+//		else {
+//			return "redirect:/board/list?error";
+//			
+//		}
+//		
+//		}
+//		
+//		else if(type.equals("작성자")) {
+//			
+//			for(BoardListDto a:list) {
+//				
+//				if(a.getBoardWriter()==null) {
+//					
+//					continue;
+//					
+//				}
+//				if(a.getBoardWriter().startsWith(search)) {
+//					
+//					result++;
+//					
+//				}	}
+//			
+//			if(result>=1) {
+//				
+//				List<BoardDto> tList = boardDao.selectWriter(search+"%");
+//				
+//				model.addAttribute("tList", tList);
+//				
+//				
+//				return "/WEB-INF/views/board/searchList.jsp";
+//			}
+//			
+//			else {
+//				return "redirect:/board/list?error2";
+//				
+//			}
+//			}
+//		else {
+//			
+//			return "redirect:/board/list";
+//		}
+//		
+//		}
 
 //	@RequestMapping("/detail")
 //	public String detail(@RequestParam int boardNo,Model model,HttpSession session,HttpSession session2) {
@@ -277,7 +280,7 @@ public class BoardController {
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int boardNo,Model model,HttpSession session,HttpSession session2,SaveDto dto) {
 		String memberId=(String) session.getAttribute("name");
-		BoardDto boardDto = boardDao.selectOne(boardNo);
+		BoardListDto boardDto = boardDao.selectOne(boardNo);
 		MemberDto memberDto = memberDao.selectOne(boardDto.getBoardWriter());
 		
 		
@@ -336,7 +339,7 @@ public class BoardController {
 	@GetMapping("/edit")
 	public String edit(@RequestParam int boardNo,Model model,HttpSession session) {
 	
-		BoardDto boardDto = boardDao.selectOne(boardNo);
+		BoardListDto boardDto = boardDao.selectOne(boardNo);
 		
 		model.addAttribute("boardDto", boardDto);
 		
@@ -383,7 +386,7 @@ public class BoardController {
 	@RequestMapping("/delete")
 	public String delete(@RequestParam int boardNo,HttpSession session) {
 		
-		BoardDto boardDto = boardDao.selectOne(boardNo);
+		BoardListDto boardDto = boardDao.selectOne(boardNo);
 		
 		
 		
