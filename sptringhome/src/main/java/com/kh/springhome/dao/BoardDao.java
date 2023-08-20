@@ -22,6 +22,8 @@ public interface BoardDao {
 	List<BoardListDto> searchList(String type, String keyword);
 	void updateView(BoardDto boardDto);
 	List<BoardListDto> selectListByPage(String type, String keyword, int page);
+	int countList(String type, String keyword);
+	int countList();
 	
 	
 	

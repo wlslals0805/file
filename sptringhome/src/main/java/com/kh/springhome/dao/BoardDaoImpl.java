@@ -256,6 +256,20 @@ public class BoardDaoImpl implements BoardDao{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public int countList() {
+		String sql = "select count(*) from board";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	
+	@Override
+	public int countList(String type, String keyword) {
+		String sql = "select count(*) from board "
+						+ "where instr("+type+", ?) > 0";
+		Object[] data = {keyword};
+		return jdbcTemplate.queryForObject(sql, int.class, data);
+	}
 
 
 
