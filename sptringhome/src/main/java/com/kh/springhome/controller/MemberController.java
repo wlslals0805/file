@@ -70,8 +70,6 @@ public class MemberController {
 	 현재 session을 선언하고 사용하는 이유 : 로그인 후 아이디를 저장해서 회원과 비회원의 header창을 다르게 보이게 하기 위해.
 	 */
 	
-	
-	
 	@PostMapping("/login")
 	public String login(@ModelAttribute MemberDto inputDto, 
 			HttpSession session) {
@@ -90,7 +88,9 @@ public class MemberController {
 		
 		//[3] 비밀번호가 일치하면 메인페이지로 이동
 		if(isCorrectPw) {
-		session.setAttribute("name",inputDto.getMemberId());
+			//세션에 아이디+등급 저장
+		session.setAttribute("name",findDto.getMemberId());
+		session.setAttribute("level", findDto.getMemberLevel());
 		//아이디와 비밀번호가 모두 일치했을 때야 비로소 session에 데이터 저장. 이 저장이 remove(로그아웃)되기 전까지 회원용 header가 뜬다
 		
 		//로그인 시간 갱신
@@ -114,6 +114,7 @@ public class MemberController {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("name");
+		session.removeAttribute("level");
 		return "redirect:/";
 	}
 	

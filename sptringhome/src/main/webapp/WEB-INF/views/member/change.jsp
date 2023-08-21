@@ -4,6 +4,14 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+
+<c:if test="${sessionScope.level=='관리자'}">
+
+<h2>회원정보 변경</h2>
+
+</c:if>
+
+
 <h2>개인정보 변경</h2>
 
 <c:if test="${param.error != null}">
