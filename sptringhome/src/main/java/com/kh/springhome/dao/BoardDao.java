@@ -20,14 +20,14 @@ public interface BoardDao {
 //	List<BoardDto> selectWriter(String boardWriter);
 	Integer selectMax(String boardWriter);
 	void updateView(BoardDto boardDto);
-	List<BoardListDto> searchList(String type, String keyword);
+//	List<BoardListDto> searchList(String type, String keyword);
 	
-	List<BoardListDto> selectListByPage(int page);
-	List<BoardListDto> selectListByPage(String type, String keyword, int page);
+	List<BoardListDto> selectListByPage(int page,PaginationVO vo);
 	List<BoardListDto> selectListByPage(PaginationVO vo);
+	List<BoardListDto> selectListByPage(String type, String keyword, int page, PaginationVO vo);
 	
-	int countList();
-	int countList(String type, String keyword);
+//	int countList();
+//	int countList(String type, String keyword);
 	int countList(PaginationVO vo);
 
 	

@@ -76,7 +76,7 @@ public class AdminController {
 		return "/WEB-INF/views/admin/list.jsp";
 	}
 	
-	
+	 
 	
 	@RequestMapping("/member/detail")
 	public String mypage(HttpSession session,Model model,
