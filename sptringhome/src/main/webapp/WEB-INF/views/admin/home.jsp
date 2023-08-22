@@ -6,7 +6,7 @@
     
     <h1>관리자 메뉴</h1>
     
-    <h3><a href="list">회원 관리</a></h3>
+    <h3><a href="member/list">회원 관리</a></h3>
     <h3><a href="">회원 통계</a></h3>
     <h3><a href="">게시글 통계</a></h3>
     

@@ -1,6 +1,7 @@
 package com.kh.springhome.vo;
 
 import lombok.Data;
+import lombok.ToString;
 
 //VO(Value Object) 
 //	- 내 입맛대로 데이터를 모아서 저장하는 클래스(DB무관)
@@ -16,21 +17,24 @@ public class PaginationVO {
 	public boolean isSearch() {
 		return type != null && keyword != null;
 	}
+	@ToString.Include
 	public int getBegin() {
 		return (page-1) / navigatorSize * navigatorSize + 1;
 	}
+	@ToString.Include
 	public int getEnd() {
 		int end = getBegin() + navigatorSize - 1;
 		return Math.min(getPageCount(), end); 
 	}
+	@ToString.Include
 	public boolean isFirst() {
 		return getBegin() == 1;
 	}
-	
+	@ToString.Include
 	public int getPageCount() {
 		return (count-1) / size + 1;
 	}
-	
+	@ToString.Include
 	public boolean isLast() {
 		return getEnd() >= getPageCount();
 	}
@@ -61,10 +65,11 @@ public class PaginationVO {
 			return "page="+page+"&size="+size;
 		}
 	}
-	
+	@ToString.Include
 	public int getStartRow() {
 		return getFinishRow() - (size-1);
 	}
+	@ToString.Include
 	public int getFinishRow() {
 		return page * size;
 	}
