@@ -10,7 +10,7 @@
 		<h1>
 			${boardDto.boardNo}번 게시글
 			<c:if test="${boardDto.boardUtime != null}">
-				(수정됨)
+				(수정됨) 
 			</c:if>
 		</h1>
 	</div>
