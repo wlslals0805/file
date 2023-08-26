@@ -194,7 +194,7 @@ public class BoardDaoImpl implements BoardDao{
 				+ "select * from board_list connect by"
 				+ " prior board_no = board_parent start with"
 				+ " board_parent is null order siblings by"
-				+ " board_group desc, board_no asc"
+				+ " board_group desc, board_no desc"
 				+ "	)TMP\r\n"
 				+ ") where rn between ? and ?";
 		

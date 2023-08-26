@@ -2,21 +2,31 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-
-
-<h1>게시글 수정</h1>
-
 <form action="edit" method="post">
-
 <input type="hidden" name="boardNo" value="${boardDto.boardNo}">
-게시글 제목 <input type="text" name="boardTitle" value="${boardDto.boardTitle}" ><br><br>
-게시글 내용 <input type="text" name="boardContent" value="${boardDto.boardContent}"><br><br>
 
-
-<button>수정하기</button>
+<div class="container w-600">
+	<div class="row">
+		<h1>게시글 수정</h1>
+	</div>
+	
+	<div class="row left">
+		<label>제목</label>
+		<input class="form-input w-100" type="text" name="boardTitle" value="${boardDto.boardTitle}" required>
+	</div>
+	
+	<div class="row left">
+		<label>내용</label>
+		<textarea class="form-input w-100" name="boardContent" 
+			style="min-height:250px" required>${boardDto.boardContent}</textarea>
+	</div>
+	
+	<div class="row right">
+		<a href="list" class="btn">목록보기</a>
+		<button type="submit" class="btn btn-positive">수정하기</button>
+	</div>
+</div>
 
 </form>
-
-
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
