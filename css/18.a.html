@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>a 태그를 버튼처럼 쓰기</title>
+    <!-- css 파일을 불러오는 코드 -->
+    <link rel="stylesheet" type="text/css" href="commons.css">
+    <link rel="stylesheet" type="text/css" href="test.css">
+    <style>
+        /*
+        a태그는 기본적으로 display가 inline(옆으로 정렬)이다.
+        inline은 폭을 설정할 수 없다.(내용에 의해 자동설정)
+        block은 폭을 지정할 수 있지만 한 줄에 하나밖에 나오지 않음. 그러나 버튼은 한줄에 여러개가 놓여있는 게 일반적.
+        그래서 방향은 inline, 크기는 block을 사용한다.
+
+        방향은 유지하면서 크기 설정이 가능하도록 
+        display를 inline-block으로 변경한다
+
+        */
+
+        #test{
+            display: inline-block;
+            text-decoration: none;
+            color: black;
+            border: 1px solid black;
+            font-size: 20px;
+            padding: 0.5em 1em;
+            border-radius: 0.1em;
+            line-height: 1.2em;
+            
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container w-400">
+
+        <div class="row">
+            <h1>A태그 개조하기</h1>
+        </div>
+
+        <div class="row">
+            <a href="#" id="test">버튼링크</a>
+            <a href="#" class="btn btn-positive">긍정버튼</a>
+            <a href="#" class="btn">중립버튼</a>
+
+
+        </div>
+
+    </div>
+</body>
+</html>

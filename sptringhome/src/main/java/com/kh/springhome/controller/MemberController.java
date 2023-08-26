@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.springhome.dao.AdminDao;
 import com.kh.springhome.dao.MemberDao;
+import com.kh.springhome.dto.MemberBlockDto;
 import com.kh.springhome.dto.MemberDto;
+import com.kh.springhome.error.AuthorityException;
 
 //회원 관련 기능을 처리하는 컨트롤러
 @Controller
@@ -25,6 +28,8 @@ public class MemberController {
 	@Autowired
 	private MemberDao memberDao;
 	
+	@Autowired
+	private AdminDao adminDao;
 
 	
 	@GetMapping("/join")
@@ -88,10 +93,24 @@ public class MemberController {
 		
 		//[3] 비밀번호가 일치하면 메인페이지로 이동
 		if(isCorrectPw) {
+			
+			MemberBlockDto blockDto = adminDao.selectBlockOne(findDto.getMemberId());
+			
+			//(주의) 만약 차단된 회원이라면 추가 작업을 중지하고 오류 발생
+			if(blockDto != null) {
+				
+//				return "redirect:오류페이지";
+				throw new AuthorityException("차단된 회원");
+				
+			}
+			
 			//세션에 아이디+등급 저장
 		session.setAttribute("name",findDto.getMemberId());
 		session.setAttribute("level", findDto.getMemberLevel());
 		//아이디와 비밀번호가 모두 일치했을 때야 비로소 session에 데이터 저장. 이 저장이 remove(로그아웃)되기 전까지 회원용 header가 뜬다
+		
+		
+		
 		
 		//로그인 시간 갱신
 		memberDao.updateMemberLogin(inputDto.getMemberId());

@@ -76,26 +76,43 @@
     <td>전화번호</td>
     <td>생년월일</td>
     <td>회원등급</td>
-
+    <td>차단여부</td>
+	<td>메뉴</td>
     </tr>
     </thead>
     <tbody>
 
-    <c:forEach var="memberDto" items="${list}">
+    <c:forEach var="memberListDto" items="${list}">
     
     <tr>
-    <td><a href="member/detail?memberId=${memberDto.memberId}">${memberDto.memberId}</a></td>
-    <td>${memberDto.memberNickname}</td>
-    <td>${memberDto.memberEmail}</td>
-    <td>${memberDto.memberContact}</td>
-    <td>${memberDto.memberBirth}</td>
-    <td>${memberDto.memberLevel}</td>
-   
+    <td><a href="detail?memberId=${memberListDto.memberId}">${memberListDto.memberId}</a></td>
+    <td>${memberListDto.memberNickname}</td>
+    <td>${memberListDto.memberEmail}</td>
+    <td>${memberListDto.memberContact}</td>
+    <td>${memberListDto.memberBirth}</td>
+    <td>${memberListDto.memberLevel}</td>
+    <td>${memberListDto.block}</td>
+    <td>
+    <a href="detail?memberId=${memberListDto.memberId}">상세</a>
+    <a href="edit?memberId=${memberListDto.memberId}">수정</a>
+    
+    <c:choose>
+    <c:when test="${memberListDto.block=='Y'}">
+    <a href="cancel?memberId=${memberListDto.memberId}">해제</a>
+	</c:when>
+	<c:otherwise>
+	<a href="block?memberId=${memberListDto.memberId}">차단</a> 
+	</c:otherwise>
+	</c:choose>
+    
+    </td>
     </tr>
  	</c:forEach>   
      </tbody>
     </table>
     <br>
+
+${vo}
 
 <!-- 페이지 네비게이터 출력 -->
 <h3>

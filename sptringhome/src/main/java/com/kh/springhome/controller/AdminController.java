@@ -1,8 +1,7 @@
 package com.kh.springhome.controller;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.springhome.dao.AdminDao;
+import com.kh.springhome.dao.BoardDao;
 import com.kh.springhome.dao.MemberDao;
+import com.kh.springhome.dto.BoardListDto;
+import com.kh.springhome.dto.MemberBlockDto;
 import com.kh.springhome.dto.MemberDto;
+import com.kh.springhome.dto.MemberListDto;
+import com.kh.springhome.error.NoTargetException;
 import com.kh.springhome.vo.PaginationVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +34,9 @@ public class AdminController {
 	
 	@Autowired
 	MemberDao memberDao;
+	
+	@Autowired
+	BoardDao boardDao;
 	
 	
 	@RequestMapping("/home")
@@ -64,22 +71,23 @@ public class AdminController {
 //	}
 	
 	
-	@RequestMapping("/list")
+	@RequestMapping("/member/list")
 	public String memberList(@ModelAttribute PaginationVO vo, Model model) {
 		int count = adminDao.countList(vo);
 		vo.setCount(count);
 		model.addAttribute("vo", vo);
 		
-		List<MemberDto> list = adminDao.selectListByPage(vo);
+//		List<MemberDto> list = memberDao.selectListByPage(vo);
+		List<MemberListDto> list = adminDao.selectListByPage2(vo);
 		model.addAttribute("list", list);
 		
-		return "/WEB-INF/views/admin/list.jsp";
+		return "/WEB-INF/views/admin/member/list.jsp";
 	}
 	
 	 
 	
 	@RequestMapping("/member/detail")
-	public String mypage(HttpSession session,Model model,
+	public String memberDetail(Model model,
 						@RequestParam String memberId) {
 		
 		
@@ -87,45 +95,65 @@ public class AdminController {
 		
 		model.addAttribute("memberDto", memberDto);
 		
-		return "/WEB-INF/views/member/mypage.jsp";
+		//이 회원이 작성한 글을 조회하여 모델에 첨부
+		List<BoardListDto> boardList=boardDao.selectListByBoardWriter(memberId);
+		model.addAttribute("boardList", boardList);
+		
+		return "/WEB-INF/views/admin/member/detail.jsp";
 		
 	}
 	
-	@GetMapping("/member/change")
-	public String change(HttpSession session, Model model,@RequestParam String memberId) {
+	@GetMapping("/member/edit")
+		public String memberEdit(Model model,
+				@RequestParam String memberId) {
 		
 		MemberDto memberDto = memberDao.selectOne(memberId);
 		
 		model.addAttribute("memberDto", memberDto);
 		
-		return "/WEB-INF/views/member/change.jsp";
-		
+	
+		return "/WEB-INF/views/admin/member/edit.jsp";
 	}
 	
-	@PostMapping("/change")
-	public String change(HttpSession session, @ModelAttribute MemberDto inputDto) 
-	{
+	@PostMapping("member/edit")
+	public String memberEdit(@ModelAttribute MemberDto memberDto) {
 		
-		String memberId = (String) session.getAttribute("name");
-		
-		//비밀번호 검사 후 변경 처리 요청
-		MemberDto findDto = memberDao.selectOne(memberId);
-		
-		if(inputDto.getMemberPw().equals(findDto.getMemberPw())) {
-			//비밀번호가 일치한다면
+		boolean result = adminDao.updateMemberInfoByAdmin(memberDto);
+		if(result) {
 			
-			inputDto.setMemberId(memberId); //아이디를 설정하고
-			memberDao.updateMemberInfo(inputDto); //정보 변경 처리
-			return "redirect:mypage";
+			return "redirect:list";		//상대경로
+//			return "redirect:/admin/member/list";//절대경로
 			
 		}
 		else {
-			//비밀번호가 일치하지 않는다면 -> 다시 입력하도록 되돌려보냄
-			return "redirect:change?error";
 			
+			throw new NoTargetException("존재하지 않는 회원 ID");
 			
-		}	
+		}
+		
+		
 	}
+	
+	@RequestMapping("/member/block")
+	public String memberBlock(@RequestParam String memberId) {
+		
+		adminDao.insertBlock(memberId);
+		
+		return "redirect:list";
+		
+		
+		
+	}
+	
+	@RequestMapping("/member/cancel")
+	public String memberCancel(@RequestParam String memberId) {
+		
+		adminDao.deleteBlock(memberId);
+		
+		return "redirect:list";
+		
+	}
+	
 	
 	
 	
