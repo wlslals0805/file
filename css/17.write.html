@@ -9,45 +9,37 @@
     <link rel="stylesheet" type="text/css" href="test.css">
     <style>
         /*
-        textarea는 크기 조정을 resize라는 속성으로 제어한다 
+            textarea는 크기 조정을 resize라는 속성으로 제어한다
         */
-        
-        .textarea.form.input{
-
+        textarea.form-input {
             resize: vertical;
-            min-height: 6em;
-
+            min-height:6em;
         }
-
-        .textarea.form.input.fixed{
-
-                resize: none;
-
+        textarea.form-input.fixed {
+            resize: none;
         }
 
     </style>
 </head>
 <body>
-        <form action="#" method="post" autocomplete="off">
-        <div class="container w-600">
-            <div class="row">
-                <h1>게시글 작성</h1>
-
-
-            </div>
-            <div class="row left">
-                <label>제목</label>
-                <input type="text" name="boardTitle" class="form-input w-100">
-
-            </div>
-            <div class="row left">
-                <label>내용</label>
-                <textarea name="boardContent" class="form-input fixed w-100"></textarea>
-            </div>
-            <div class="row right">
-                <button class="btn btn-positive">글쓰기</button>
-                <a href="#" class="btn">목록보기</a>
-            </div>
+    <form action="#" method="post" autocomplete="off">
+    <div class="container w-600">
+        <div class="row">
+            <h1>게시글 작성</h1>
         </div>
+        <div class="row left">
+            <label>제목</label>
+            <input type="text" name="boardTitle" class="form-input w-100">
+        </div>
+        <div class="row left">
+            <label>내용</label>
+            <textarea name="boardContent" class="form-input fixed w-100"></textarea>
+        </div>
+        <div class="row right">
+            <button class="btn btn-positive">글쓰기</button>
+            <a href="#" class="btn">목록보기</a>
+        </div>
+    </div>
+    </form>
 </body>
 </html>
