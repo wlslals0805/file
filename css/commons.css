@@ -5,6 +5,7 @@
 
 * {
     box-sizing: border-box;
+    font-family: 'Quantico', sans-serif;
 }
 
 
@@ -311,3 +312,21 @@ textarea.form-input.fixed {
     font-weight: bold;
     color: #d63031;
 }
+
+
+/*
+
+글자 색상과 관련된 클래스
+(아이콘에도 사용가능)
+
+*/
+.red{
+
+    color: #d63031;
+}
+.blue{color: #0984e3;}
+.gray{color: #b2bec3;}
+.yellow{color: #fdcb6e;}
+.green{color: #00b894;}
+.blank{color: #2d3436;}
+.white{color: #fff;}
