@@ -14,7 +14,7 @@
                     for="대상 ID"
                     체크박스 등도 선택하게 만들 수 있다 (디자인적으로 활용)
                 -->
-                    <label for="id-input">아이디 <span class="important">*</span></label>
+                    <label for="id-input">아이디 <i class="fa-solid fa-asterisk red"></i></label>
                     <input type="text" name="memberId" class="form-input w-100"
                     id="id-input"
                     placeholder="영문 소문자 + 숫자 8~20자 이내">
