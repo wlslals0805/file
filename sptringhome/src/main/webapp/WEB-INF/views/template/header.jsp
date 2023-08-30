@@ -49,13 +49,13 @@
 						</c:if>
             		</c:when>
             		<c:otherwise>
-            			<li><a href="/">Home</a></li>
+            			<li><a href="/">Ho me</a></li>
             			<li><a href="/member/join">회원가입</a></li>
             			<li><a href="/member/login">로그인</a></li>
             			<li><a href="/board/list">게시판</a></li>
             		</c:otherwise>
             	</c:choose>
-            </ul>
+            </ul> 
         </nav>
         <section class="center">
 		
