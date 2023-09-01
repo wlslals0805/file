@@ -10,7 +10,7 @@
 
  <div class="container w-600">
         <div class="row">
-            <h1>게시글 작성</h1>
+            <h1>게시 글 작성</h1>
         </div>
 
         <form autocomplete="off" onsubmit="return checkForm();" action="write" method="post">
