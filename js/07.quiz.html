@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./css/commons.css">
+    <link rel="stylesheet" type="text/css" href="./css/test.css">
+
+    <script>
+
+    
+
+        function small(){
+
+       var tag= document.querySelector("#target");
+
+       tag.style.fontSize="12px";}
+
+       function normal(){
+
+        var tag = document.querySelector("#target");
+
+        tag.style.fontSize="16px";
+
+       }
+
+       function big(){
+
+        var tag = document.querySelector("#target");
+
+        tag.style.fontSize="24px";
+
+       }
+
+function plus(){
+            var tag = document.querySelector("#target");
+            var present = tag.style.fontSize;
+            tag.style.fontSize = parseInt(present) + 1 + "px";
+        }
+
+        function minus(){
+            var tag = document.querySelector("#target");
+            var present = tag.style.fontSize;
+            var newSize = parseInt(present) - 1;
+            tag.style.fontSize = newSize + "px";
+        }
+
+
+        function startIncreasingFontSize() {
+            // 100ms마다 plus 함수 호출
+            interval = setInterval(plus, 100);
+        }
+
+        function stopIncreasingFontSize() {
+            // setInterval을 멈추고 interval 변수 초기화
+            clearInterval(interval);
+        }
+
+        function startdecreasingFontSize() {
+            // 100ms마다 plus 함수 호출
+            interval = setInterval(minus, 100);
+        }
+
+        function stopdecreasingFontSize() {
+            // setInterval을 멈추고 interval 변수 초기화
+            clearInterval(interval);
+        }
+
+
+
+    </script>
+
+</head>
+<body>
+
+    
+    <button onclick="small()">작게</button>
+    <button onclick="normal()">보통</button>
+    <button onclick="big()">크게</button>
+
+
+
+    <button onmousedown="startIncreasingFontSize()" onmouseup="stopIncreasingFontSize()" onmouseout="stopIncreasingFontSize()">+</button>
+    <button onmousedown="startdecreasingFontSize()" onmouseup="stopdecreasingFontSize()" onmouseout="stopdecreasingFontSize()">-</button>
+    <button onclick="plus()">+</button>
+    <button onclick="minus()">-</button>
+
+    <hr>
+
+    <h1 id="target" style="border: 1px solid black; font-size: 14px;">
+
+        훈장등의 영전은 이를 받은 자에게만 효력이 있고, 
+        어떠한 특권도 이에 따르지 아니한다. 
+        타인의 범죄행위로 인하여 생명·신체에 대한 
+        피해를 받은 국민은 법률이 정하는 바에 의하여 
+        국가로부터 구조를 받을 수 있다. 대통령은 조약을 체결·비준하고, 
+        외교사절을 신임·접수 또는 파견하며, 선전포고와 강화를 한다.
+국회의 정기회는 법률이 정하는 바에 의하여 매년 1회 집회되며, 
+국회의 임시회는 대통령 또는 국회재적의원 4분의 1 이상의 요구에 의하여 집회된다. 
+군사재판을 관할하기 위하여 특별법원으로서 군사법원을 둘 수 있다. 
+국가는 균형있는 국민경제의 성장 및 안정과 적정한 소득의 분배를 유지하고, 
+시장의 지배와 경제력의 남용을 방지하며, 
+경제주체간의 조화를 통한 경제의 민주화를 위하여 경제에 관한 
+규제와 조정을 할 수 있다.
+
+
+    </h1>
+
+    
+
+
+    
+</body>
+</html>

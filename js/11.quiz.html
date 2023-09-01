@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript 실습</title>
+
+    <!-- css 파일을 불러오는 코드 -->
+
+    <!-- 아이콘 사용을 위한 Font Awesome 6 CDN -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- 구글 웹 폰트 사용을 위한 CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+    <!-- 내가 만든 CSS 파일-->
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./css/commons.css">
+    <link rel="stylesheet" type="text/css" href="./css/test.css">
+    <style>
+
+    </style>
+
+    <!-- javascript 작성 공간 -->
+    <script>
+ 
+
+        function idTest(){
+
+        var IdRegexStr = "^[a-z][a-z0-9]{5,20}$";
+        // console.log(nickRegexStr.test("안녕123"));//문자열은 검사가 불가
+
+        var b= document.querySelector("#idInput")
+        
+        var IdRegexStr = new RegExp(IdRegexStr);
+        console.log(b.value);
+
+        var result = IdRegexStr.test(b.value);
+            
+
+        if(result==true){
+
+            idMessage.textContent="멋진 아이디입니다!"
+            idMessage.style.color="green";
+
+        }
+        else{
+
+            idMessage.textContent="영문숫자 5~20자로 작성"
+            idMessage.style.color="red";
+        }
+
+    }
+
+
+    function pwTest(){
+
+        var pwRegexStr=/^(?=.[A-Z])(?=.[a-z])(?=.[0-9])(?=.[!@#$])[A-Za-z0-9!@#$]{8,16}$/;
+    
+        var b= document.querySelector("#pwInput")
+
+        var result = pwRegexStr.test(b.value);
+            
+
+        if(result==true){
+
+            pwMessage.textContent="올바른 비밀번호 형식입니다."
+            pwMessage.style.color="green";
+
+        }
+        else{
+
+           
+
+            pwMessage.textContent="영문대소문자,숫자,특수문자 반드시 1개 포함"
+            pwMessage.style.color="red";
+        }
+
+
+    }
+
+    function checkPw(){
+
+        var b= document.querySelector("#pwInput")   //원래 비밀번호 좌표
+        var d = document.querySelector("#checkPw")  //확인에 쓰는 비밀번호
+
+        var cm=document.querySelector("#checkMessage")
+    
+
+        var origin = b.value;
+        var check = d.value;
+
+        if(origin==check){
+
+            cm.textContent="일치"
+            cm.style.color="green";
+
+
+        }
+        else{
+
+            cm.textContent="불일치"
+            cm.style.color="red";
+        }
+
+
+    }
+
+    </script>
+</head>
+<body>
+
+    <div class="container w-600">
+
+        <div class="row left">아이디</div>
+        <div class="row left"><input class="w-100" id="idInput" oninput="idTest()"></div>
+        <div class="row left" id="idMessage"></div>
+
+        <div class="row left">비밀번호</div>
+        <div class="row left"><input class="w-100" id="pwInput" oninput="pwTest()"></div>
+        <div class="row left" id="pwMessage"></div>
+
+        <div class="row left">비밀번호 확인</div>
+        <div class="row left"><input class="w-100" id="checkPw" oninput="checkPw()"></div>
+        <div class="row left" id="checkMessage"></div>
+
+
+    </div>
+
+
+    
+</body>
+</html>
