@@ -26,37 +26,47 @@
     <!-- javascript 작성 공간 -->
     <script>
 
+        
+    //(참고) style은 하위 속성을 선택하여 지정할 수 있다
+
+
+        window.addEventListener("load", function(){
+           var buttonList = document.querySelectorAll(".btn");
+           
+           buttonList[0].addEventListener("click",function(){
+
+            var h1 = document.querySelector(".target");
+            h1.style.color="red";
+
+           });
+           buttonList[1].addEventListener("click",function(){
+
+            var h1 = document.querySelector(".target");
+            h1.style.color="black";
+
+           });
+           buttonList[2].addEventListener("click",function(){
+
+            var h1 = document.querySelector(".target");
+            h1.style.color="blue";
+           });
+
+        });
+
+        
+
     </script>
 </head>
 <body>
-    <div class="container w-600">
-        <div class="row left">
-            <input type="checkbox">모두선택
-        </div>
-        <div class="row">
-            <hr>
-        </div>
-        <div class="row left">
-            <input type="checkbox">사과(500원)
-        </div>
-        <div class="row left">
-            <input type="checkbox">딸기(1000원)
-        </div>
-        <div class="row left">
-            <input type="checkbox">바나나(800원)
-        </div>
-        <div class="row left">
-            <input type="checkbox">포도(2000원)
-        </div>
-        <div class="row">
-            <hr>
-        </div>
-        <div class="row left">
-            <label>예상 결제 금액:0원</label>
-        </div>
 
+    <h1 class="target" style="border:1px solid black">
+        Hello Javascript!
+    </h1><hr>
 
-    </div>
-    
+    <div class="row">
+    <button class="btn" data-color="red">레드</button>
+    <button class="btn" data-color="black">검정</button>
+    <button class="btn" data-color="blue">파랑</button>
+</div>
 </body>
 </html>
