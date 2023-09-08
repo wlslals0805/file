@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>닉네임 검사</title>
+
+    <!-- css 파일을 불러오는 코드 -->
+
+    <!-- 아이콘 사용을 위한 Font Awesome 6 CDN -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- 구글 웹 폰트 사용을 위한 CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+    <!-- 내가 만든 CSS 파일-->
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./css/commons.css">
+    <link rel="stylesheet" type="text/css" href="./css/test.css">
+    <style>
+
+    </style>
+
+    <!--jquery cdn-->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+
+    <!-- javascript 작성 공간 -->
+    <script>
+
+$(function(){
+
+//목표 : 아이디의 입력이 완료되면 중복검사를 요청하여 결과를 출력
+$("[name=memberNickname]").blur(function(){
+    var nickname = $(this).val();
+
+    $.ajax({
+
+        url:"http://localhost:8080/nicknameCheck",
+        method:"post",//전송방식
+        data:{//전송데이터
+            memberNickname : nickname
+        },
+        success:function(response){
+            //아이디가 있으면 "Y" 없으면 "N"이 반환된다
+            // $(".display").text(response);
+
+            var regex = /^[ㄱ-ㅎㅏ-ㅣ가-힣0-9]{2,10}$/;
+            var isValid = regex.test(nickname);
+           
+            $(".form-input").removeClass("success fail");
+            if(response=='N'&&isValid){
+                $(".display").text("사용 가능한 닉네임입니다")
+                $(".form-input").addClass("success");
+            }
+            else if(response == 'Y'){
+
+                $(".display").text("이미 사용 중인 닉네임입니다"
+                )
+                $(".form-input").addClass("fail");
+            }
+            else if(isValid==false){
+
+                $(".display").text("형식에 맞게 입력해주세요");
+                $(".form-input").addClass("fail");
+
+            }
+    }
+});
+});
+});
+
+
+    </script>
+</head>
+<body>
+
+    <div class="container w-500">
+        <div class="row">
+            <h1>닉네임 검사</h1>
+        </div>
+        <div class="row">
+            <input type="text" name="memberNickname" class="form-input w-100">
+        </div>
+        <div class="row display">
+        </div>
+    </div>
+    
+</body>
+</html>
