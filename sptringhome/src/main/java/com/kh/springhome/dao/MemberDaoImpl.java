@@ -37,7 +37,7 @@ public class MemberDaoImpl implements MemberDao{
 		String sql = "select * from member where member_id=?";
 		
 		Object[]data= {memberId};
-		List<MemberDto>list = jdbcTemplate.query(sql, memberMapper,data);
+		List<MemberDto>list =  jdbcTemplate.query(sql, memberMapper,data);
 		
 		
 		return list.isEmpty() ? null : list.get(0);
