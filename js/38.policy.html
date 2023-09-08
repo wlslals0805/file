@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript 실습</title>
+
+    <!-- css 파일을 불러오는 코드 -->
+
+    <!-- 아이콘 사용을 위한 Font Awesome 6 CDN -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- 구글 웹 폰트 사용을 위한 CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+    <!-- 내가 만든 CSS 파일-->
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./css/commons.css">
+    <link rel="stylesheet" type="text/css" href="./css/test.css">
+    <style>
+
+    </style>
+
+    <!--jquery cdn-->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+
+    <!-- javascript 작성 공간 -->
+    <script>
+
+        $(function(){
+
+            $(".allCk").change(function(){
+
+                var checked = $(this).prop("checked");
+                $(".ck").prop("checked",checked);
+                // $(".ck").prop("checked",true);
+            })
+
+            $(".ck").change(function(){
+
+                /*개별체크박스개수 == 체크된개별체크박스개수*/
+                // var allCheck = $(".check-item").length == $(".check-item:checked").length;
+                var allCheck = $(".ck").length == $(".ck").filter(":checked").length;
+                $(".allCk").prop("checked",allCheck);
+            });
+
+           
+
+        });
+
+    </script>
+</head>
+<body>
+    <div class="container w-500">
+        <div class="row">
+            <h1>이용약관</h1>
+        </div>
+      <div class="row"><textarea class="form-input w-100"></textarea>
+    </div>
+    <div class="row">
+        <input type="checkbox" class="ck">동의합니다
+    </div>
+    <div class="row"><textarea class="form-input w-100"></textarea>
+    </div>
+    <div class="row">
+        <input type="checkbox" class="ck">동의합니다
+    </div>
+    <div class="row">
+        <input type="checkbox" class="allCk" >모두 동의합니다
+    </div>
+    <button class="btn btn-positive w-100">다음 단계로 이동</button>
+    
+</body>
+</html>
