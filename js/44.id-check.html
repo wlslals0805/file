@@ -31,21 +31,27 @@
     <script>
         $(function(){
 
-            //목표 : 아이디의 입력이 완료되면 중복검사를 요청하여 결과를 출력
-            $("[name=memberId]").blur(function(){
+            //목표 : 아이디의 입력이 완료되면 중복검사를 요청(비동기통신)하여 결과를 출력
+            $("[name=memberId]")/*아이디입력*/.blur(function(){
+                //1.입력창에 블러이벤트가 발생하면
                 var id = $(this).val();
+                //2.입력값을 가지고 와서
 
+
+                //3.비동기 통신으로
                 $.ajax({
 
+                    //4.주소, 방식, 값 줄 테니까 넘겨라 (적힌 주소로)
                     url:"http://localhost:8080/idCheck",
-                    method:"post",//전송방식
+                    method:"post",//전송방식 (입력된 검사대상 아이디를 url로 전송)
                     data:{//전송데이터
-                        memberId : id
+                        memberId/*(url에서 memberId라는 이름으로 들어갈 것이)*/ : id /*(입력된 아이디이다)*/
                     },
 
-                    
+                   //5.그리고 돌아오는 결과를 받아서 찍어라
                     success:function(response){
                         //아이디가 있으면 "Y" 없으면 "N"이 반환된다
+                        //response가 Y아니면 N이라는 것.
                         // $(".display").text(response);
 
 
