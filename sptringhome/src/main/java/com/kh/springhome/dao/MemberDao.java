@@ -17,6 +17,7 @@ public interface MemberDao {
 	
 	boolean increaseMemberPoint(String memberId, int point);
 	boolean decreaseMemberPoint(String memberId, int point);
+	MemberDto selectOneByMemberNickname(String memberNickname);
 	
 	
 	

@@ -89,8 +89,13 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 	registry.addInterceptor(boardDefenderInterceptor)
 	.addPathPatterns("/board/detail");
 	
+	
+	//[5] 관리자용 인터셉터 등록
 	registry.addInterceptor(adminInterceptor)
-	.addPathPatterns("/admin/**");
+				.addPathPatterns(
+						"/admin/**", 
+						"/board/deleteByAdmin"
+				);
 	
 	
 	}
