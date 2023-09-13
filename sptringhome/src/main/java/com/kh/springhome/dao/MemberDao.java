@@ -1,7 +1,9 @@
 package com.kh.springhome.dao;
 
+import java.util.List;
+
 import com.kh.springhome.dto.MemberDto;
-import com.kh.springhome.vo.PaginationVO;
+import com.kh.springhome.dto.StatDto;
 
 //메소드 명세만 작성(책으로 치면 목차)
 public interface MemberDao {
@@ -18,6 +20,11 @@ public interface MemberDao {
 	boolean increaseMemberPoint(String memberId, int point);
 	boolean decreaseMemberPoint(String memberId, int point);
 	MemberDto selectOneByMemberNickname(String memberNickname);
+	
+	//통계 기능 추가
+	List<StatDto> selectGroupByMemberLevel();
+	
+	
 	
 	
 	
