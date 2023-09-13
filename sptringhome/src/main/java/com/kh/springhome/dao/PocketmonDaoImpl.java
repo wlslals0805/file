@@ -39,6 +39,7 @@ public class PocketmonDaoImpl implements PocketmonDao{
 		};
 		
 		jdbcTemplate.update(sql,data);
+		
 	}
 
 	@Override
