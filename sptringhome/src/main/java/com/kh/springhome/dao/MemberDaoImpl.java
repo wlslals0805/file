@@ -7,7 +7,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.springhome.dto.MemberDto;
+import com.kh.springhome.dto.StatDto;
 import com.kh.springhome.mapper.MemberMapper;
+import com.kh.springhome.mapper.StatMapper;
 
 @Repository
 public class MemberDaoImpl implements MemberDao{
@@ -161,6 +163,23 @@ public class MemberDaoImpl implements MemberDao{
 	public boolean decreaseMemberPoint(String memberId, int point) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	
+	@Autowired
+	private StatMapper statMapper;
+
+	@Override
+	public List<StatDto> selectGroupByMemberLevel() {
+		
+		String sql = "select member_level name, count(*) cnt"
+				+ " from member group by member_level order by"
+				+ " cnt desc";
+		
+		
+		return jdbcTemplate.query(sql, statMapper);
+		
+		
 	}
 	
 	
