@@ -28,7 +28,7 @@ public class RegularServiceImpl implements RegularService{
 	//월~금까지 근무시간 1시간마다
 //	@Scheduled(cron = "* * * * * mon")//월요일만 1초마다
 //	@Scheduled(cron = "* * * 18 * ?")//요일 무관 매 18일마다
-	@Scheduled(cron = "0 0 12 ? * 4L")//매월 마지막(L)목요일(4) 12시 정각
+	@Scheduled(cron = "0 0 12 ? * 4L")//매월 마지막 (L)목요일(4) 12시 정각
 	
 	@Override
 	public void clearCert() {
