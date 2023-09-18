@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript 실습</title>
+
+    <!-- css 파일을 불러오는 코드 -->
+
+    <!-- 아이콘 사용을 위한 Font Awesome 6 CDN -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- 구글 웹 폰트 사용을 위한 CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+    <!-- 내가 만든 CSS 파일-->
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./css/commons.css">
+    <!-- <link rel="stylesheet" type="text/css" href="./css/test.css"> -->
+    <style>
+
+        .row.left {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+            }
+
+
+            .input.input-text{
+            border-radius: 2px; 
+            border-style: solid;
+            display: block;
+            font-size: 15px;
+            padding: 0.5em;
+            border-width: 1px;
+            border-color: lightgray;
+            
+        }
+
+        .btn{
+
+            border-radius: 5px;
+
+        }
+
+        .row {
+             margin-bottom: 20px; 
+            }
+
+
+            .container {
+  width: 500px;
+  padding: 20px; 
+  margin: 0 auto; 
+  box-shadow: 0 0 10px rgba(0, 0, 0.2); 
+  background-color: #fff; 
+}
+
+    </style>
+
+    <!--jquery cdn-->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+
+    <!-- javascript 작성 공간 -->
+    <script>
+
+    </script>
+</head>
+<body>
+
+    <form action="" method="post">
+        <div class="container w-500">
+          <div class="row mb-30">
+            <h1>User Login</h1>
+          </div>
+          <div class="row ms-50 me-50">
+            <input name="userId" class="input input-text w-100" placeholder="ID" style="border-radius: 5px">
+          </div>
+          <div class="row ms-50 me-50 mb-20">
+            <input name="userPw" class="input input-text w-100" placeholder="Password" style="border-radius: 5px">
+          </div>
+          <div class="row left ms-50 me-50 mb-20">
+            <label>
+              <input type="radio" name="userType" value="normal" checked>일반 회원
+            </label>
+            <label>
+              <input type="radio" name="userType" value="admin">관리자
+            </label>
+          </div>
+      
+          <div class="row ms-50 me-50">
+            <button class="btn btn-positive w-100 mb-10">로그인</button>
+          </div>
+          <div class="row ms-50 me-50 mb-10">
+            <hr>
+          </div>
+          <div class="row ms-50 me-50 mb-30">
+            <button class="btn w-100" style="background-color: #b2bec3;">회원가입</button>
+          </div>
+        </div>
+      </form>
+      
+
+
+
+    
+</body>
+</html>
