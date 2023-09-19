@@ -59,6 +59,10 @@
     <form action="http://localhost:8080/file/upload" 
     method="post" enctype="multipart/form-data">
 
+    <!-- enctype은 인코딩 타입을 의미한다. 디폴트는 Form URL Encoding 방식이고 이는 우리가 항상 사용하던 방식.
+    우리가 항상 사용하던 인코딩 타입으로 파일을 전송하면 파일 이름밖에 전송할 수 없다(하나의 이름에 한 개의 데이터)
+ -->
+
         <input type="file" name="attach">
         <button>전송</button>
     </form>
