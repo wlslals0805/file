@@ -223,6 +223,7 @@ public class MemberController {
 	public String passwordFinish() {
 		
 		return "/WEB-INF/views/member/passwordFinish.jsp";
+		
 	}
 	
 	@GetMapping("/change")
