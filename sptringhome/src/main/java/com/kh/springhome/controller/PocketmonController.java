@@ -67,7 +67,6 @@ public class PocketmonController {
 			dir.mkdirs();
 			File target = new File(dir,String.valueOf(attachNo));
 			attach.transferTo(target);
-			
 			AttachDto attachDto = new AttachDto();
 			attachDto.setAttachNo(attachNo);
 			attachDto.setAttachName(attach.getOriginalFilename());
