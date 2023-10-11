@@ -23,7 +23,7 @@ public class ShirtListTest {
 		
 		for(ShirtDto dto : list) {
 			
-			System.out.println(dto);
+//			System.out.println(dto);
 			
 		}
 			
