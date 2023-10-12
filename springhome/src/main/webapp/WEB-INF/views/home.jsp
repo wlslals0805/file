@@ -20,7 +20,7 @@
 	
 	<c:otherwise>
 	
-	<h2>방문을 환영합니다</h2>
+	<h2>방문을 환영하압니다</h2>
 	
 	<h3>회원가입 해주실 거죠</h3><br><br>
 	<img src="${pageContext.request.contextPath}/bling.jpg"><br><br>
