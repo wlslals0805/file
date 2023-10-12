@@ -22,7 +22,7 @@
 	
 	<h2>방문을 환영합니다</h2>
 	
-	<h3>회원가입 해주실 거죠?</h3><br><br>
+	<h3>회원가입 해주실 거죠</h3><br><br>
 	<img src="${pageContext.request.contextPath}/bling.jpg"><br><br>
 	<a href="${pageContext.request.contextPath}/member/join">회원가입 바로가기</a>
 	
