@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="member">
+	<insert id="save">
+		insert into member(
+			member_id, MEMBER_PW, MEMBER_NICKNAME, MEMBER_EMAIL,
+			MEMBER_CONTACT, MEMBER_BIRTH, MEMBER_POST, MEMBER_ADDR1,
+			MEMBER_ADDR2, MEMBER_LEVEL,MEMBER_POINT,MEMBER_JOIN,
+			MEMBER_LOGIN,MEMBER_CHANGE
+		)	
+		values(
+			#{memberId},#{memberPw},#{memberNickname},#{memberEmail}
+			,#{memberContact},#{memberBirth},#{memberPost}
+			,#{memberAddr1},#{memberAddr2},#{memberLevel}
+			,#{memberPoint},#{memberJoin},#{memberLogin},#{memberChange}
+		)
+	</insert>
+	
+	
+	<select id="list" resultType="MemberDto">
+	
+	select * from member
+	
+	</select>
+	
+	<select id="find" resultType="MemberDto">
+	
+	select * from member where member_id=#{memberId}
+	
+	</select>
+	
+	<update id="edit">
+	
+	update member set member_id=#{memberId},MEMBER_PW=#{memberPw},MEMBER_NICKNAME=#{memberNickname},
+	MEMBER_EMAIL=#{memberEmail},MEMBER_CONTACT=#{memberContact},MEMBER_BIRTH=#{memberBirth},
+	MEMBER_POST=#{memberPost},MEMBER_ADDR1=#{memberAddr1},MEMBER_ADDR2=#{memberAddr2},
+	MEMBER_LEVEL=#{memberLevel},MEMBER_POINT=#{memberPoint},MEMBER_JOIN=#{memberJoin},
+			MEMBER_LOGIN=#{memberLogin},MEMBER_CHANGE=#{memberChange} where member_id=#{memberId}
+	</update>
+	
+	<select id="search" resultType="MemberDto">
+		select * from member 
+		where instr(${type}, #{keyword}) > 0
+		order by ${type} asc 
+	
+	</select>
+	
+	<select id="complexSearch" resultType="MemberDto">
+	
+	select * from member
+	
+	<where>
+	<if test="memberId!=null">
+	
+	and instr(member_id,#{memberId}) > 0
+	
+	</if>
+	<if test="memberNickname!=null">
+	
+	and instr(member_nickname,#{memberNickname})>0
+	</if>
+	<if test="memberEmail!=null">
+	and instr(member_email,#{memberEmail})>0
+	</if>
+	<if test="memberContact!=null">
+	and instr(member_contact,#{memberContact})>0
+	</if>
+	<if test="memberPost!=null">
+	and instr(member_post,#{memberPost})>0
+	</if>
+	
+<!-- 	<![CDATA[ 구문 ]]> -->
+	
+	<choose>
+	<when test="birthBegin!=null and birthEnd!=null">
+	and to_date(member_birth,'YYYY-MM-DD') 
+	between 
+	to_date(#{birthBegin}|| ' ' || '00:00:00','YYYY-MM-DD HH24:MI:SS') 
+	and 
+	to_date(#{birthEnd}||''|| '23:59:59','YYYY-MM-DD HH24:MI:SS')
+	</when>
+	<when test="birthBegin!=null">
+	<![CDATA[
+	to_date(member_birth,'YYYY-MM-DD') 
+	>= 
+	to_date(#{birthBegin}||''||'00:00:00','YYYY-MM-DD HH24:MI:SS')
+	 ]]>
+	</when>
+	<when test="birthEnd!=null">
+	<![CDATA[ 
+	
+	to_date(member_birth,'YYYY-MM-DD')
+	<=
+	to_date(#{birthEnd}||''||'23:59:59','YYYY-MM-DD HH24:MI:SS')
+	 ]]>
+	</when>
+	
+	</choose>
+	
+	
+	
+	
+	</where>
+	
+	</select>
+	
+	
+	</mapper>
