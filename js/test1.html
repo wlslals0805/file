@@ -1,0 +1,77 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>장바구니 목록</title>
+</head>
+<body>
+
+<script>
+$(function() {
+    // 전체 선택과 개별 체크박스에 대한 이벤트 구현
+
+    // 전체 선택
+    $(".check-all").change(function() {
+        var check = $(this).prop("checked");
+        $(".check-all, .check-item").prop("checked", check);
+        recalculateTotal();
+    });
+
+    // 개별 체크박스
+    $(".check-item").change(function() {
+        recalculateTotal();
+    });
+
+    function recalculateTotal() {
+        var total = 0;
+
+        // 체크된 개별 체크박스들을 찾아서 가격과 수량을 가져와 총 가격을 계산합니다.
+        $(".check-item:checked").each(function() {
+            var price = $(this).closest("tr").find(".price").data("cart-price");
+            var count = $(this).closest("tr").find(".count").data("cart-count");
+            total += price * count;
+        });
+
+        // 계산된 총 가격을 화면에 업데이트합니다.
+        $(".total").text(total);
+    }
+});
+
+
+	
+	
+	
+	
+</script>
+
+
+
+
+    <h1>장바구니 목록</h1>
+	<div id="selectAllDiv">
+    <input type="checkbox" class="check-all">모두 선택
+</div>
+	<form action="insert" method="get">
+        <c:forEach items="${cartList}" var="cart">
+            <a href="/cuddly/product/detail?productNo=${cart.productNo}"><img src="/cuddly/image/product/main?productNo=${cart.productNo}" width="200" height="200"></a>
+            	상품명 : ${cart.productName}
+            	크리에이터 : ${cart.creatorName}
+            	옵션 : ${cart.productOptionName}
+               수량: ${cart.cartCount}
+               가격 : <label class="price">${cart.cartPrice}</label>
+               추가 날짜 : ${cart.cartDate}	<br><br>
+              추가하기 <input type="checkbox" name="cartNo" value="${cart.cartNo}" class="check-item">
+               <hr>
+        </c:forEach>
+        
+        
+        <div class="row">총 가격:<label class="total">0</label>원</div>
+       <button type="submit">주문하기</button>
+        </form>
+    
+</body>
+</html>
