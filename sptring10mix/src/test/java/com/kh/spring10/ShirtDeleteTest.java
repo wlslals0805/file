@@ -23,7 +23,7 @@ public class ShirtDeleteTest {
 		
 		int shirtNo = 999;
 		boolean result = dao.delete(shirtNo);
-		System.out.println("result="+result);
+//		System.out.println("result="+result);
 		
 		
 		
