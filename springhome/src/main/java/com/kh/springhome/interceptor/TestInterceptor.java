@@ -34,8 +34,8 @@ public class TestInterceptor implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-//		System.out.println("preHandle 실행");
-		return false;	//true, false에 따라 홈페이지에 들어갈 수 있는지 없는지가 결정된다
+		System.out.println("preHandle 실행");
+		return true;	//true, false에 따라 홈페이지에 들어갈 수 있는지 없는지가 결정된다
 		//true면 preHandle이 실행돼도 홈페이지에 들어갈 수 있음. 
 		//홈페이지에 들어가기 전에 자격이 있냐 없냐를 따져서 허용과 차단을 결정.
 	}
@@ -50,7 +50,7 @@ public class TestInterceptor implements HandlerInterceptor{
 			HttpServletResponse response, 
 			Object handler,
 			ModelAndView modelAndView) throws Exception {
-//		System.out.println("postHandle 실행");
+		System.out.println("postHandle 실행");
 //		System.out.println(modelAndView);
 	}
 	/**
@@ -66,7 +66,7 @@ public class TestInterceptor implements HandlerInterceptor{
 			Object handler, 
 			Exception ex)
 			throws Exception {
-//		System.out.println("afterCompletion 실행");
+		System.out.println("afterCompletion 실행");
 //		System.out.println(ex);
 	}
 }
