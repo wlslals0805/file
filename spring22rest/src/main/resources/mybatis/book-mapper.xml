@@ -38,6 +38,51 @@
     		select * from book where book_id=#{bookId}
     		
     	</select>
+    	
+    	<delete id="remove">
+    		
+    		delete book where book_id=#{bookId}
+    	
+    	</delete>
+    	
+    	<update id="editUnit">
+    		
+    		update book 
+    		<set>
+    			<if test="dto.bookId>0">
+    				book_id=#{dto.bookId},
+    			</if>
+				<if test="dto.bookTitle !=null">
+					book_title=#{dto.bookTitle},
+				</if>    		
+				<if test="dto.bookAuthor != null">
+					book_author=#{dto.bookAuthor},
+				</if>
+				<if test="dto.bookPublicationDate != null">
+					book_publication_date=#{dto.bookPublicationDate},
+				</if>
+				<if test="dto.bookPrice>0">
+					book_price=#{dto.bookPrice},
+				</if>
+				<if test="dto.bookPublisher != null">
+					book_publisher=#{dto.bookPublisher},
+				</if>
+				<if test="dto.bookPageCount!=null">
+					book_page_count=#{dto.bookPageCount},					
+				</if>
+				<if test="dto.bookGenre !=null">
+					book_genre=#{dto.bookGenre},
+				</if>
+    		</set>
+    		where book_id = #{bookId}
+    	
+    	</update>
+    	
+    	<select id="search" resultType="bookDto">
+    		
+    		select * from book where instr(book_title,#{bookTitle})>0
+    	
+    	</select>
     
     
     </mapper>
