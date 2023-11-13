@@ -47,6 +47,7 @@ public class BookDaoImpl implements BookDao{
 		int result = sqlSession.delete("book.deleteByBookId", bookId);
 		if(result == 0) throw new NoTargetException();
 	}
+	
 	@Override
 	public List<BookDto> searchListByPage(int page, int size) {
 		int end = page * size;

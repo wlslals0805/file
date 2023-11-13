@@ -68,7 +68,7 @@
 				book_genre = #{bookDto.bookGenre},
 			</if>
 		</set>
-		where book_id = #{bookId}
+		where book_id = #{bookId} order by #{bookTitle} desc
 	</update>
 	
 	<select id="complexSearch" resultType="BookDto">
