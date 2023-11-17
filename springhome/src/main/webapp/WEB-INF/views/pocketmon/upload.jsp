@@ -37,7 +37,7 @@
                         //console.log(response);
                         //이미지의 src를 바꾸는 코드
                         $("img").attr("src", "http://localhost:8080/pocketmon/download?attachNo="+response.attachNo);
-                    },
+                    }
                 });
             });
         });        
