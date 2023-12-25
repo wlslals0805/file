@@ -28,25 +28,25 @@ public class Test62 {
 	
 	int[] bandage = new int[3];
 	
-	bandage[0]=1;
-	bandage[1]=1;
-	bandage[2]=1;
+	bandage[0]=3;
+	bandage[1]=100;
+	bandage[2]=7;
 	
-	int[][] attacks = new int[2][2];
+	int[][] attacks = new int[3][2];
 	
 	attacks[0][0] = 1;
-	attacks[0][1] = 2;
+	attacks[0][1] = 15;
 	
-	attacks[1][0] = 3;
-	attacks[1][1] = 2;
+	attacks[1][0] = 5;
+	attacks[1][1] = 100;
 	
-//	attacks[2][0] = 8;
-//	attacks[2][1] = 6;
+	attacks[2][0] = 8;
+	attacks[2][1] = 6;
 	
 //	attacks[3][0] = 11;
 //	attacks[3][1] = 5;
 		
-	int health = 5;
+	int health = 20;
 	
 		
 	int lastAttackTime = attacks[attacks.length-1][0];
@@ -67,52 +67,68 @@ public class Test62 {
 		
 	};
 	
-	for(int i = 0;i<=lastAttackTime;i++) {
+	System.out.println("attackSecondeList="+attackSecondeList);
+	System.out.println("lastAttackTime="+lastAttackTime);
+	
+	for(int i = 1;i<=lastAttackTime;i++) {
 		
 		
-			if(attackSecondeList.contains(i)) {
+		if(attackSecondeList.contains(i)) {
 			
-			int a = attackSecondeList.indexOf(i);
+			System.out.println("공격당함");
+		
+		int a = attackSecondeList.indexOf(i);
+		
+		System.out.println("i="+i);
+		System.out.println("a="+a);
+		
+		int attackDamage = attacks[a][1];
+		System.out.println("attackDamage="+attackDamage);
+		
+		hp= hp- attackDamage;
+		continueSecond = 0;
+		
+		if(hp<=0) {
 			
-			int attackDamage = attacks[a][1];
-			
-			hp= hp- attackDamage;
-			continueSecond = 0;
-			
-			if(hp<=0) {
-				
-				dead = true;
-				
-			}
+			dead = true;
 			
 		}
-			
-			else {
-	
-		
-			if(hp<health) {
-			hp = hp + secondHill;
-			continueSecond++;
-			}
-			
-			if(continueSecond==hillTime) {
-				
-				hp= hp+ plusHill;
-				continueSecond = 0;
-				
-				if(hp>=health) {
-					
-					hp = health;
-				}
-			}
-			
-		
-			}
 		
 		
-	
 		
 	}
+		
+		else {
+			
+			System.out.println("공격 안 당함");
+            
+        continueSecond++;
+	
+		if(hp<health) {
+		hp = hp + secondHill;
+		
+		}
+		
+		if(continueSecond==hillTime) {
+			
+            
+            
+			hp= hp+ plusHill;
+			continueSecond = 0;
+			
+			if(hp>=health) {
+				
+				hp = health;
+			}
+		}
+		
+	
+		}
+		System.out.println("hp="+hp);
+	System.out.println("continueSecond="+continueSecond);
+	System.err.println("dead="+dead);
+	
+}
 	
 	if(dead==true) {
 		
@@ -122,9 +138,7 @@ public class Test62 {
 	else {
 		
 		System.out.println(hp);
-		
 	}
-		
 		
 		
 	}
