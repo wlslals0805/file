@@ -41,6 +41,9 @@ public class Test64 {
 		for(int i=0;i<length;i++) {
 			
 			String present = String.valueOf(input1.charAt(i));
+			
+			
+			
 			String presentUpper = present.toUpperCase();
 			
 			String change;
