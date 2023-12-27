@@ -24,8 +24,7 @@ public class Test66 {
 		Scanner sc = new Scanner(System.in);
 		
 		int n = sc.nextInt();
-//		sc.nextLine();	//nextInt를 쓰고 남은 개행문자("\n")소비용.
-		//(nextInt는 숫자를 적고 엔터를 쳤을 때 숫자만 쏙 빼먹고 엔터를 버퍼에 남겨둔다 따라서 그다음에 오는 nextLine이 nextInt가 안 쓰고 남긴 개행문자를 흡수해서 사용자가 입력을 받지도 않았는데 입력을 받은 걸로 처리한 후 다음으로 넘어간다) 
+
 		
 		List<String> result = new ArrayList<>();
 		
@@ -48,11 +47,11 @@ public class Test66 {
 			
 		}
 		
-//		for(String answer : result) {
-//			
-//			System.out.println(answer);
-//			
-//		}
+		for(String answer : result) {
+			
+			System.out.println(answer);
+			
+		}
 	
 		
 	}
