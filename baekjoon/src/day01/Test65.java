@@ -1,4 +1,4 @@
-package day01;
+ package day01;
 
 import java.util.Scanner;
 
@@ -41,7 +41,9 @@ public class Test65 {
 				
 			}
 			
-			length = list[i].length();
+			length = list[i].length();	//length는 가장 긴 단어의 글자수만 담아야 하고 
+			//기존보다 더 긴 글자수가 나타났을 때만 교체되어야 한다
+			//따라서 if문 안에 있어야 함
 			
 		}
 		
