@@ -30,15 +30,13 @@ public class Test66 {
 		
 		for(int i=0;i<n;i++) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 			
-			System.out.println("i="+i);
 			
 			String str = sc.nextLine();
-			System.out.println("입력="+str);
 			
 			StringBuilder sb = new StringBuilder();
 			
 			for(char x : str.toCharArray()) {
-				
+				 
 				sb.append(x);
 				
 			}
