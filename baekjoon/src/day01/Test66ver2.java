@@ -64,7 +64,10 @@ public class Test66ver2 {
 			begin++;
 			end--;
 			
+			System.out.println("begin"+begin);
+			System.out.println("end"+end);
 			
+		
 		}
 		
 		
