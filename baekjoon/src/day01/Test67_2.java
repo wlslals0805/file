@@ -2,7 +2,7 @@ package day01;
 
 import java.util.Scanner;
 
-public class Test67 {
+public class Test67_2 {
 
 //	영어 알파벳과 특수문자로 구성된 문자열이 주어지면 영어 알파벳만 뒤집고,
 // 특수문자는 자기 자리에 그대로 있는 문자열을 만들어 출력하는 프로그램을 작성하세요.
@@ -29,27 +29,30 @@ public class Test67 {
 		
 		int begin = 0;
 		int end = c.length-1;
-		
-		
-
 	
 		while(begin<end) {
 			
 			char left = c[begin];
 			char right = c[end];
 			
-			if(Character.isAlphabetic(left)&&Character.isAlphabetic(right)) {
+			if(!Character.isAlphabetic(left)) {
+			
+				begin++;
+				
+			}
+			else if(!Character.isAlphabetic(right)) {
+			
+				end--;
+			}
+			else {
 				char save = c[begin];
 				c[begin] = c[end];
 				c[end] = save;
 				
+				begin++;
+				end--;
 			}
 
-			
-			begin++;
-			end--;
-			
-			
 		}
 		
 		result = String.valueOf(c);
