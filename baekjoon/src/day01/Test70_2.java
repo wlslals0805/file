@@ -2,7 +2,7 @@ package day01;
 
 import java.util.Scanner;
 
-public class Test70 {
+public class Test70_2 {
 
 //	앞에서 읽을 때나 뒤에서 읽을 때나 같은 문자열을 팰린드롬이라고 합니다.
 //
@@ -30,20 +30,17 @@ public class Test70 {
 	
 	static String solution(String input) {
 		
-		StringBuilder sb = new StringBuilder();
 		
-		for(char x : input.toCharArray()) {
-			
-			if(Character.isAlphabetic(x)) {
-				
-				sb.append(x);
-				
-				
-			}
-			
-		}
 		
-		if(sb.reverse().toString().equalsIgnoreCase(sb.reverse().toString())) {
+		input = input.toUpperCase();
+		input = input.replaceAll("[^A-Z]", "");
+		
+		StringBuilder sb = new StringBuilder(input);
+
+		String str1 = sb.reverse().toString();
+		String str2 = sb.reverse().toString();
+		
+		if(str2.equals(str1)) {
 			
 			return "YES";  
 				
