@@ -31,42 +31,43 @@ public class Test68_2 {
 	static String solution(String input) {
 		
 		String result ="";
-//		int start = 0;
-//		
-//		for(char x : input.toCharArray()) {
-//			
-//			 int index = input.indexOf(x); 
-//			 
-//			
-//			 if(start == index) {
-//				 
-//				 result+=x;
-//				 
-//			 }
-//			 start ++;
-//			
-//			
-//		}
+		int start = 0;
 		
-		for(int i = 0; i<input.length(); i++) {
+		for(char x : input.toCharArray()) {
 			
-			char currentCh = input.charAt(i);
-			//순회 중인 문자열 안에서 현재 문자
+			 int index = input.indexOf(x); 
+			 
 			
-			int index = input.indexOf(currentCh);
-			//그 현재 문자의 맨 앞자리
-			
-			if(i==index) {
-				//맨 앞자리와 현재 문자의 자리(i)가 같으면 처음 나온 문자. 앞서 나왔던 (중복)문자
-				
-				
-				result+=currentCh;
-				//처음 나온 문자면 추가
-				
-			}
+			 if(start == index) {
+				 
+				 result+=x;
+				 
+			 }
+			 start ++;
 			
 			
 		}
+		
+//		for(int i = 0; i<input.length(); i++) {
+//			
+//			char currentCh = input.charAt(i);
+//			//순회 중인 문자열 안에서 현재 문자
+//			
+//			int index = input.indexOf(currentCh);
+//			//그 현재 문자의 맨 앞자리
+//			
+//			if(i==index) {
+//				//맨 앞자리와 현재 문자의 자리(i)가 같으면 처음 나온 문자. 
+//				//같지 않으면 앞서 나왔던 (중복)문자
+//				
+//				
+//				result+=currentCh;
+//				//처음 나온 문자면 추가
+//				
+//			}
+//			
+//			
+//		}
 		
 		
 		

@@ -49,9 +49,6 @@ public class Test68 {
 		
 		result = sb.toString();
 		
-		
-		
-		
 		return result;
 
 	}
