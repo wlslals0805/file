@@ -35,6 +35,7 @@ public class Test70 {
 		for(char x : input.toCharArray()) {
 			
 			if(Character.isAlphabetic(x)) {
+//				if(65<=x&&x<=122) {
 				
 				sb.append(x);
 				
