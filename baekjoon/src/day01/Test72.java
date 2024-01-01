@@ -36,8 +36,6 @@ public class Test72 {
 		
 		int[] list2 = new int[2];
 		
-		
-		
 		for(int i = 0;i<str.length();i++) {
 			
 			int num = 0;
