@@ -2,7 +2,7 @@ package day01;
 
 import java.util.Scanner;
 
-public class Test73 {
+public class Test73_2 {
 	
 //	설명
 //
@@ -30,36 +30,23 @@ public class Test73 {
 	
 	static String solution(String input) {
 
-		String ch = String.valueOf(input.charAt(0));
-		int cnt = 0;
+		input+=" ";
 		String result="";
-		for(int i = 0;i<input.length();i++) {
+		int cnt=1;
+		
+		for(int i=0;i<input.length()-1;i++) {
 			
-			if(String.valueOf(input.charAt(i)).equals(ch)) {
-				
+			if(input.charAt(i)==input.charAt(i+1)) {
 				cnt++;
-				
-				if(i==input.length()-1) {
-					
-					result+=ch+cnt;
-					
-				}
 			}
 			else {
-				if(cnt==1) {
-					result+=ch;
-				}
-				else if(cnt!=1){
-					result+=ch+cnt;
-					
-				}
-				if(i==input.length()-1){
-					ch = String.valueOf(input.charAt(i));
-					result+=ch;
+				result+=input.charAt(i);
+				if(cnt!=1) {
+				result+=cnt;
 				}
 				cnt=1;
-				ch = String.valueOf(input.charAt(i));
 			}
+			
 		}
 		return result;
 	}
