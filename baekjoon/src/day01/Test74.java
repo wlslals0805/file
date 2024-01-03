@@ -1,7 +1,5 @@
 package day01;
 
-import java.awt.dnd.DragSourceListener;
-import java.awt.image.AbstractMultiResolutionImage;
 import java.util.Scanner;
 
 public class Test74 {
