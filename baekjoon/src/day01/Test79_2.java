@@ -2,7 +2,7 @@ package day01;
 
 import java.util.Scanner;
 
-public class Test79 {
+public class Test79_2 {
 	
 //	설명
 //
@@ -23,28 +23,26 @@ public class Test79 {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		int[] list = new int[sc.nextInt()];
-		
-		for(int i=1;i<=list.length;i++) {
-			list[i-1] = i;
-		}
-		System.out.println(solution(list));
+		System.out.println(solution(sc.nextInt()));
 		
 	}
 	
-	static int solution(int[] input) {
+	static int solution(int input) {
 
-		int result = input.length-1;
+		int result = input-1;
 		
-		for(int i=0;i<input.length;i++) {
-			int num = input[i];
+		for(int i=1;i<=input;i++) {
+			
 			
 			boolean answer= false;
 			
-			for(int a=2;a<num;a++) {
+			
+			System.out.println("i="+i+" 제곱근="+Math.sqrt(i));
+			for(int a=2;a<=Math.sqrt(i);a++) {
 				
-				if(num%a==0) {
+				if(i%a==0) {
 					answer = true;
+					a=i-1; 
 				}
 				
 			}
