@@ -1,6 +1,8 @@
 package day01;
 
 import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Test79_3 {
 	
@@ -38,20 +40,28 @@ public class Test79_3 {
 	
 	static int solution(int[] input) {
 
-		int result = 0;
-		for(int i=0;i<input.length;i++) {
-			for(int a=input[i]+1;a<=input.length;a++) {
-				
-//				System.out.println("input[i]="+input[i]+" a="+a);
-				if(a%input[i]==0) {
-					input[i]=1;
-				}
+		Set<Integer> list = new TreeSet<Integer>();
+		
+		for(int i=1;i<input.length;i++) {
+			int tmp = input[i]*2;
+			
+			for(int a=i+1;a<input.length;a++) {
+					if(tmp==input[a]) {
+						list.add(input[a]);
+						tmp+=input[i];//tmp와 input[a]가 일치해야 한 번 더 곱해진다. 
+						//6같은 경우에는 3의 배수로서 9가 3의 배수가 되어 1이 되기 위해선 6을 거치고 가야한다.
+						//그런데 6은 앞선 2의 배수여서 이미 1이 되어버렸다. 그래서 3이 6을 밟고 넘어가지 못해 9를 만나지 못했다.
+						//그래서 9가 3을 약수로 가지고 있음에도 소수가 아닌 수로 판정이 나지 않았다.
+						
+					}
+					
 			}
-			if(input[i]==0) {
-				
-				result++;
-			}
+
+			
 		}
+		
+		
+		int result = input.length - list.size()-1;
 		
 		return result;
 	}
