@@ -20,65 +20,62 @@ public class Test80_2 {
 //
 //	출력
 //	첫 줄에 뒤집은 소수를 출력합니다. 출력순서는 입력된 순서대로 출력합니다.
-	
+
 	public static void main(String[] args) {
-		
+
 		Scanner sc = new Scanner(System.in);
-		
+
 		int num = sc.nextInt();
-		
+
 		int[] list = new int[num];
-		
-		for(int i=0;i<num;i++) {
+
+		for (int i = 0; i < num; i++) {
 			list[i] = sc.nextInt();
-			
+
 		}
 		System.out.println(solution(list));
 	}
-	
+
 	public static boolean add(int input) {
-		
-		if(input==1) {
+
+		if (input == 1) {
 			return false;
-		}
-		else {
-		for(int i=2;i<=Math.sqrt(input);i++) {
-			
-			if(input%i==0) {
-				return false;
-				
+		} else {
+			for (int i = 2; i <= Math.sqrt(input); i++) {
+
+				if (input % i == 0) {
+					return false;
+
+				}
+
 			}
-			
 		}
-		}
-		
+
 		return true;
 	}
-	
+
 	static String solution(int[] input) {
 
 		String result = "";
-		
-		for(int x : input) {
-			
+
+		for (int x : input) {
+
 			int tmp = x;
 			int answer = 0;
-			while(tmp>0) {
-				
-				int t = tmp%10;
-				answer=answer*10+t;
-				tmp = tmp/10;
-				
-				
+			while (tmp > 0) {
+
+				int t = tmp % 10;
+				answer = answer * 10 + t;
+				tmp = tmp / 10;
+
 			}
-			
-			if(add(answer)) {
-				
-		result+=answer+" ";
+
+			if (add(answer)) {
+
+				result += answer + " ";
+			}
+
 		}
-			
-			
-		}
-	return result;
+		return result;
 	}
 }
