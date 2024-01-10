@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class Test86 {
+public class Test86_2 {
 
 	public static void main(String[] args) {
 
@@ -30,29 +30,28 @@ public class Test86 {
 		int m = list.length; // 테스트 횟수
 		int result = 0;
 
-		for (int b = 1; b <= n; b++) {// 학생 번호
-
-			Set<Integer> set = new TreeSet<>();
-
-			for (int c = 1; c <= n; c++) {
-
-				set.add(c);
-
-			}
-
-			for (int i = 0; i < m; i++) {// 테스트 순서
-
-				for (int a = 0; a < n; a++) {// 등수
-
-					if (list[i][a] == b) {
-						break;
-					} else {
-						set.remove(list[i][a]);
+		for (int i = 0; i < n; i++) {
+			int os = 0; // 멘토 등수
+			int es = 0; // 멘티 등수
+			for (int a = 0; a < n; a++) {
+				int cnt = 0;
+				for (int b = 0; b < m; b++) {
+					for (int c = 0; c < n; c++) {
+						if (list[b][c] == i + 1) {
+							os = c;
+						}
+						if (list[b][c] == a + 1) {
+							es = c;
+						}
 					}
-
+					if (os > es) {
+						cnt++;
+					}
+				}
+				if (cnt >= m) {
+					result++;
 				}
 			}
-			result += set.size() - 1;
 
 		}
 
