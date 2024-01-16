@@ -30,6 +30,8 @@ public class Test92 {
 			String direction = routes[i].substring(0, 1);
 			int n = Integer.parseInt(routes[i].substring(2));
 			boolean pass = false;
+			
+			
 
 			if (direction.equals("E")) {
 
