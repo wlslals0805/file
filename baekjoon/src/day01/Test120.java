@@ -30,4 +30,22 @@ public class Test120 {
 
 		return answer;
 	}
+	
+	
+
+	public int solution2(int k, int m, int[] score) {
+	    int answer = 0;
+	    Arrays.sort(score);
+
+	    int groups = score.length / m; 
+
+	    for (int j = 0; j < groups; j++) {
+	      
+	        int lastElementIndex = score.length - 1 - j * m; 
+	        answer += m * score[lastElementIndex];
+	    }
+
+	    return answer;
+	}
+
 }
