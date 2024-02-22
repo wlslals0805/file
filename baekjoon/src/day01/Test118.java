@@ -1,7 +1,9 @@
 package day01;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Test118 {
 
@@ -34,5 +36,19 @@ public class Test118 {
 
 		return max;
 	}
+	
+
+
+	public int solution2(int[] nums) {
+	    int n = nums.length / 2;
+	    
+	    Set<Integer> uniqueNums = new HashSet<>();
+	    for (int num : nums) {
+	        uniqueNums.add(num);
+	    }
+	    
+	    return Math.min(uniqueNums.size(), n);
+	}
+
 
 }
