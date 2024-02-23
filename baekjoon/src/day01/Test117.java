@@ -36,5 +36,20 @@ public class Test117 {
 
 		return answer;
 	}
+	
+	public String solution2(int a, int b) {
+	    int[] daysOfMonth = {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	    String[] dayOfWeek = {"FRI", "SAT", "SUN", "MON", "TUE", "WED", "THU"};
+	    
+	    int totalDays = b;
+	    for (int i = 1; i < a; i++) {
+	        totalDays += daysOfMonth[i];
+	    }
+	    
+	    String answer = dayOfWeek[(totalDays - 1) % 7];
+	    
+	    return answer;
+	}
+
 
 }
