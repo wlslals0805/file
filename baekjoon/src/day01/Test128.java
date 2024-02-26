@@ -14,28 +14,39 @@ public class Test128 {
         list.add("woo");
         list.add("ma");
         
+        ArrayList<String> list2 = new ArrayList<>();
+        
+        list2.add("ayaaya");
+        list2.add("yeye");
+        list2.add("woowoo");
+        list2.add("mama");
         
         for(int i=0;i<babbling.length;i++){
             
             String str = babbling[i];
-            
+            boolean pass = true;
           for(int j=0;j<list.size();j++){
-             
+    
+        	  if(str.equals(list2.get(j))) {
+        		  pass=false;
+        	  }
+        	  
               if(str.contains(list.get(j))){
 
-                  str = str.replaceFirst(list.get(j), "%");
+                  str = str.replace(list.get(j), "%");
              
               }
               
           }
            
-            boolean pass = true;
-            for(char ch : str.toCharArray()){
-                
-            if(ch!='%'){
-                pass=false;
-            }
-            }
+           for(char x : str.toCharArray()) {
+        	   
+        	   if(x!='%') {
+        		   pass=false;
+        	   }
+        	   
+           }
+            
             if(pass==true){
                 answer++;
             }
