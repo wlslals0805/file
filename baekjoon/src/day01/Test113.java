@@ -46,5 +46,21 @@ public class Test113 {
 
 		return list;
 	}
+	
+
+
+	public List<String> solution2(int n, int[] arr1, int[] arr2) {
+	    List<String> list = new ArrayList<>();
+
+	    for (int i = 0; i < n; i++) {
+	        String binaryString = Integer.toBinaryString(arr1[i] | arr2[i]);
+	        binaryString = String.format("%" + n + "s", binaryString);
+	        binaryString = binaryString.replaceAll("1", "#").replaceAll("0", " ");
+	        list.add(binaryString);
+	    }
+
+	    return list;
+	}
+
 
 }
