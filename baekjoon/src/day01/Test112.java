@@ -5,19 +5,19 @@ import java.util.TreeSet;
 
 public class Test112 {
 
+	
+
 	public Set<Integer> solution(int[] numbers) {
+	    Set<Integer> result = new TreeSet<>();
 
-		Set<Integer> list = new TreeSet<>();
+	    for (int i = 0; i < numbers.length - 1; i++) {
+	        for (int j = i + 1; j < numbers.length; j++) {
+	            result.add(numbers[i] + numbers[j]);
+	        }
+	    }
 
-		for (int i = 0; i < numbers.length - 1; i++) {
-			for (int a = i + 1; a < numbers.length; a++) {
-
-				list.add(numbers[i] + numbers[a]);
-
-			}
-		}
-
-		return list;
+	    return result;
 	}
+
 
 }
