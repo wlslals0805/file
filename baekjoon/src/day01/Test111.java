@@ -3,6 +3,7 @@ package day01;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Test111 {
@@ -44,5 +45,23 @@ public class Test111 {
 
 		return answer;
 	}
+	
+	
+
+	public String[] solution2(String[] strings, int n) {
+	    Arrays.sort(strings, new Comparator<String>() {
+	        @Override
+	        public int compare(String s1, String s2) {
+	            if (s1.charAt(n) == s2.charAt(n)) {
+	                return s1.compareTo(s2);
+	            } else {
+	                return s1.charAt(n) - s2.charAt(n);
+	            }
+	        }
+	    });
+
+	    return strings;
+	}
+
 
 }
