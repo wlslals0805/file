@@ -1,6 +1,7 @@
 package day01;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,4 +29,20 @@ public class Test110 {
 
 		return answer;
 	}
+	
+
+
+	public List<Integer> solution2(int[] array, int[][] commands) {
+	    List<Integer> answer = new ArrayList<>();
+
+	    for (int[] command : commands) {
+	        int[] temp = Arrays.copyOfRange(array, command[0] - 1, command[1]);
+	        Arrays.sort(temp);
+
+	        answer.add(temp[command[2] - 1]);
+	    }
+
+	    return answer;
+	}
+
 }
