@@ -34,4 +34,15 @@ public class Test108 {
         return Integer.parseInt(s);
     }
 	
+	public static int solution2(String s) {
+	    String[] alp = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
+	    
+	    for(int i = 0; i < alp.length; i++) {
+	        s = s.replaceAll(alp[i], String.valueOf(i));
+	    }
+	    
+	    return Integer.parseInt(s);
+	}
+
+	
 }
