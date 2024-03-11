@@ -1,36 +1,51 @@
 package day01;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Test133 {
 
-	public int solution(int n, int[] lost, int[] reserve) {
-		int answer = 0;
+	public static List<Integer> arrayList(int[] list) {
 
-		List<Integer> lost_list = new ArrayList<>();
+		List<Integer> arrayList = new ArrayList<>();
 
-		for (int i = 0; i < lost.length; i++) {
+		for (int i = 0; i < list.length; i++) {
 
-			lost_list.add(lost[i]);
+			arrayList.add(list[i]);
+
 		}
 
-		for (int i = 0; i < reserve.length; i++) {
+		return arrayList;
 
-			
-				for (int j = 0; j < lost_list.size(); j++) {
+	}
 
-					if (reserve[i] - 1 == lost_list.get(j) || reserve[i] + 1 == lost_list.get(j)) {
-						answer++;
-						lost_list.remove(j);
+	public int solution(int n, int[] lost, int[] reserve) {
+		int answer = n;
 
-					}
+		List<Integer> lost_list = arrayList(lost);
+		List<Integer> reserve_list = arrayList(reserve);
+		List<Integer> intersect_list = new ArrayList<>(lost_list);
 
-				
+		intersect_list.retainAll(reserve_list);
+		reserve_list.removeAll(intersect_list);
+		lost_list.removeAll(intersect_list);
+
+		Collections.sort(reserve_list);
+		Collections.sort(lost_list);
+
+		for (int i = 0; i < reserve_list.size(); i++) {
+
+			for (int j = 0; j < lost_list.size(); j++) {
+
+				if (reserve_list.get(i) - 1 == lost_list.get(j) || reserve_list.get(i) + 1 == lost_list.get(j)) {
+					lost_list.remove(j);
+					break;
+				}
 
 			}
 		}
-		answer += n - lost.length;
+		answer -= lost_list.size();
 
 		return answer;
 	}
