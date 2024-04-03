@@ -1,7 +1,10 @@
 package day01;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Test151 {
 	public List<Integer> solution(int[] numlist, int n) {
@@ -37,4 +40,26 @@ public class Test151 {
 
 		return list;
 	}
+	
+
+	public class Solution2 {
+	    public List<Integer> solution(int[] numlist, int n) {
+	        Comparator<Integer> comp = (a, b) -> {
+	            int diffA = Math.abs(a - n);
+	            int diffB = Math.abs(b - n);
+	            if (diffA == diffB) {
+	                return a - b;
+	            }
+	            return diffA - diffB;
+	        };
+
+	        List<Integer> sortedList = Arrays.stream(numlist)
+	                                         .boxed()
+	                                         .sorted(comp)
+	                                         .collect(Collectors.toList());
+
+	        return sortedList;
+	    }
+	}
+
 }
