@@ -5,36 +5,32 @@ import java.util.List;
 
 public class Test154 {
 	public List<Integer> solution(int l, int r) {
-
-		List<Integer> list = new ArrayList<>();
-
-		StringBuilder sb = new StringBuilder(String.valueOf(l));
-
-		boolean exist_zero = false;
-
-		while (true) {
-
-			for (int i = sb.length() - 1; i >= 0; i--) {
-
-				if (sb.charAt(i) == '0') {
-					sb.setCharAt(i, '5');
-					exist_zero = true;
-					break;
-				}
-
-			}
-
-			if (exist_zero == false) {
-				sb.append("0");
-			}
-
-			list.add(Integer.parseInt(sb.toString()));
-
-			if (Integer.parseInt(sb.toString()) > r) {
-				break;
-			}
-		}
-
-		return list;
-	}
+        List<Integer> list = new ArrayList<>();
+        
+      
+        for (int num = 0; num <= r; num++) {
+            if (isValid(num) && num >= l && num <= r) {
+                list.add(num);
+            }
+        }
+        
+        
+        if (list.isEmpty()) {
+            list.add(-1);
+        }
+        
+        return list;
+    }
+    
+   
+    private boolean isValid(int num) {
+        while (num > 0) {
+            int digit = num % 10;
+            if (digit != 0 && digit != 5) {
+                return false;
+            }
+            num /= 10;
+        }
+        return true;
+    }
 }
