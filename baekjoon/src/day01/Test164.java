@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class Test164 {
 	public int solution(String[] babbling) {
+		
+		//미완성
 		int answer = 0;
 
 		ArrayList<String> list = new ArrayList<>();

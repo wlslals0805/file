@@ -3,47 +3,47 @@ package day01;
 import java.util.Arrays;
 
 public class Test163 {
+	//
+	 public int[] solution(int N, int[] stages) {
+	        int[] stageReached = new int[N + 1]; 
+	        int[] stageFailed = new int[N + 1]; 
 
-	public int[] solution(int N, int[] stages) {
-		//미완성
-		int[] list = new int[N + 1];
+	        for (int stage : stages) {
+	            if (stage <= N) {
+	                stageFailed[stage]++;
+	            }
+	            for (int i = 1; i <= stage && i <= N; i++) {
+	                stageReached[i]++;
+	            }
+	        }
 
-		float[] answer = new float[N];
+	        Stage[] failRates = new Stage[N];
+	        for (int i = 1; i <= N; i++) {
+	            float failRate = (stageReached[i] > 0) ? (float) stageFailed[i] / stageReached[i] : 0;
+	            failRates[i - 1] = new Stage(i, failRate);
+	        }
 
-		int[] result = { 1, 2, 3, 4, 5 };
+	        Arrays.sort(failRates, (s1, s2) -> {
+	            if (s1.failRate > s2.failRate) return -1;
+	            else if (s1.failRate < s2.failRate) return 1;
+	            else return Integer.compare(s1.stageNumber, s2.stageNumber);
+	        });
 
-		for (int i = 0; i < stages.length; i++) {
-			list[stages[i] - 1]++;
+	        int[] result = new int[N];
+	        for (int i = 0; i < N; i++) {
+	            result[i] = failRates[i].stageNumber;
+	        }
 
-		}
-
-		int count = stages.length;
-
-		for (int i = 0; i < N; i++) {
-
-			answer[i] = (float) list[i] / count;
-
-			count -= list[i];
-
-		}
-
-		for (int i = 0; i < N - 1; i++) {
-			int num = i;
-			while (answer[i] > answer[i + 1]) {
-
-				if (answer[i] > answer[i + 1]) {
-
-					int tmp = result[num + 1];
-					result[num + 1] = result[num];
-					result[num] = tmp;
-
-				}
-			}
-
-		}
-
-		Arrays.sort(answer);
-
-		return result;
-	}
+	        return result;
+	    }
+	    
+	    static class Stage {
+	        int stageNumber;
+	        float failRate;
+	        
+	        public Stage(int stageNumber, float failRate) {
+	            this.stageNumber = stageNumber;
+	            this.failRate = failRate;
+	        }
+	    }
 }
