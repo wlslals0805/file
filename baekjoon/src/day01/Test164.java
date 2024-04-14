@@ -1,58 +1,41 @@
 package day01;
 
-import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Test164 {
 	public int solution(String[] babbling) {
-		
-		//미완성
-		int answer = 0;
+        int answer = 0;
+        String[] validPatterns = {"aya", "ye", "woo", "ma"};
 
-		ArrayList<String> list = new ArrayList<>();
+        String patternString = String.join("|", validPatterns); 
 
-		list.add("aya");
-		list.add("ye");
-		list.add("woo");
-		list.add("ma");
+        for (String word : babbling) {
+            if (isValidWord(word, validPatterns, patternString)) {
+                answer++;
+            }
+        }
 
-		ArrayList<String> list2 = new ArrayList<>();
+        return answer;
+    }
 
-		list2.add("ayaaya");
-		list2.add("yeye");
-		list2.add("woowoo");
-		list2.add("mama");
+    private boolean isValidWord(String word, String[] patterns, String patternString) {
+        Matcher m = Pattern.compile(patternString).matcher(word);
+        int lastEnd = 0; 
+        String lastMatch = ""; 
 
-		for (int i = 0; i < babbling.length; i++) {
+        while (m.find()) {
+            if (m.start() != lastEnd) {
+                return false; 
+            }
+            String currentMatch = m.group();
+            if (currentMatch.equals(lastMatch)) {
+                return false; 
+            }
+            lastMatch = currentMatch;
+            lastEnd = m.end();
+        }
 
-			String str = babbling[i];
-			boolean pass = true;
-			for (int j = 0; j < list.size(); j++) {
-
-				if (str.equals(list2.get(j))) {
-					pass = false;
-				}
-
-				if (str.contains(list.get(j))) {
-
-					str = str.replaceAll(list.get(j), "%");
-
-				}
-
-			}
-
-			for (char x : str.toCharArray()) {
-
-				if (x != '%') {
-					pass = false;
-				}
-
-			}
-
-			if (pass == true) {
-				answer++;
-			}
-		}
-
-		return answer;
-	}
+        return lastEnd == word.length(); 
+    }
 }
