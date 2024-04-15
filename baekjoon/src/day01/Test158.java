@@ -39,4 +39,28 @@ public class Test158 {
 
 		return answer;
 	}
+	
+	
+	    public static int notThree(int n) {
+	        while (n % 3 == 0 || String.valueOf(n).contains("3")) {
+	            n++;
+	        }
+	        return n;
+	    }
+
+	    public int solution2(int n) {
+	        int count = 0;
+	        int number = 0;
+
+	        while (count < n) {
+	            number++;
+	            if (notThree(number) == number) {
+	                count++;
+	            }
+	        }
+
+	        return number;
+	    
+	}
+
 }
